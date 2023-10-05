@@ -1,0 +1,91 @@
+% \documentclass{article}
+% \documentclass[conference]{IEEEtran}
+\documentclass{article}
+\usepackage{want_neurips_2023}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%Citation-related commands
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}} 
+%%%%% ADDED BY TOMMY %%%%%
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{authblk}
+\usepackage{hyperref}
+\usepackage{placeins}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure}
+ 
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Ie}{\textit{I.e.}\xspace}
+\newcommand{\ie}{\textit{i.e.}\xspace}
+\newcommand{\Eg}{\textit{E.g.}\xspace}
+\newcommand{\eg}{\textit{e.g.}\xspace}
+\newcommand{\probP}{\text{I\kern-0.15em P}}
+
+\DeclareMathOperator*{\minimise}{\textrm{minimise}}
+\DeclareMathOperator*{\maximise}{\textrm{maximise}}
+
+\newcommand{\tl}[1]{\textit{[{\color{red}#1}]}}
+\newcommand{\cm}[1]{\textit{{\color{blue}#1}}}
+\newcommand{\erik}[1]{\textit{[{\color{brown}Erik: #1}]}}
+\newcommand{\mr}[1]{\textit{[{\color{brown}Mohammed: #1}]}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \usepackage{itemize}
+\title{A Systematic Approach to Robustness Modelling for Deep Convolutional Neural Networks}
+% \title{Deckard: A Cloud-Native Platform for Robust Machine Learning }
+
+\author[1]{Charles Meyers}
+\author[1]{Mohammad Reza Saleh Sedghpour}
+% \affil{Department of Computing Science, Umeå University, Umeå, Sweden}
+\author[1]{Tommy L\"{o}fstedt}
+% \affil{Department of Computing Science, Umeå University, Umeå, Sweden}
+\author[1]{Erik Elmroth}
+\affil[1]{Department of Computing Science, Umeå University, Umeå, Sweden}
+% \title{Cloud, AI, and Robustness}
+\date{May 2023}
+
+\begin{document}
+
+
+
+\maketitle
+\input{0-abstract}
+\input{1-introduction}
+\input{2-background}
+\input{3-afr}
+\input{4-methods}
+\input{5-results}
+\input{6-conclusions}
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\bibliography{bibliography}
+
+
+\newpage
+\input{appendix}
+
+\end{document}

@@ -1,0 +1,4 @@
+,AIC,Concordance,BIC,Train LL,Test LL,Mean $S(t;\theta)$,Median $S(t;\theta)$
+Weibull,-1502.88,0.79,-1502.88,0.54,0.62,1.4,0.19
+LogNormal,-1709.34,0.8,-1709.34,0.61,0.67,2.53,0.14
+LogLogistic,-1596.29,0.79,-1596.29,0.57,0.63,,0.13

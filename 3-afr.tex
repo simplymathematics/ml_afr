@@ -1,0 +1,59 @@
+\label{afr_models}
+\section{Accelerated Failure Models for ML}
+Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  Accelerated Failure Rate (AFR) models have been widely used to model the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.} medicine or manufacturing). When, for example, a car manufacturer wants to test a motor for next-year's production model, they cannot simply sample a collection of motors from their upstream suppliers since the motor is intended to last a decade or more. Instead, they \textit{induce} failures by introducing extreme circumstances~\citep{liu2013development,lawless1995methods} into the verification procedures. For example, this might include running the motor in extremely cold or hot environments, cycling between temperatures rapidly, or using extreme vibration to simulate the effect of normal wear-and-tear~\citep{meeker1998accelerated}. By measuring the effect of each of these test scenarios on the tested component and keeping track of the real-world circumstances and usage of their products, they can estimate the long-term behavior of a component without relying on long-term testing that would drastically slow development. That is, they can successfully model the expected survival time of a component using accelerated methods. A \textbf{survival function}, $S$, is the function that describes the probability of not having a failure by time $t$ such that~\cite{},
+\[
+    S(t; \theta):= 1- \int_t^{\infty} h(\tau) \,d\tau := 1 - H(t; \theta),
+\]
+where $\tau$ is some set of time-variant parameters, and $H(t; \theta)$ is the hazard rate described in Sec.~\ref{metrics}. We can use the survival function to calculate the expected survival time as a function of the covariates (\textit{e.g.} perturbation distance or time). Modelling the expected survival time of a model requires a choice of modelling distribution, and we outline the most common ones in the subsections below.\footnote{While non-parametric models like Cox's \textbf{proportional hazard model} do exist, they don't allow us to estimate the expectation of $H(t)$ at $t=0$---merely the proportional effects of the covariates \citep{aft_models}. Furthermore, parametric distributions are known to be robust to omitted covariates \citep{lambert2004parametric}.} 
+
+\subsection{Weibull AFR}
+The first AFR model we tested was the Weibull distribution, which has the form
+\[
+    S(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(x)} \right)^{\rho(y)} \right)},
+\]
+where $x$ is the sample and $y$ is the true label, where $\lambda(y)=\exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_n)$ is a scale parameter and $\rho(x)=\exp(\alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_n)$ is a shape parameter that determines the direction of acceleration over time.
+
+% Using the Weibull distribution, we can define the accelerated failure rate model as,
+% \[
+%     \log(T) = \beta ^T \mathcal{X} + \xi
+% \]
+% where $T$ represents the survival time or failure time, $\log$ is the logarithm function, $\beta$ is a vector of coefficients that quantifies the impact of covariates on the logarithm of the survival time, $X$ is a vector of covariates, including indicators or characteristics related to adversarial attacks, and $\xi$ is an error term representing the unexplained variation in the survival time. The model parameters, $\beta$, can be estimated for various constraints by using adversarial attacks that each have different optimization criteria. For example, to estimate the effect of single-pixel failures, we could use the `Pixel-attack`~\citep{pixelattack}. To estimate the effect of perturbations across the whole feature space, we could use an $\ell_{\infty}$ attack like `Thresh'~\citep{pixelattack}. By comparing the failure rates in these particular adversarial contexts to the failure rates under random (benign) noise, we can isolate the effects of the \textit{adversary} from effect of noise in general.
+
+\subsection{Log-Normal AFR}
+
+The \textbf{Log-Normal} AFR model introduces the parameters $\mu(x) = \alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_n $ and $\sigma(y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_m y_m)$ such that the survival function is given by,
+\[
+    S(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(x) }{ \sigma(y) } \right ) \ \right).
+\]
+\subsection{Log-Logistic AFR}
+Another form of the AFR model, the \textbf{Log-Logistic} AFR, introduces the scale and shape parameters $\alpha(x) = \exp(\alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_n )$ and $\beta(y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_m y_m)$, respectively, with survival function,
+\[
+    S(t; x, y) = 1 - \log \left( 1 + \left (  \frac{t - \alpha(x) }{ \beta(y) } \right ) \ \right).
+\]
+
+\subsection{Model Comparison Scores}
+
+To compare the models, we use Akaike information criterion (\textbf{AIC}), log-likelihood, concordance score, and Bayesian information criterion (\textbf{BIC}), each of which has been widely used for comparing these types of models~\citep{}. 
+
+
+% \section{AFR Models: A brief Overview}
+% If we assume that a model needs to be retrained after $N_{critical}$ samples to incorporate the behavior of the new API calls, then the total cost ($C_{total}$) is 
+
+% \begin{equation}
+% C_{total} = C_{training} + C_{inference} 
+% \end{equation}
+
+% \subsection{Modelling the Pareto Front}
+
+% It is well established by theory that there is a power relationship between the accuracy and the number of samples ($n$) such that: $\mathcal{O}(1/\sqrt{n})$~\citep{vapnik1994measuring}. Furthermore, marginal gains in accuracy have historically relied on increasing the size of models exponentially \citep{desislavov2021compute}. Therefore, the distribution we use to model this front must be robust to these various scaling factors. Since we have prior knowledge about that there is a power relationship between the cost and the failure rate, we can model the Pareto front using a Pareto \textit{distribution} given by:
+% \[f(x; \alpha, x_m) = \frac{\alpha \cdot x_m^\alpha}{x^{\alpha+1}}\]
+% where $\alpha$ is a shape parameter and $x_m$ is the minimum value that $x$ can take (called the scale parameter). The survival function is given by:
+
+% \[
+% S(x; \alpha, x_m) = \begin{cases}
+% \left(\frac{x_m}{x}\right)^\alpha & \text{for } x \geq x_m \\
+% 1 & \text{for } x < x_m
+% \end{cases}
+% \]
+
+% For our purposes, we will fit a Pareto \textit{distribution}, using our Pareto \textit{set} to determine the asymptotic behavior of our models beyond our limited test capabilities and fixed computational budget.
