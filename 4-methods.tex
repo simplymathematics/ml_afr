@@ -1,6 +1,6 @@
 \section{Methodology}
 \label{methods}
-Below we outline the experiments performed and the hyper-parameter configurations across the various model architectures, model defences, and attacks. All experiments were conducted on a Ubuntu 18.04 virtual machine running in a shared-host environment with one NVIDIA V100 GPU using Python 3.8.8. All configurations were tested in a grid search using \texttt{hydra} \citep{hydra} to manage the parameters, \texttt{dvc}~\citep{dvc} to ensure reproducibility, and \texttt{optuna}~\citep{optuna} to manage the scheduling. For each attack and model configuration, we collected the metrics outlined in Eq.~\ref{eq:acc}-\ref{eq:cost} as well as inference time, training time, and attack generation time.
+Below we outline the experiments performed and the hyper-parameter configurations across the various model architectures, model defences, and attacks. All experiments were conducted on a Ubuntu 18.04 virtual machine running in a shared-host environment with one NVIDIA V100 GPU using Python 3.8.8. All configurations were tested in a grid search using \texttt{hydra} \citep{hydra} to manage the parameters, \texttt{dvc}~\citep{dvc} to ensure reproducibility, and \texttt{optuna}~\citep{optuna} to manage the scheduling. For each attack and model configuration, we collected the metrics outlined in Eqs.~\ref{eq:acc}-\ref{eq:cost} as well as inference time, training time, and attack generation time.
 
 \subsection{Dataset}
 \label{dataset}

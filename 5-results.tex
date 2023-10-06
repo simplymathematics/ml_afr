@@ -1,7 +1,7 @@
 \section{Results and Discussion}
 \label{results}
 
-Through tens of thousands experiments across many signal-processing techniques (\textit{e.g.}~defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts, regardless of configuration; that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFR models are a powerful tool for comparing model architectures and examining the effects of covariates.
+Through tens of thousands experiments across many signal-processing techniques (\textit{e.g.}~defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts, regardless of configuration; that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFR models are a powerful tool for comparing model architectures and examining the effects of covariates. In the section below, we display and discuss the results for CIFAR10 while the same data for MNIST is in the appendix (see: Sec~\ref{appendix}).
 
 \subsection{Attack and Defence Strength}
 \begin{figure*}
@@ -34,7 +34,7 @@ In Fig.~\ref{fig:strength}, we can see that no defence consistently outperforms 
     \caption{The left plot shows the adversarial failure rate (see: Eq.~\ref{eq:failure_rate}) as a function of the defence strength where the control parameter represents the number of model layers. The right plot depicts the adversarial failure rate as a function of training time and ResNet configuration.}
     \label{fig:failure_rate}
 \end{figure*}
-Fig.~\ref{fig:failure_rate} depicts all tested attacks, defences, and model configurations. Clearly, increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. Furthermore, it reveals something surprising---that increasing the number of hidden layers tends to increase the failure rate--even across model architectures and all defences. Certain defences can outperform the control model- at the cost of expensive tuning- evidenced by the large variance in performance (see left side of Fig.~\ref{fig:failure_rate}). The right subplot of Fig.~\ref{fig:failure_rate} shows that there is no general relationship between training time and adversarial failure rate. We formalize this analysis  in the next subsection.
+Fig.~\ref{fig:failure_rate} depicts the adversarial failure rate of all tested attacks, defences, and model configurations. Clearly, increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. Furthermore, it reveals something surprising---that increasing the number of hidden layers tends to increase the failure rate--even across model architectures and all defences. Certain defences can outperform the control model- at the cost of expensive tuning- evidenced by the large variance in performance (see left side of Fig.~\ref{fig:failure_rate}). The right subplot of Fig.~\ref{fig:failure_rate} shows that there is no general relationship between training time and adversarial failure rate. We formalize this analysis  in the next subsection.
 
 
 \begin{figure*}
@@ -83,7 +83,7 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
     \label{fig:afr_models}
 \end{figure*}
 \input{cifar/aft_comparison}
-\input{mnist/aft_comparison}
+% \input{mnist/aft_comparison}
 \begin{figure}
     % \begin{subfigure}
     %     \input{cifar/aft_comparison}
@@ -92,7 +92,6 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
    \caption{This figure depicts the survival curve over time as a function of the number of model layers for the highest scoring model (the Log-Normal distribution). The partial effects plots of other models were excluded for space reasons, but the results were nearly identical.}
     \label{fig:layers}
 \end{figure}
-
 % \input{mnist/aft_comparison}
 
 

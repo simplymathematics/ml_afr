@@ -55,11 +55,11 @@ For our purposes, we assumed the cost, $C$, is proportional to the total trainin
 We have defined all of the metrics in the section below.
 \label{metrics}
 
-In order to account for the marginal cost of a given model change, we also define $\bar{C}$, which is the expected number of adversarial failures that an attacker can generate during the time it takes to train a single sample\footnote{Consequently, if this number is larger than one, the average attacker has a time advantage the average model builder.} such that
+In order to account for the marginal cost of a given model change, we also define $\bar{C}_{adv.}$, which is the expected number of adversarial failures that an attacker can generate during the time it takes to train a single sample\footnote{Consequently, if this number is larger than one, the average attacker has a time advantage the average model builder.} and $C_{ben.}$, which indicates the expected number of unperturbed samples that would be incorrectly classified in a single sample of training time, such that
 \begin{equation}
-    \bar{C}_{adv.} := h_{adv}(t, \theta) \cdot t_{train}
+    \bar{C}_{adv.} := h_{adv.}(t, \theta) \cdot t_{train}
      ~~\textrm{and}~~
-     \bar{C}_{ben.} := h_{ben}(t, \theta) \cdot t_{train}
+     \bar{C}_{ben.} := h_{ben.}(t, \theta) \cdot t_{train}
 \label{eq:cost}
 \end{equation}
 
