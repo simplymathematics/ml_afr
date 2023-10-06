@@ -1,12 +1,3 @@
-@article{kotyan2022adversarial,
-  title={Adversarial robustness assessment: Why in evaluation both L0 and L∞ attacks are necessary},
-  author={Kotyan, Shashank and Vargas, Danilo Vasconcellos},
-  journal={PLoS ONE},
-  volume={17},
-  number={4},
-  pages={e0265723},
-  year={2022},
-}
 
 @inproceedings{optuna,
   title={Optuna: A next-generation hyperparameter optimization framework},
@@ -93,14 +84,6 @@
   pages={505--515},
   year={2017},
   publisher={Radiological Society of North America}
-}
-
-@inproceedings{ai_aviation,
-  title={A comparative study of machine learning techniques for aviation applications},
-  author={Maheshwari, Apoorv and Davendralingam, Navindran and DeLaurentis, Daniel A},
-  booktitle={2018 Aviation Technology, Integration, and Operations Conference},
-  pages={3980},
-  year={2018}
 }
 
 @article{santos2021universal,
@@ -651,13 +634,6 @@
 }
 
 
-@article{desislavov2021compute,
-  title={Compute and energy consumption trends in deep learning inference},
-  author={Desislavov, Radosvet and Mart{\'\i}nez-Plumed, Fernando and Hern{\'a}ndez-Orallo, Jos{\'e}},
-  journal={arXiv preprint arXiv:2109.05472},
-  year={2021}
-}
-
 @article{ai_industry,
   title={Machine learning in industrial control system (ICS) security: current landscape, opportunities and challenges},
   author={Koay, Abigail MY and Ko, Ryan K L and Hettema, Hinne and Radke, Kenneth},
@@ -706,7 +682,13 @@
 }
 
 @article{croce_reliable_2020,
-	title = {Reliable evaluation of adversarial robustness with an ensemble of diverse parameter-free attacks},
+  title={Reliable evaluation of adversarial robustness with an ensemble of diverse parameter-free attacks},
+  author={Croce, Francesco and Hein, Matthias},
+  booktitle={International conference on machine learning},
+  pages={2206--2216},
+  year={2020},
+  organization={PMLR}
+}title = {Reliable evaluation of adversarial robustness with an ensemble of diverse parameter-free attacks},
 	url = {http://arxiv.org/abs/2003.01690},
 	abstract = {The ﬁeld of defense strategies against adversarial attacks has signiﬁcantly grown over the last years, but progress is hampered as the evaluation of adversarial defenses is often insufﬁcient and thus gives a wrong impression of robustness. Many promising defenses could be broken later on, making it difﬁcult to identify the state-of-the-art. Frequent pitfalls in the evaluation are improper tuning of hyperparameters of the attacks, gradient obfuscation or masking. In this paper we ﬁrst propose two extensions of the PGD-attack overcoming failures due to suboptimal step size and problems of the objective function. We then combine our novel attacks with two complementary existing ones to form a parameter-free, computationally affordable and user-independent ensemble of attacks to test adversarial robustness. We apply our ensemble to over 50 models from papers published at recent top machine learning and computer vision venues. In all except one of the cases we achieve lower robust test accuracy than reported in these papers, often by more than 10\%, identifying several broken defenses.},
 	language = {en},
@@ -762,17 +744,12 @@
 }
 
 @article{carlini_towards_2017,
-	title = {Towards {Evaluating} the {Robustness} of {Neural} {Networks}},
-	url = {http://arxiv.org/abs/1608.04644},
-	abstract = {Neural networks provide state-of-the-art results for most machine learning tasks. Unfortunately, neural networks are vulnerable to adversarial examples: given an input x and any target classiﬁcation t, it is possible to ﬁnd a new input x that is similar to x but classiﬁed as t. This makes it difﬁcult to apply neural networks in security-critical areas. Defensive distillation is a recently proposed approach that can take an arbitrary neural network, and increase its robustness, reducing the success rate of current attacks’ ability to ﬁnd adversarial examples from 95\% to 0.5\%.},
-	language = {en},
-	urldate = {2020-10-01},
-	journal = {arXiv:1608.04644 [cs]},
-	author = {Carlini, Nicholas and Wagner, David},
-	month = mar,
-	year = {2017},
-	keywords = {Computer Science - Cryptography and Security, Computer Science - Computer Vision and Pattern Recognition},
-	file = {Carlini and Wagner - 2017 - Towards Evaluating the Robustness of Neural Networ.pdf:C\:\\Users\\charlie\\Zotero\\storage\\PDN3S6FR\\Carlini and Wagner - 2017 - Towards Evaluating the Robustness of Neural Networ.pdf:application/pdf}
+  title={Towards evaluating the robustness of neural networks},
+  author={Carlini, Nicholas and Wagner, David},
+  booktitle={2017 ieee symposium on security and privacy (sp)},
+  pages={39--57},
+  year={2017},
+  organization={Ieee}
 }
 
 @inproceedings{fredrikson_model_2015,
@@ -835,19 +812,12 @@
 }
 
 @article{biggio_evasion_2013,
-	title = {Evasion {Attacks} against {Machine} {Learning} at {Test} {Time}},
-	volume = {7908},
-	url = {http://arxiv.org/abs/1708.06131},
-	doi = {10.1007/978-3-642-40994-3_25},
-	abstract = {In security-sensitive applications, the success of machine learning depends on a thorough vetting of their resistance to adversarial data. In one pertinent, well-motivated attack scenario, an adversary may attempt to evade a deployed system at test time by carefully manipulating attack samples. In this work, we present a simple but eﬀective gradientbased approach that can be exploited to systematically assess the security of several, widely-used classiﬁcation algorithms against evasion attacks. Following a recently proposed framework for security evaluation, we simulate attack scenarios that exhibit diﬀerent risk levels for the classiﬁer by increasing the attacker’s knowledge of the system and her ability to manipulate attack samples. This gives the classiﬁer designer a better picture of the classiﬁer performance under evasion attacks, and allows him to perform a more informed model selection (or parameter setting). We evaluate our approach on the relevant security task of malware detection in PDF ﬁles, and show that such systems can be easily evaded. We also sketch some countermeasures suggested by our analysis.},
-	language = {en},
-	urldate = {2020-09-17},
-	journal = {arXiv:1708.06131 [cs]},
-	author = {Biggio, Battista and Corona, Igino and Maiorca, Davide and Nelson, Blaine and Srndic, Nedim and Laskov, Pavel and Giacinto, Giorgio and Roli, Fabio},
-	year = {2013},
-	keywords = {Computer Science - Cryptography and Security, Computer Science - Machine Learning},
-	pages = {387--402},
-	file = {Biggio et al. - 2013 - Evasion Attacks against Machine Learning at Test T.pdf:C\:\\Users\\charlie\\Zotero\\storage\\KSVTHWRB\\Biggio et al. - 2013 - Evasion Attacks against Machine Learning at Test T.pdf:application/pdf}
+  title={Evasion attacks against machine learning at test time},
+  author={Biggio, Battista and Corona, Igino and Maiorca, Davide and Nelson, Blaine and {\v{S}}rndi{\'c}, Nedim and Laskov, Pavel and Giacinto, Giorgio and Roli, Fabio},
+  booktitle={Machine Learning and Knowledge Discovery in Databases: European Conference, ECML PKDD 2013, Prague, Czech Republic, September 23-27, 2013, Proceedings, Part III 13},
+  pages={387--402},
+  year={2013},
+  organization={Springer}
 }
 
 @article{simon-gabriel_first-order_2019,
@@ -1143,11 +1113,14 @@ Publisher: Multidisciplinary Digital Publishing Institute},
 
 
 @article{pixelattack,
-  title={Adversarial Robustness Assessment: Why both $L_0$ and $L_\infty$ Attacks Are Necessary},
-  author={Kotyan, Shashank and Vasconcellos Vargas, Danilo},
-  journal={arXiv e-prints},
-  pages={arXiv--1906},
-  year={2019}
+  title={Adversarial robustness assessment: Why in evaluation both $\ell_0$ and $\ell_{\infty}$ attacks are necessary},
+  author={Kotyan, Shashank and Vargas, Danilo Vasconcellos},
+  journal={PloS one},
+  volume={17},
+  number={4},
+  pages={e0265723},
+  year={2022},
+  publisher={Public Library of Science San Francisco, CA USA}
 }
 
 @article{finlayson2018adversarial,
