@@ -6,11 +6,11 @@ Through tens of thousands experiments across many signal-processing techniques (
 \subsection{Attack and Defence Strength}
 \begin{figure*}
     \centering
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{cifar/def_param_vs_accuracy.pdf}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{cifar/atk_param_vs_accuracy.pdf}
     \end{subfigure}
@@ -23,11 +23,11 @@ In Fig.~\ref{fig:strength}, we can see that no defence consistently outperforms 
 
 \subsection{Failure Rate}
 \begin{figure*}
-    \begin{subfigure}{0.50\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{cifar/def_param_vs_adv_failure_rate.pdf}
     \end{subfigure}
-    \begin{subfigure}{0.50\textwidth}
+    \begin{subfigure}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{{cifar/adv_failure_rate_vs_train_time.pdf}}
     \end{subfigure}
@@ -82,7 +82,8 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
     \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $\lambda$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate.}
     \label{fig:afr_models}
 \end{figure*}
-
+\input{cifar/aft_comparison}
+\input{mnist/aft_comparison}
 \begin{figure}
     % \begin{subfigure}
     %     \input{cifar/aft_comparison}
@@ -91,7 +92,7 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
    \caption{This figure depicts the survival curve over time as a function of the number of model layers for the highest scoring model (the Log-Normal distribution). The partial effects plots of other models were excluded for space reasons, but the results were nearly identical.}
     \label{fig:layers}
 \end{figure}
-\input{cifar/aft_comparison}
+
 % \input{mnist/aft_comparison}
 
 
