@@ -1,4 +1,0 @@
-,AIC,Concordance,BIC,Train LL,Test LL,Mean ST,Median ST
-Weibull,9098.21,0.79,9098.21,-3.8,-32.81,91.61,12.25
-LogNormal,8957.95,0.81,8957.95,-3.74,-3.62,157.22,9.02
-LogLogistic,9065.34,0.8,9065.34,-3.78,-3.63,,8.42
