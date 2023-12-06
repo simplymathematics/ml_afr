@@ -12,7 +12,8 @@ Much work has already gone into explaining the dangers of adversarial attacks on
 
 \subsection{Adversarial Attacks}
 
-In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate or fool ML models. These attacks are designed to deceive or mislead the model's behavior by introducing carefully crafted input data that can cause the model to make incorrect predictions or otherwise produce undesired outputs. The goal of an attacker is often to exploit vulnerabilities in the model's decision-making process or to probe its weaknesses. These attacks can occur during various stages of the ML pipeline, including during training \citep{biggio_poisoning_2013}, inference\citep{biggio_evasion_2013}, or deployment \citep{santos2021universal}.\footnote{For all sections below, we collect metrics on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{Ben.} and \textit{Adv.} are used throughout, respectively.}
+In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of ML models. These attacks are designed to change the model's behavior by introducing carefully crafted input data that can cause the model to make incorrect predictions or otherwise produce undesired outputs.
+The goal of an attacker is often to exploit vulnerabilities in the model's decision-making process or to probe its weaknesses. These attacks can occur during various stages of the ML pipeline, including during training \citep{biggio_poisoning_2013}, inference\citep{biggio_evasion_2013}, or deployment \citep{santos2021universal}. For all sections below, we collect metrics on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben.} and \textit{adv.} are used throughout, respectively.
 
 
 \subsubsection{Perturbation Distance}
@@ -22,46 +23,81 @@ The strength of an attack is generally though of in terms of perturbation `dista
 \[
     \varepsilon := \| x' - x \| \leq \varepsilon_{max},
 \]
-where $\| \cdot \|$ denotes a norm or pseudo-norm (\eg, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon_{max}$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space.
+where $\| \cdot \|$ denotes a norm or pseudo-norm (\eg, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon_{max}$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different optimization criteria, see Section~\ref{attacks}.
 
 
 \subsubsection{Accuracy and Failure Rate}
-The accuracy, denoted by $h$, refers to the percentage or proportion of examples that cause the targeted ML model to misclassify or produce incorrect outputs and is a measure of the vulnerability or susceptibility of the model to noise-induced failures. A lower accuracy indicates a higher rate of misclassifications or incorrect predictions, signifying a weaker model in terms of \textbf{robustness} against noise-induced failures. The accuracy is defined as,
+The accuracy refers to the percentage or proportion of examples that cause the targeted ML model to misclassify or produce incorrect outputs and is a measure of the vulnerability or susceptibility of the model to noise-induced failures. A lower accuracy indicates a higher rate of misclassifications or incorrect predictions. The accuracy, $\lambda$, is defined as:
 \begin{equation}
-    \lambda := \frac{\textrm{False~Classifications}}{N},
+    \lambda := 1 -  \frac{\textrm{False~Classifications}}{N},
+        % \approx \mathbb{P}(\textrm{True~Classifications}),
     \label{eq:acc}
 \end{equation}
-where $N$ is the number of samples and can be measured on both the benign and adversarial sets. To penalize more time-intensive attacks, we modelled the distribution of these failures as a function of computational time such that the \textbf{hazard function}, $H$, is:
+where $N$ is the number of samples.
+% and $\mathbb{P}(\mathrm{True~Classifications})$ is the probability of a correct classification.
+However, accuracy is known to vary with things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring} , the number of classes ~\cite{dohmatob_generalized_2019}, or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}. Likewise, there are many hyperparameters that can influence an attack's run time and accuracy. Instead, we can think in terms of \textbf{failure rate}:
 \begin{equation}
-    H(t; \theta) =  \theta h(t; \theta),
-\label{eq:cdf}
-\end{equation}
-where $\theta := \theta(x;\beta)$ describes the joint effect of the covariates , ${x}$, with model parameters, ${\beta}$. The function $h(t;\theta)$ refers to the probability of adversarial failure at time $t$, $t_{attack}$ refers to the attack generation time per sample, and $t_{predict}$ indicates the inference time per sample. The collected covariates include number of model layers, the perturbation distance, the inference time, the predict time, the learning rate, the failure rate, the training time, and the random state (see Sec.~\ref{attacks}). If we assume the the chance of failure is time-independent, we can estimate the \textbf{failure rate} or \textbf{instantaneous hazard function} as
-\begin{equation}
-    h_{adv.}(t; \theta) \approx \frac{\lambda_{adv.}}{t_{attack}}~~\mathrm{and}~~h_{ben.}(t; \theta) \approx \frac{\lambda_{ben.}}{t_{predict}}
+    \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t},
     \label{eq:failure_rate}
 \end{equation}
-\subsection{Cost}\label{cost}
-
-For our purposes, we assumed the cost, $C$, is proportional to the total training, $T_{train}$, the number of samples, $N$, and training time per sample, $t_{\mathrm{train}}$, such that the cost of training, $t_{\mathrm{train}}$, is
-\[
-    C = T_{\mathrm{train}} := t_{train} \cdot N.
-\]
-
-
-
-
-\subsubsection{Failure Rates and Cost Normalization}
-We have defined all of the metrics in the section below.
-\label{metrics}
-
-In order to account for the marginal cost of a given model change, we also define $\bar{C}_{adv.}$, which is the expected number of adversarial failures that an attacker can generate during the time it takes to train a single sample\footnote{Consequently, if this number is larger than one, the average attacker has a time advantage the average model builder.} and $C_{ben.}$, which indicates the expected number of unperturbed samples that would be incorrectly classified in a single sample of training time, such that
+where $\Delta t$ is a time interval. This failure rate varies as a function of time, and we would like to model this behaviour. 
+So, let $h$ be a function with model/attack parameters, $\theta$, such that $h_{\theta}$ describes the rate of failure at time $t$.
+We can express the failure rate in terms of a \textbf{hazard function}, which can be expressed in terms of a point in time, $t$. It is defined as:
 \begin{equation}
-    \bar{C}_{adv.} := h_{adv.}(t, \theta) \cdot t_{train}
-     ~~\textrm{and}~~
-     \bar{C}_{ben.} := h_{ben.}(t, \theta) \cdot t_{train}
-\label{eq:cost}
+    h_{\theta}(t) := \lim_{ \Delta t \rightarrow 0} \frac{P(t \leq T < t + \Delta t \,|\, T \geq t)}{\Delta t},
+    \label{eq:failure_rate_h}
 \end{equation}
+where $T$ is time until a false classification occurs, also referred to as \textbf{survival time}~\cite{kleinbaum1996survival}. To describe the computational efficacy of different model and attack configurations in general, we modelled the
+probability of not observing a failure before a given time, $t$, giving the \textbf{cumulative survival function},
+\begin{equation}
+    S_{\theta}(t) := \exp \left\{- \int_0^{t} h_{\theta}(\tau) d\tau) \right\}.
+\label{eq:cdf}
+\end{equation}
+The probability density of observing a failure at time, $t$, is~\cite{kleinbaum1996survival},
+\begin{equation*}
+    f(t; \theta) := h_{\theta}(t)S_{\theta}(t).
+    \label{eq:pdf}
+\end{equation*}
+If we assume the probability of failure and time-to-failure is uniform across the samples for a particular set of covariates, we can estimate the probability of failure on the unperturbed test set,
+\begin{equation}
+    f_{ben.}(t; \theta) \approx \frac{1 - \lambda_{ben.}}{t_{predict}} \cdot t,
+    \label{eq:ben_failure_rate}
+\end{equation}
+where $t_{predict}$ indicates the inference time per sample. As we can plainly see, at $t=t_{predict}$, this reduces to one minus the test-set \textbf{benign accuracy}. However, this is, at best, an optimistic lower bound to the the real-world failure rate~\cite{meyers,croce_reliable_2020}. To get a realistic picture of the worst-case scenario, we can look at $f$ in the presence of adversarial noise,
+\begin{equation}
+    f_{adv.}(t; \theta) \approx \frac{ 1 - \lambda_{adv.}}{t_{attack}} \cdot t,
+    \label{eq:adv_failure_rate}
+\end{equation}
+where $t_{attack}$ refers to the attack generation time per sample. Hence, at $t=t_{attack}$ this reduces to one minus the \textbf{adversarial accuracy}.
+
+
+\subsection{Cost}
+
+\label{cost}
+For our purposes, we assumed the cost, $C_{train}$, is proportional to the total training, $T_{train}$, the number of samples, $N$,  and the training time per sample, $t_{\mathrm{train}}$, such that the cost of training on hardware with a fixed time-cost, $C_h$, is
+\[
+    C_{train} := C_{h} \cdot T_{\mathrm{train}} = C_h \cdot t_{train} \cdot N,
+\]
+where $C_h$ is the cost per time unit of a particular piece of hardware. This assumption means that cost will scale linearly with per-sample training time or sample size. Analogously, we can discuss this in adversarial terms where $N$ is the number of samples. If we assume the same hardware cost as the model-builder then,
+$$
+    C_{attack} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{attack} \cdot N.
+$$
+
+If we assume that the training time and attack time are uniform across the samples and restricted to the same hardware, then we can say that
+\begin{equation}
+C_{train} \propto t_{train} \text{~~~and~~~} C_{attack} \propto t_{attack}.
+\label{eq:naive_cost}
+\end{equation}
+
+Furthermore, a fast attack will be lower-bounded by $t_{predict}$, which is generally much smaller than the training time, $t_{train}$. Of course the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{train}$) is much, much larger than the cost of finding a counterexample ($\propto t_{attack}$) within some imperceptible noise distance of untainted samples. However, this merely encapsulates the cost of a particular model architecture or signal pre-processing choice and doesn't consider the likelihood of noise induced failure. Our cost normalized metric is introduced below in Eq.~\ref{eq:cost} in Section~\ref{cost_normalization}. Before we can compare this cost to the failure rate, we must estimate the attack time per sample, or expected survival time, $\mathbb{E}[T]$. For that, we use an accelerated failure rate model.
+
+% \begin{equation}
+%     \bar{C}_{adv.} := f_{adv.}(t, \theta) \cdot t_{train}
+%      ~~~\textrm{and}~~~
+%      \bar{C}_{ben.} := f_{ben.}(t, \theta) \cdot t_{train}.
+% \label{eq:cost}
+% \end{equation}
+% Notably, if we use a fast attack, $t_{attack}$ can be close to $t_{predict}$ which is ususally much faster than the trainin time, $t_{train}$. So, we need a new metric
 
 
 % to reflect the marginal performance gains of a method normalized by the training time for a given defence and model. A larger number indicates that more training time is required for the same failure rate while a smaller number indicates the opposite. Because both of these numbers are strictly non-negative, so is the metric.
