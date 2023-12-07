@@ -1,15 +1,13 @@
 \begin{table}
-\caption{Comparison of AFR Models on the <built-in method upper of str object at 0x7efdcbf6b3f0> dataset.}
-\label{tab:cifar10}
-\begin{tabular}{llrrrrr}
+\caption{Comparison of AFR Models on the MNIST dataset.}
+\label{tab:mnist}
+\begin{tabular}{lrrrlr}
 \toprule
- & Distribution & AIC & Concordance & BIC & Mean $S(t;\theta)$ & Median $S(t;\theta)$ \\
-Model &  &  &  &  &  &  \\
+ & AIC & Concordance & BIC & Mean $S(t;\theta)$ & Median $S(t;\theta)$ \\
 \midrule
-0 & Weibull & 4587.46 & 0.81 & 4587.46 & 80.23 & 6.40 \\
-1 & LogNormal & 4450.31 & 0.82 & 4450.31 & 78.55 & 4.87 \\
-2 & LogLogistic & 4489.71 & 0.81 & 4489.71 & NaN & 4.27 \\
-3 & Cox & NaN & 0.94 & NaN & 69.99 & 1.21 \\
+weibull & 4464.42 & 0.84 & 4464.42 & 64.30 & 4.62 \\
+log_logistic & 4258.52 & 0.83 & 4258.52 & -- & 2.70 \\
+log_normal & 4242.50 & 0.84 & 4242.50 & 66.49 & 3.59 \\
 \bottomrule
 \end{tabular}
 \end{table}
