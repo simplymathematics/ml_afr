@@ -1,16 +1,15 @@
-\begin{table}
+\begin{table*}
 \centering
-\caption{Comparison of AFR Models on the <built-in method upper of str object at 0x7f77d6ec43f0> dataset.}
+\caption{Comparison of AFR Models on the CIFAR100 dataset.}
 \label{tab:cifar100}
 \begin{tabular}{llrrrrr}
 \toprule
-{} & Distribution &     AIC &  Concordance &     BIC &  Mean \$S(t;\textbackslash theta)\$ &  Median \$S(t;\textbackslash theta)\$ \\
-Model &              &         &              &         &                     &                       \\
+Distribution &     AIC &  Concordance &     BIC &  Mean  $S(t; \theta)$ &  Median $S(t; \theta)$ \\
 \midrule
-0     &      Weibull & 5026.59 &         0.77 & 5026.59 &              578.43 &                 79.44 \\
-1     &    LogNormal & 5038.16 &         0.79 & 5038.16 &             4736.64 &                 73.43 \\
-2     &  LogLogistic & 5066.87 &         0.78 & 5066.87 &                 NaN &                 78.79 \\
-3     &          Cox &     NaN &         0.87 &     NaN &              307.51 &                141.41 \\
+Weibull & 5026.59 &         0.77 & 5026.59 &              578.43 &                 79.44 \\
+LogNormal & 5038.16 &         0.79 & 5038.16 &             4736.64 &                 73.43 \\
+LogLogistic & 5066.87 &         0.78 & 5066.87 &                 -- &                 78.79 \\
+Cox &     -- &         0.87 &     -- &              307.51 &                141.41 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
