@@ -38,9 +38,7 @@ In order to simulate various attacks that vary in information and run-time requi
     \item \textbf{Deep} ($\ell_2$): the Deepfool Attack~\citep{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient including the top $n$ outputs where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\citep{deepfool}. This algorithm is iterative and we restricted it to ten such iterations.
 
     \item \textbf{HSJ} ($\ell_2$, \textit{queries}): the `HopSkipJump' attack, in contrast to the attacks above, does not need access to model gradients nor soft class labels, instead relying on an offline approximation of the gradient using the model's decision boundaries. In this case, the strength is denoted by the number of queries necessary to find an adversarial counterexample~\citep{hopskipjump}. This algorithm is iterative and we restricted it to ten such iterations.
-    % \item \textbf{Knock-off:} The 'Knock-off-network' attack creates a proxy-model using a network architecture supplied by the attacker. By using a network with a smaller architecture (as we did), we use this to simulate an attacker who is trying to steal an approximation of the model.
-    % \item \textbf{Poisoning:} the `Backdoor Poisoning' attack interferes with the training process by injecting adversarially perturbed samples such that they appear to be a particular class. We use this to simulate how these \textit{worst-case} perturbations to the training set influence the model's efficacy (samples or $\ell_0$ distance). 
-    % \item \textbf{Membership:} the `Membership Inference` attack attempts to find the prototypical example for a target class. We include this to simulate an attacker who is attacking only a single class (samples or $\ell_0$ distance). 
+
 \end{itemize}
 
 
