@@ -1,4 +1,0 @@
-,AIC,Concordance,BIC,Mean $S(t;\theta)$,Median $S(t;\theta)$
-weibull,4464.42,0.84,4464.42,64.3,4.62
-log_logistic,4258.52,0.83,4258.52,,2.7
-log_normal,4242.5,0.84,4242.5,66.49,3.59
