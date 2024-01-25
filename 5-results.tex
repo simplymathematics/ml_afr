@@ -11,11 +11,11 @@ Through tens of thousands experiments across many signal-processing techniques (
 %     \centering
 %     \begin{subfigure}{0.45\textwidth}
 %         \centering
-%         \includegraphics[width=\textwidth]{cifar100/def_param_vs_accuracy.eps}
+%         \includegraphics[width=\textwidth]{cifar100_def_param_vs_accuracy.eps}
 %     \end{subfigure}
 %     \begin{subfigure}{0.45\textwidth}
 %         \centering
-%         \includegraphics[width=\textwidth]{cifar100/atk_param_vs_accuracy.eps}
+%         \includegraphics[width=\textwidth]{cifar100_atk_param_vs_accuracy.eps}
 %     \end{subfigure}
 %     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) accuracies across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength, and the definition can be found in Eq.~\ref{eq:acc}. The shaded areas reflect the 95\% confidence intervals for performance across random configurations of the data for each tuned attack and model configuration.}
 %     \label{fig:strength}
@@ -29,11 +29,11 @@ In Fig.~\ref{fig:strength}, we can see that no defence consistently outperforms 
 % \begin{figure*}
 %     \begin{subfigure}{0.45\textwidth}
 %         \centering
-%         \includegraphics[width=\textwidth]{cifar100/def_param_vs_adv_failure_rate.eps}
+%         \includegraphics[width=\textwidth]{cifar100_def_param_vs_adv_failure_rate.eps}
 %     \end{subfigure}
 %     \begin{subfigure}{0.45\textwidth}
 %         \centering
-%         \includegraphics[width=\textwidth]{{cifar100/adv_failure_rate_vs_train_time.eps}}
+%         \includegraphics[width=\textwidth]{{cifar100_adv_failure_rate_vs_train_time.eps}}
 %     \end{subfigure}
 %     \caption{The left plot shows the adversarial failure rate (see Eq.~\ref{eq:failure_rate}) as a function of the defence strength where the control parameter represents the number of model layers. The shaded areas reflect the 95\% confidence intervals for each tuned hyperparameter combination. The right plot depicts the adversarial failure rate as a function of training time and ResNet configuration.}
 %     \label{fig:failure_rate}
@@ -47,14 +47,14 @@ As the training time increases, however, the variance of attack times decreases,
 %     \centering
 %     \begin{subfigure}{.28\textwidth}
 %         \centering
-%         \includegraphics[width=\textwidth]{cifar100/ben_failures_per_train_time_vs_defence_type.eps}
+%         \includegraphics[width=\textwidth]{cifar100_ben_failures_per_train_time_vs_defence_type.eps}
 %     \end{subfigure}
 %     \begin{subfigure}{0.28\textwidth}
-%         \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_defence_type.eps}
+%         \includegraphics[width=\textwidth]{cifar100_adv_failures_per_train_time_vs_defence_type.eps}
 %         \centering
 %     \end{subfigure}
 %     \begin{subfigure}{0.42\textwidth}
-%         \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_attack_type.eps}
+%         \includegraphics[width=\textwidth]{cifar100_adv_failures_per_train_time_vs_attack_type.eps}
 %         \centering
 %     \end{subfigure}
 %     \caption{This figure depicts the cost-normalized adversarial failure rate (see Eq.~\ref{eq:cost}) across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Sec.~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a diamond.}
@@ -75,32 +75,32 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
     % \centering
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{cifar100/weibull_aft.eps}
+        \includegraphics[width=\textwidth]{cifar100_weibull_aft.eps}
     \end{subfigure}%
     ~ 
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{cifar100/log_normal_aft.eps}
+        \includegraphics[width=\textwidth]{cifar100_log_normal_aft.eps}
     \end{subfigure}
     ~
     \begin{subfigure}{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{cifar100/log_logistic_aft.eps}
+        \includegraphics[width=\textwidth]{cifar100_log_logistic_aft.eps}
     \end{subfigure}
     
     \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $h$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate. Additionally, $\lambda_{ben}$ refers to the benign accuracy (see Eq.~\ref{eq:acc}) and $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}.
     \label{fig:afr_models}
 \end{figure*}
-\input{cifar100/aft_comparison}
-% \input{mnist/aft_comparison}
+\input{cifar100_aft_comparison}
+% \input{mnist_aft_comparison}
 \begin{figure}
     % \begin{subfigure}
-    %     \input{cifar100/aft_comparison}
+    %     \input{cifar100_aft_comparison}
     % \end{subfigure}
-    \centering\includegraphics[width=.5\textwidth]{cifar100/log_normal_epochs_partial_effect.eps}
+    \centering\includegraphics[width=.5\textwidth]{cifar100_log_normal_epochs_partial_effect.eps}
    \caption{The survival curve over time as a function of the number of model layers for the highest scoring AFR model (the Log-Normal distribution). The partial effects plots of other models are included in the Appendix \ref{appendix}, as the results were very similar.}
     \label{fig:layers}
 \end{figure}
-% \input{mnist/aft_comparison}
+% \input{mnist_aft_comparison}
 
 
