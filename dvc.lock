@@ -1,0 +1,170 @@
+schema: '2.0'
+stages:
+  prepare_images@cifar100:
+    cmd: python flatten.py --directories cifar100
+    deps:
+    - path: cifar100/
+      md5: bb8b5ed55c49f4d125bf1590674b6560.dir
+      size: 2122108
+      nfiles: 15
+    - path: flatten.py
+      md5: d203bc3a88a44cda3b794373cb379b25
+      size: 2761
+    outs:
+    - path: cifar100_adv_accuracy_vs_attack_type.eps
+      md5: a23e52020420a269984bb6dcbd2e6aee
+      size: 109746
+    - path: cifar100_adv_accuracy_vs_defence_type.eps
+      md5: d3f23b527e1059aaba303b5416ae9bb1
+      size: 106548
+    - path: cifar100_adv_failure_rate_vs_train_time.eps
+      md5: 6d2c3c1b3aee47aecf8975aa0e50f807
+      size: 1119464
+    - path: cifar100_adv_failures_per_train_time_vs_attack_type.eps
+      md5: 24a361a0f0cd7025b1c9614570c5c589
+      size: 133752
+    - path: cifar100_adv_failures_per_train_time_vs_defence_type.eps
+      md5: 345fb9f8e3c9fcbd925c8fe5a76c55d7
+      size: 121862
+    - path: cifar100_aft_comparison.tex
+      md5: e3d53b838dd94b98800609ed0c9c5e11
+      size: 606
+    - path: cifar100_atk_param_vs_accuracy.eps
+      md5: b080751ada988c919eacfba99663a641
+      size: 39663
+    - path: cifar100_ben_accuracy_vs_defence_type.eps
+      md5: d0564205d5e3ee45f50a1d98fff77dcb
+      size: 113268
+    - path: cifar100_ben_failures_per_train_time_vs_defence_type.eps
+      md5: d746852bfaff5ad7177e5b1fddd068fd
+      size: 118866
+    - path: cifar100_def_param_vs_accuracy.eps
+      md5: c361b71d520f37effe6197146d2899de
+      size: 38049
+    - path: cifar100_def_param_vs_adv_failure_rate.eps
+      md5: e0602899b055106cf2a0ab5ab0d00801
+      size: 36997
+    - path: cifar100_log_logistic_aft.eps
+      md5: 9be37d4f99f533b3e78dbef2b385a13e
+      size: 46636
+    - path: cifar100_log_normal_aft.eps
+      md5: bad39dcbf96e80b71a77596c5551ad2c
+      size: 47394
+    - path: cifar100_log_normal_layers_partial_effect.eps
+      md5: 72756304f681656bd45b59918338d01f
+      size: 44746
+    - path: cifar100_weibull_aft.eps
+      md5: 548f459eb1443be1372895a0fdce26a4
+      size: 44511
+  prepare_images@cifar:
+    cmd: python flatten.py --directories cifar
+    deps:
+    - path: cifar/
+      md5: f3eb66d97088789e3687d7a91cfaa504.dir
+      size: 1410069
+      nfiles: 15
+    - path: flatten.py
+      md5: d203bc3a88a44cda3b794373cb379b25
+      size: 2761
+    outs:
+    - path: cifar_adv_accuracy_vs_attack_type.eps
+      md5: fd5bd838049b1398204d3578f644b420
+      size: 106575
+    - path: cifar_adv_accuracy_vs_defence_type.eps
+      md5: 90e5f140e9692f2c133b7d092012677e
+      size: 98548
+    - path: cifar_adv_failure_rate_vs_train_time.eps
+      md5: 61a705f377502f5c181b711eb8e4548f
+      size: 507471
+    - path: cifar_adv_failures_per_train_time_vs_attack_type.eps
+      md5: 64c8c7f32038fac4f28fddfbee013516
+      size: 117314
+    - path: cifar_adv_failures_per_train_time_vs_defence_type.eps
+      md5: a4d7f416795196b8a344d2c709e5d4de
+      size: 99649
+    - path: cifar_aft_comparison.tex
+      md5: 569cc492fdd774c0a0af506af6724696
+      size: 600
+    - path: cifar_atk_param_vs_accuracy.eps
+      md5: 65e542d26e0ada90dabc320f33ac63d8
+      size: 38782
+    - path: cifar_ben_accuracy_vs_defence_type.eps
+      md5: bff2629e0fd4fc0c7823349511d81af6
+      size: 83244
+    - path: cifar_ben_failures_per_train_time_vs_defence_type.eps
+      md5: e9f85256329fe776ec4fb14e0d328907
+      size: 96490
+    - path: cifar_def_param_vs_accuracy.eps
+      md5: 4708d71becf081f55335088ed4082968
+      size: 37876
+    - path: cifar_def_param_vs_adv_failure_rate.eps
+      md5: 477c0dbbb57d19bdcc6b222c8edd4073
+      size: 39890
+    - path: cifar_log_logistic_aft.eps
+      md5: f3d8ebf23bed88b6073e7fd5b1ec06a4
+      size: 46602
+    - path: cifar_log_normal_aft.eps
+      md5: cc3c387731c50d5db1d97e5d0623d7a2
+      size: 47357
+    - path: cifar_log_normal_layers_partial_effect.eps
+      md5: 0ef45a84b66a5fe43c51b8965abc47c2
+      size: 43910
+    - path: cifar_weibull_aft.eps
+      md5: 224dc1d61f94b095440dcfda060739c6
+      size: 45761
+  prepare_images@mnist:
+    cmd: python flatten.py --directories mnist
+    deps:
+    - path: flatten.py
+      md5: d203bc3a88a44cda3b794373cb379b25
+      size: 2761
+    - path: mnist/
+      md5: 37022e5300d33b26c285b88a5e4158fa.dir
+      size: 1779456
+      nfiles: 15
+    outs:
+    - path: mnist_adv_accuracy_vs_attack_type.eps
+      md5: 5e68101b5deda284b2af9e6d22e7653f
+      size: 113600
+    - path: mnist_adv_accuracy_vs_defence_type.eps
+      md5: bad2272acc1161f7dd045511f9a18698
+      size: 105721
+    - path: mnist_adv_failure_rate_vs_train_time.eps
+      md5: 80ec531d2412405ab392e055adce2bd6
+      size: 798746
+    - path: mnist_adv_failures_per_train_time_vs_attack_type.eps
+      md5: c380fefe4643cb8c3d9c59b7810ccdd2
+      size: 123494
+    - path: mnist_adv_failures_per_train_time_vs_defence_type.eps
+      md5: c47cd69aa7b557546cca59a929878d9a
+      size: 116302
+    - path: mnist_aft_comparison.tex
+      md5: 0034975eb38ed6deb1b6f325f714571f
+      size: 600
+    - path: mnist_atk_param_vs_accuracy.eps
+      md5: 246c94693b7372e5e16e8a238a5cb9bc
+      size: 37595
+    - path: mnist_ben_accuracy_vs_defence_type.eps
+      md5: 32880f89f9ec0ff0bd94ca4d243e9b4c
+      size: 101387
+    - path: mnist_ben_failures_per_train_time_vs_defence_type.eps
+      md5: aabe0da0ee21d012c7c2f00d089ef5d0
+      size: 116879
+    - path: mnist_def_param_vs_accuracy.eps
+      md5: c2ef7ec56666695955afc2356e62be6a
+      size: 38918
+    - path: mnist_def_param_vs_adv_failure_rate.eps
+      md5: d73b7c684813e94a1a20dcd81f411bbe
+      size: 40619
+    - path: mnist_log_logistic_aft.eps
+      md5: b53ca1fcae1471dbb1e1a14a055b0fb7
+      size: 46346
+    - path: mnist_log_normal_aft.eps
+      md5: fe7dc6e06d3c166210be737bf62f0988
+      size: 48850
+    - path: mnist_log_normal_layers_partial_effect.eps
+      md5: ffcd1d6285750415c687cede522be672
+      size: 44637
+    - path: mnist_weibull_aft.eps
+      md5: 0e5226500ad2ebeffd02413ae683f326
+      size: 45762
