@@ -13,12 +13,6 @@ where $\phi$ is an acceleration factor that depends on the covariates, typically
 \]
 
 While non-parametric AFR models like Cox's \textbf{proportional hazard model} do exist, they don't allow us to estimate the underlying distribution~\cite{kleinbaum1996survival} --- merely the proportional effects of the covariates~\citep{aft_models}. Furthermore, parametric distributions are known to be robust to omitted covariates~\citep{lambert2004parametric}.
-% . Estimating the expected survival time of a model requires a choice of probability distribution ($\mathcal{X}$) \footnote{While non-parametric AFR models like Cox's \textbf{proportional hazard model} do exist, they don't allow us to estimate the underlying distribution~\cite{kleinbaum1996survival} --- merely the proportional effects of the covariates~\citep{aft_models}. Furthermore, parametric distributions are known to be robust to omitted covariates~\citep{lambert2004parametric}.}, and we outline the most common ones in the subsections below. The expected value of a random variable, $\mathcal{X}$:
-%  \[
-%  \mathbb{E}[\mathcal{X}] = \mathbb{P}(\mathcal{X} > t) = \int_0^{\infty} t \cdot S(t) dt
-%  \]
-%  where $\mathbb{E}$ is the expectation, and $\mathbb{P}(\mathcal{X} > t)$ is the probability of drawing a sample from $\mathcal{X}$ with survival time greater than $t$.
-
 
 \subsection{Weibull AFR}
 The first AFR model we tested was using the Weibull distribution, which has the form
@@ -26,14 +20,6 @@ The first AFR model we tested was using the Weibull distribution, which has the 
     S_\theta(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(\beta, x)} \right)^{\rho(\alpha, y)} \right)},
 \]
 where $\theta=(\alpha, \beta)$, the $x = (x_1, \ldots, x_p)$ is the set of covariates and $y=(y_1, \ldots, y_n)$ is the count of failure events, and where $\lambda(\beta, x)=\exp(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p)$ is a scale parameter and $\rho(\alpha, y)=\exp(\alpha_0 + \alpha_1 y_1 + \cdots + \alpha_p y_p)$ is a shape parameter that determines the direction of acceleration over time.
-
-% Using the Weibull distribution, we can define the accelerated failure rate model as,
-% \[
-%     \log(T) = \beta ^T \mathcal{X} + \xi
-% \]
-% where $T$ represents the survival time or failure time, $\log$ is the logarithm function, $\beta$ is a vector of coefficients that quantifies the impact of covariates on the logarithm of the survival time, $X$ is a vector of covariates, including indicators or characteristics related to adversarial attacks, and $\xi$ is an error term representing the unexplained variation in the survival time. The model parameters, $\beta$, can be estimated for various constraints by using adversarial attacks that each have different optimization criteria. For example, to estimate the effect of single-pixel failures, we could use the `Pixel-attack`~\citep{pixelattack}. To estimate the effect of perturbations across the whole feature space, we could use an $\ell_{\infty}$ attack like `Thresh'~\citep{pixelattack}. By comparing the failure rates in these particular adversarial contexts to the failure rates under random (benign) noise, we can isolate the effects of the \textit{adversary} from effect of noise in general.
-
-
 
 \subsection{Log-Normal AFR}
 
