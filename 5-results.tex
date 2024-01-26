@@ -7,99 +7,59 @@ Through tens of thousands experiments across many signal-processing techniques (
 
 \subsection{Attack and Defence Strength}
 
-% \begin{figure*}
-%     \centering
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{cifar100/def_param_vs_accuracy.eps}
-%     \end{subfigure}
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{cifar100/atk_param_vs_accuracy.eps}
-%     \end{subfigure}
-%     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) accuracies across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength, and the definition can be found in Eq.~\ref{eq:acc}. The shaded areas reflect the 95\% confidence intervals for performance across random configurations of the data for each tuned attack and model configuration.}
-%     \label{fig:strength}
-% \end{figure*}
+
 
 
 In Fig.~\ref{fig:strength}, we can see that no defence consistently outperforms the undefended (control) model (denoted in blue). Furthermore, the relationship between the defence control parameter and the benign accuracy is not monotonic, meaning that tuning is will be expensive. We can see that the relationship between the attack parameters and failure rate is also not monotonic. However, all defences appear to perform much worse in the average adversarial case (right) than in the benign (left). Additionally we see in the right side of Fig.~\ref{fig:strength} that the attack types yield relatively consistent results, with the mean of one falling in the 95 confidence intervals of all the others. We can also see that defence choice follows the same pattern, except for Gauss-in, which rapidly decreases the accuracy.
 
 
 \subsection{Failure Rate}
-% \begin{figure*}
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{cifar100/def_param_vs_adv_failure_rate.eps}
-%     \end{subfigure}
-%     \begin{subfigure}{0.45\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{{cifar100/adv_failure_rate_vs_train_time.eps}}
-%     \end{subfigure}
-%     \caption{The left plot shows the adversarial failure rate (see Eq.~\ref{eq:failure_rate}) as a function of the defence strength where the control parameter represents the number of model layers. The shaded areas reflect the 95\% confidence intervals for each tuned hyperparameter combination. The right plot depicts the adversarial failure rate as a function of training time and ResNet configuration.}
-%     \label{fig:failure_rate}
-% \end{figure*}
 
-Fig.~\ref{fig:failure_rate} depicts the adversarial failure rate of all tested attacks, defences, and model configurations. Clearly, increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. Furthermore, it reveals something surprising---that increasing the number of hidden layers tends to increase the failure rate---even across model architectures and all defences. Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see left side of Fig.~\ref{fig:failure_rate}). The right subplot of Fig.~\ref{fig:failure_rate} shows that there is no general relationship between training time and adversarial failure rate. 
+
+Fig.~\ref{fig:failure_rate} depicts the adversarial failure rate of all tested attacks, defences, and model configurations. Clearly, increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. Furthermore, it reveals something surprising---that increasing the number of hidden layers tends to increase the failure rate---even across model architectures and all defences. Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see left side of Fig.~\ref{fig:failure_rate}). The right subplot of Fig.~\ref{fig:failure_rate} shows that there is no general relationship between training time and adversarial failure rate.
 As the training time increases, however, the variance of attack times decreases, likely due to the increase in inference time (see:~\ref{fig:afr_models}) rather than inherent robustness. We formalize this analysis  in the next subsection.
 
 
-% \begin{figure*}
-%     \centering
-%     \begin{subfigure}{.28\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{cifar100/ben_failures_per_train_time_vs_defence_type.eps}
-%     \end{subfigure}
-%     \begin{subfigure}{0.28\textwidth}
-%         \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_defence_type.eps}
-%         \centering
-%     \end{subfigure}
-%     \begin{subfigure}{0.42\textwidth}
-%         \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_attack_type.eps}
-%         \centering
-%     \end{subfigure}
-%     \caption{This figure depicts the cost-normalized adversarial failure rate (see Eq.~\ref{eq:cost}) across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Sec.~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a diamond.}
-%     \label{fig:failures_per_train_time}
-% \end{figure*}
 
-Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (left) figure and adversarial cases (middle and right figures). Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see: left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations. 
+Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (left) figure and adversarial cases (middle and right figures). Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see: left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations.
 
 
 
 \subsection{AFR Models}
 
-Fig.~\ref{fig:afr_models} reveals very similar estimates for the model parameters despite the models having different forms, suggesting that these parameter estimates reflect the true effect of these covariates on the failure rate. Table~\ref{tab:cifar} contains the performance of each of these models on the CIFAR10 dataset.  Appendix~\ref{appendix} contains the same data for all other datastes. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that Log-Normal model marginally outperforms the Weibull model when measured with AIC/BIC as well as the Concordance. 
-In all cases, the mean time until false classification is much larger than the median, indicating the long-tailed nature of these distributions. 
+Fig.~\ref{fig:afr_models} reveals very similar estimates for the model parameters despite the models having different forms, suggesting that these parameter estimates reflect the true effect of these covariates on the failure rate. Table~\ref{tab:cifar} contains the performance of each of these models on the CIFAR10 dataset.  Appendix~\ref{appendix} contains the same data for all other datastes. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that Log-Normal model marginally outperforms the Weibull model when measured with AIC/BIC as well as the Concordance.
+In all cases, the mean time until false classification is much larger than the median, indicating the long-tailed nature of these distributions.
 The concordance scores for all three distributions are in agreement as well, confirming our assumption that accuracy is not independent of attack time (e.g., Concordance $> 0.5$).
 We then used the Log-Normal AFR to demonstrate the partial effect of the the number of layers on the survival time as in Fig.~\ref{fig:layers}. In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the resulting inference time (see Fig.~\ref{fig:afr_models}) than the number of model layers.
 \begin{figure*}
-    % \centering
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100/weibull_aft.eps}
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100/log_normal_aft.eps}
-    \end{subfigure}
-    ~
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100/log_logistic_aft.eps}
-    \end{subfigure}
-    
-    \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $h$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate. Additionally, $\lambda_{ben}$ refers to the benign accuracy (see Eq.~\ref{eq:acc}) and $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}.
-    \label{fig:afr_models}
+	% \centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100/weibull_aft.eps}
+	\end{subfigure}%
+	~
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100/log_normal_aft.eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100/log_logistic_aft.eps}
+	\end{subfigure}
+
+	\caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $h$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate. Additionally, $\lambda_{ben}$ refers to the benign accuracy (see Eq.~\ref{eq:acc}) and $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}.
+	\label{fig:afr_models}
 \end{figure*}
 \input{cifar100/aft_comparison}
 % \input{mnist_aft_comparison}
 \begin{figure}
-    % \begin{subfigure}
-    %     \input{cifar100/aft_comparison}
-    % \end{subfigure}
-    \centering\includegraphics[width=.5\textwidth]{cifar100/log_normal_layers_partial_effect.eps}
-   \caption{The survival curve over time as a function of the number of model layers for the highest scoring AFR model (the Log-Normal distribution). The partial effects plots of other models are included in the Appendix \ref{appendix}, as the results were very similar.}
-    \label{fig:layers}
+	% \begin{subfigure}
+	%     \input{cifar100/aft_comparison}
+	% \end{subfigure}
+	\centering\includegraphics[width=.5\textwidth]{cifar100/log_normal_layers_partial_effect.eps}
+	\caption{The survival curve over time as a function of the number of model layers for the highest scoring AFR model (the Log-Normal distribution). The partial effects plots of other models are included in the Appendix \ref{appendix}, as the results were very similar.}
+	\label{fig:layers}
 \end{figure}
 % \input{mnist_aft_comparison}
 

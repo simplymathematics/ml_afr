@@ -33,7 +33,7 @@ However, accuracy is known to vary with things like model complexity~\cite{vgg,r
     \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t},
     \label{eq:failure_rate}
 \end{equation}
-where $\Delta t$ is a time interval. This failure rate varies as a function of time, and we would like to model this behaviour. 
+where $\Delta t$ is a time interval. This failure rate varies as a function of time, and we would like to model this behaviour.
 So, let $h$ be a function with model/attack parameters, $\theta$, such that $h_{\theta}$ describes the rate of failure at time $t$.
 We can express the failure rate in terms of a \textbf{hazard function}, which can be expressed in terms of a point in time, $t$. It is defined as:
 \begin{equation}
