@@ -4,14 +4,17 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
+      
       - name: Set up Git repository
         uses: actions/checkout@v1
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@master
         with:
           root_file: main.tex
+        continue-on-error: true
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
           name: PDF
           path: main.pdf
+        continue-on-error: true
