@@ -1,49 +1,7 @@
 \subsection{Comparison of datasets}
 Tables~\ref{tab:cifar100}-\ref{tab:mnist} compare the efficacy of the AFR technique across datasets.
 
-\begin{table}[h!]
-\centering
-\caption{Comparison of AFR Models on the CIFAR100 dataset.}
-\label{tab:cifar100}
-\begin{tabular}{llrrrrr}
-\toprule
-Distribution &     AIC &  Concordance &     BIC &  Mean  $S(t; \theta)$ &  Median $S(t; \theta)$ \\
-\midrule
-Weibull & 5026.59 &         0.77 & 5026.59 &              578.43 &                 79.44 \\
-Log-Normal & 5038.16 &         0.79 & 5038.16 &             4736.64 &                 73.43 \\
-Log-Logistic & 5066.87 &         0.78 & 5066.87 &                 -- &                 78.79 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{cifar100/aft_comparison}
+\input{cifar/aft_comparison}
+\input{mnist/aft_comparison}
 
-
-\begin{table}[h!]
-\centering
-\caption{Comparison of AFR Models on the CIFAR10 dataset.}
-\label{tab:cifar}
-\begin{tabular}{lrrrlr}
-\toprule
-Distribution & AIC & Concordance & BIC & Mean $S(t;\theta)$ & Median $S(t;\theta)$ \\
-\midrule
-Weibull & 4464.42 & 0.84 & 4464.42 & 64.30 & 4.62 \\
-Log-Logistic & 4258.52 & 0.83 & 4258.52 & -- & 2.70 \\
-Log-Normal & 4242.50 & 0.84 & 4242.50 & 66.49 & 3.59 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-\begin{table}[h!]
-\centering
-\caption{Comparison of AFR Models on the MNIST dataset.}
-\label{tab:mnist}
-\begin{tabular}{lrrrlr}
-\toprule
-Distribution & AIC & Concordance & BIC & Mean $S(t;\theta)$ & Median $S(t;\theta)$ \\
-\midrule
-Weibull & 6023.09 & 0.79 & 6023.09 & 55.49 & 6.80 \\
-Log-Logistic & 5856.06 & 0.85 & 5856.06 & -- & 5.18 \\
-Log-Normal & 5808.19 & 0.84 & 5808.19 & 69.42 & 5.72 \\
-\bottomrule
-\end{tabular}
-\end{table}

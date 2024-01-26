@@ -136,7 +136,7 @@ def main(args):
     tmp_directories = [Path(tmp_directory, directory).name for directory in directories]
     copy_files_to_tmp_directory(tmp_directory)
     flatten_directories(tmp_directories)
-    
+
     os.chdir(tmp_directory)
     for directory in directories:
         remove_unused_files(directory, logfile, enc)
@@ -146,7 +146,7 @@ def main(args):
         for extension in args.extensions:
             delete_files_with_extension(extension)
     delete_image_directories(directories)
-    
+
     os.chdir(old_directory)
     zip_tmp_directory(args.title, tmp_directory)
     delete_tmp_directory_final(tmp_directory)

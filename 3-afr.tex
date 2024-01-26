@@ -1,15 +1,15 @@
 
 \section{Accelerated Failure Models for ML}
 \label{afr_models}
-Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles). When, for example, a car manufacturer wants to test a motor for next-year's production model, they cannot simply sample a collection of motors from their upstream suppliers since the motor is intended to last a decade or more. Instead, they \textit{induce} failures by introducing extreme circumstances~\citep{liu2013development,lawless1995methods} into the verification procedures. For example, this might include running the motor in extremely cold or hot environments, cycling between temperatures rapidly, or using extreme vibration to \textit{accelerate} the effect of normal wear-and-tear~\citep{meeker1998accelerated}. By measuring the effect of each of these test scenarios on the tested component and keeping track of the real-world circumstances and usage of their products, they can estimate the long-term behavior of a component without relying on long-term testing that would drastically slow development. That is, they can successfully estimate the expected survival time of a component using accelerated methods. 
+Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles). When, for example, a car manufacturer wants to test a motor for next-year's production model, they cannot simply sample a collection of motors from their upstream suppliers since the motor is intended to last a decade or more. Instead, they \textit{induce} failures by introducing extreme circumstances~\citep{liu2013development,lawless1995methods} into the verification procedures. For example, this might include running the motor in extremely cold or hot environments, cycling between temperatures rapidly, or using extreme vibration to \textit{accelerate} the effect of normal wear-and-tear~\citep{meeker1998accelerated}. By measuring the effect of each of these test scenarios on the tested component and keeping track of the real-world circumstances and usage of their products, they can estimate the long-term behavior of a component without relying on long-term testing that would drastically slow development. That is, they can successfully estimate the expected survival time of a component using accelerated methods.
 
 Under the assumption of accelerated failure time~\cite{kleinbaum1996survival}, we can express the survival time as,
 $$
-    S_\theta(t) = S_0(\phi(\theta, x) t),
+	S_\theta(t) = S_0(\phi(\theta, x) t),
 $$
 where $\phi$ is an acceleration factor that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs. We can use the survival function to compute the expected survival time,
 \[
-    \mathbb{E}_{S_\theta}[T] = \int_0^{\infty} t \cdot S_\theta(t) \,dt.
+	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty} t \cdot S_\theta(t) \,dt.
 \]
 
 While non-parametric AFR models like Cox's \textbf{proportional hazard model} do exist, they don't allow us to estimate the underlying distribution~\cite{kleinbaum1996survival} --- merely the proportional effects of the covariates~\citep{aft_models}. Furthermore, parametric distributions are known to be robust to omitted covariates~\citep{lambert2004parametric}.
@@ -17,7 +17,7 @@ While non-parametric AFR models like Cox's \textbf{proportional hazard model} do
 \subsection{Weibull AFR}
 The first AFR model we tested was using the Weibull distribution, which has the form
 \[
-    S_\theta(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(\beta, x)} \right)^{\rho(\alpha, y)} \right)},
+	S_\theta(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(\beta, x)} \right)^{\rho(\alpha, y)} \right)},
 \]
 where $\theta=(\alpha, \beta)$, the $x = (x_1, \ldots, x_p)$ is the set of covariates and $y=(y_1, \ldots, y_n)$ is the count of failure events, and where $\lambda(\beta, x)=\exp(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p)$ is a scale parameter and $\rho(\alpha, y)=\exp(\alpha_0 + \alpha_1 y_1 + \cdots + \alpha_p y_p)$ is a shape parameter that determines the direction of acceleration over time.
 
@@ -25,7 +25,7 @@ where $\theta=(\alpha, \beta)$, the $x = (x_1, \ldots, x_p)$ is the set of covar
 
 The Log-Normal AFR model introduces the parameters $\mu(\alpha, x) = \alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p $ and $\sigma(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$ with the survival function given by,
 \[
-    S_\theta(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(\alpha, x) }{ \sigma(\beta, y) } \right) \right),
+	S_\theta(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(\alpha, x) }{ \sigma(\beta, y) } \right) \right),
 \]
 where $\theta = (\alpha, \beta)$.
 
@@ -35,7 +35,7 @@ where $\theta = (\alpha, \beta)$.
 
 Another form of the AFR model, the Log-Logistic AFR, introduces the scale and shape parameters $a(\alpha, x) = \exp(\alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p )$ and $b(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$, respectively, with survival function,
 \[
-    S_\theta(t; x, y) = 1 - \log \left( 1 + \left (  \frac{t - a(\alpha, x) }{ b(\beta, y) }\right)\right),
+	S_\theta(t; x, y) = 1 - \log \left( 1 + \left (  \frac{t - a(\alpha, x) }{ b(\beta, y) }\right)\right),
 \]
 where $\theta = (\alpha, \beta)$.
 
@@ -58,11 +58,11 @@ To compare the efficacy of different parametric aft models, we use the Akaike in
 
 So, finally, we can introduce the idea of a failure rate normalized cost. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this relative cost of failure in both benign and adversarial terms as,
 \begin{equation}
-    \bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
-    \text{~~~and~~~}
-    \bar{C}_{adv.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon_{max}]}.
-    \label{eq:cost}
+	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
+	\text{~~~and~~~}
+	\bar{C}_{adv.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon_{max}]}.
+	\label{eq:cost}
 \end{equation}
-If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{e.g.}, that our model is \textit{broken}). Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model. 
+If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{e.g.}, that our model is \textit{broken}). Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
 This approach has two advantages over the traditional train-test split method. Firstly, we can quantify the effects of covariates like model depth or noise distance to compare the effect of model changes. Secondly, the train-test split methodology relies on an ever-larger number of samples to increase precision, whereas the accelerated failure method is able to precisely and accurately compare models using only a small number of samples~\cite{schmoor2000sample,lachin1981introduction} relative to the many billions required of the train/test split methodology and safety-critical standards~\cite{iso26262,IEC61508,IEC62034,meyers}.
-In short, by generating worst-case examples (\textit{e.g.}, adversarial ones), we can test \textit{and compare} arbitrarily complex models \textit{before} they leave the lab, drive a car, predict the presence of cancer, or pilot a drone. 
+In short, by generating worst-case examples (\textit{e.g.}, adversarial ones), we can test \textit{and compare} arbitrarily complex models \textit{before} they leave the lab, drive a car, predict the presence of cancer, or pilot a drone.
