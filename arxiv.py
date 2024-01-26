@@ -133,12 +133,13 @@ def main(args):
     tmp_directory = tempfile.mkdtemp()
     logger.info('Temporary directory: ' + tmp_directory)
     create_tmp_directory(tmp_directory)
-    directories = [Path(tmp_directory, directory).name for directory in directories]
+    tmp_directories = [Path(tmp_directory, directory).name for directory in directories]
     copy_files_to_tmp_directory(tmp_directory)
-    flatten_directories(directories)
+    flatten_directories(tmp_directories)
+    
+    os.chdir(tmp_directory)
     for directory in directories:
         remove_unused_files(directory, logfile, enc)
-    os.chdir(tmp_directory)
     remove_git_directories()
     replace_contents(directories, tex_files)
     if args.extensions:

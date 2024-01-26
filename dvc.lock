@@ -173,14 +173,14 @@ stages:
       csv --title "Survival Analysis for Deep Convolutional Neural Networks"
     deps:
     - path: arxiv.py
-      md5: 5b3d7f38ceb69b9c9abc95ed1c479700
-      size: 7040
+      md5: 43f39bc5d21cf4d8715a6a80d89ff4fa
+      size: 7053
     - path: cifar/
-      md5: 88a9176328f66e228abaf6c4e49ab86d.dir
-      size: 16244281
+      md5: 7edb3740c0b854775469df29a2a8d533.dir
+      size: 16243009
       nfiles: 25
     - path: cifar100/
-      md5: c1c16446d03a1ae8f0506e311ed86d7c.dir
+      md5: 53c5709f5f5b77289282600ce8689faa.dir
       size: 2885837
       nfiles: 27
     - path: cifar100_aft_comparison.tex
@@ -190,7 +190,7 @@ stages:
       md5: 569cc492fdd774c0a0af506af6724696
       size: 600
     - path: mnist/
-      md5: 8589d4c078eb55fa0ca79287af199c03.dir
+      md5: 71800e43aef08c66b89898cc69e47ea5.dir
       size: 2286297
       nfiles: 24
     - path: mnist_aft_comparison.tex
@@ -198,5 +198,5 @@ stages:
       size: 600
     outs:
     - path: Survival Analysis for Deep Convolutional Neural Networks.zip
-      md5: 30178946d7354d12a35ddd40443b981d
-      size: 10173428
+      md5: 11bf133dd0c9ba14ccbb04c429b3b298
+      size: 40507386
