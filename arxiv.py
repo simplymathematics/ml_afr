@@ -18,15 +18,18 @@ def copy_files_to_tmp_directory(tmp_directory):
     logger.info('Copying files to temporary directory: ' + tmp_directory)
     for filename in Path('.').glob('*'):
         if Path(filename).is_dir():
-            logger.info(f"{filename} is a directory - skipping.")
+            logger.debug(f"Copying {filename} to tmp directory.")
+            shutil.copytree(filename, str(Path(tmp_directory, filename).resolve()))
         else:
-            logger.info(f"Copying {filename} to tmp directory.")
+            logger.debug(f"Copying {filename} to tmp directory.")
             shutil.copy(filename, str(Path(tmp_directory, filename).resolve()))
 
 
 def remove_unused_files(directory, logfile, enc, filetype=".eps"):
-    logger.info('Removing unused files in directory: ' + directory)
+    logger.info('Removing unused files in directory: ' + directory + ' with extension: ' + filetype)
     for filename in Path(directory).glob(f'*{filetype}'):
+        filename = str(filename)
+        logfile = str(logfile)
         if filename in open(logfile, encoding=enc).read():
             pass
         else:
@@ -34,7 +37,7 @@ def remove_unused_files(directory, logfile, enc, filetype=".eps"):
                 logger.info(filename + ' not in use - deleting.')
                 os.remove(os.path.join(directory, filename))
             else:
-                logger.info(filename + ' is a directory.')
+                pass
 
 
 def remove_git_directories():
@@ -63,7 +66,7 @@ def delete_image_directories(directories):
     for directory in directories:
         if Path(directory).exists():
             logger.info('Removing ' + directory + ' directory.')
-            os.rmdir(directory)
+            shutil.rmtree(directory)
 
 
 def zip_tmp_directory(title, tmp_directory):
@@ -123,7 +126,7 @@ def replace_contents(directories, tex_files):
 
 def main(args):
     directories = args.directories
-    logfile = args.logfile
+    logfile = Path(args.logfile).as_posix()
     enc = args.enc
     tex_files = args.tex_files
     old_directory = os.getcwd()
@@ -131,18 +134,18 @@ def main(args):
     logger.info('Temporary directory: ' + tmp_directory)
     create_tmp_directory(tmp_directory)
     directories = [Path(tmp_directory, directory).name for directory in directories]
-    flatten_directories(directories)
-    os.chdir(tmp_directory)
     copy_files_to_tmp_directory(tmp_directory)
-    directories = [Path(tmp_directory, directory).name for directory in directories]
+    flatten_directories(directories)
+    for directory in directories:
+        remove_unused_files(directory, logfile, enc)
+    os.chdir(tmp_directory)
     remove_git_directories()
     replace_contents(directories, tex_files)
     if args.extensions:
         for extension in args.extensions:
             delete_files_with_extension(extension)
     delete_image_directories(directories)
-    for directory in directories:
-        remove_unused_files(directory, logfile, enc)
+    
     os.chdir(old_directory)
     zip_tmp_directory(args.title, tmp_directory)
     delete_tmp_directory_final(tmp_directory)
