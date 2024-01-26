@@ -14,9 +14,9 @@ The goal of an attacker is often to exploit vulnerabilities in the model's decis
 \label{perturbation_distance}
 The strength of an attack is generally though of in terms of perturbation `distance'~\citep{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The perturbation distance is usually defined using some norm (or pseudo-norm). The definition is,
 \[
-    \varepsilon := \| x' - x \| \leq \varepsilon_{max},
+    \varepsilon := \| x' - x \| \leq \varepsilon^*,
 \]
-where $\| \cdot \|$ denotes a norm or pseudo-norm (\eg, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon_{max}$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different optimization criteria, see Section~\ref{attacks}.
+where $\| \cdot \|$ denotes a norm or pseudo-norm (\eg, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon^*$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different optimization criteria, see Section~\ref{attacks}.
 
 
 \subsubsection{Accuracy and Failure Rate}

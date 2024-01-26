@@ -60,7 +60,7 @@ So, finally, we can introduce the idea of a failure rate normalized cost. If we 
 \begin{equation}
 	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~~and~~~}
-	\bar{C}_{adv.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon_{max}]}.
+	\bar{C}_{adv.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
 If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{e.g.}, that our model is \textit{broken}). Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
