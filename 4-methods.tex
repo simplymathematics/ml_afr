@@ -13,36 +13,26 @@ The Residual Neural Network (ResNet)~\citep{resnet} is a popular classification 
 
 \subsection{Tested Defences}
 \label{defences}
+
 In order to simulate various conditions affecting the model's efficacy, we have also tested several defences that modify the model's inputs or predictions in an attempt to reduce its susceptibility to adversarial perturbations. Just like with the attacks, we used the Adversarial Robustness Toolbox~\citep{art2018} for their convenient implementations. These defences are listed below.
 
-\begin{itemize}
-    \item \textbf{Gauss-in} ($\ell_2$): the `Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples. In our case, we set this proportion to 50\%, allowing us to simulate the effect of noise  on the resulting model~\citep{gauss_aug}. We tested noise levels in $\{.001, .01, .1, .3, .5, 1\}$.
-    \item \textbf{Conf} : ($\ell_{\infty}$) the `High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain. This allows us to simulate the effects of rejecting `adversarial' or otherwise `confusing' queries~\citep{high_conf} that fall outside of given confidence range by ignoring ambiguous results without penalty. We tested confidence levels in $\{.1, .5, .9, .99, .999\}$.
-    \item \textbf{Gauss-out} ($\ell_2$): the `Gaussian Noise` defence, rather than adding noise to the input data, it adds  noise to the model outputs~\citep{gauss_out}, allowing us to simulate small changes in model weights without going through costly training iterations. We tested levels in $\{.001, .01, .1, .3, .5, 1\}$.
-    \item \textbf{FSQ} : the `Feature Squeezing` defence changes the bit-depth of the input data in order to minimize the noise induced by floating point operations. We include it here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\citep{feature_squeezing}. We tested bit-depths in $\{2, 4, 8, 16, 32, 64\}$.
-\end{itemize}
+\textbf{Gauss-in} ($\ell_2$): The 'Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples. In our case, we set this proportion to 50\%, allowing us to simulate the effect of noise on the resulting model~\citep{gauss_aug}. We tested noise levels in $\{.001, .01, .1, .3, .5, 1\}$.
+
+\textbf{Conf} ($\ell_{\infty}$): The 'High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain. This allows us to simulate the effects of rejecting 'adversarial' or otherwise 'confusing' queries~\citep{high_conf} that fall outside the given confidence range by ignoring ambiguous results without penalty. We tested confidence levels in $\{.1, .5, .9, .99, .999\}$.
+
+\textbf{Gauss-out} ($\ell_2$): The 'Gaussian Noise' defence, rather than adding noise to the input data, adds noise to the model outputs~\citep{gauss_out}, allowing us to simulate small changes in model weights without going through costly training iterations. We tested levels in $\{.001, .01, .1, .3, .5, 1\}$.
+
+\textbf{FSQ}: The 'Feature Squeezing' defence changes the bit-depth of the input data to minimize the noise induced by floating-point operations. We include it here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\citep{feature_squeezing}. We tested bit-depths in $\{2, 4, 8, 16, 32, 64\}$.
+
 
 \subsection{Tested Attacks}
 \label{attacks}
-In order to simulate various attacks that vary in information and run-time requirements across a variety of distance metrics, we have evaluated several attacks using the Adversarial Robustness Toolbox~\citep{art2018}. Other researchers~\citep{carlini_towards_2017} have noted the importance of testing against multiple types of attacks. For our purposes, \textbf{attack strength} refers to the degree to which an input is modified by an attacker, as described in Sec.~\ref{perturbation_distance}. Below, we briefly describe the attacks that we tested against. One or more norms or pseudo-norms were used to optimise each attack, denoted in the parentheses next to the attack name.
 
-\begin{itemize}
-    \item \textbf{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): the `Fast Gradient Method' quickly generates noisy sample with no feasibility conditions beyond a specified step size and number of iterations~\citep{fgm} by using the model gradient and taking a step of length $\varepsilon$ in the direction that maximizes the loss with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
+In order to simulate various attacks that vary in information and run-time requirements across a variety of distance metrics, we have evaluated several attacks using the Adversarial Robustness Toolbox~\citep{art2018}. Other researchers~\citep{carlini_towards_2017} have noted the importance of testing against multiple types of attacks. For our purposes, \textbf{attack strength} refers to the degree to which an input is modified by an attacker, as described in Sec.~\ref{perturbation_distance}. Below, we briefly describe the attacks that we tested against. One or more norms or pseudo-norms were used to optimize each attack, denoted in the parentheses next to the attack name.
 
-    \item \textbf{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$):  the `Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\citep{madry2017towards}. This algorithm is iterative and we restricted it to ten such iterations. In short, this imposes feasibility conditions on the FGM attack with $\varepsilon \in \{001,.01,.03,.1,.2,.3,.5,.8,1\}$.
+\textbf{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): The 'Fast Gradient Method' quickly generates a noisy sample with no feasibility conditions beyond a specified step size and number of iterations~\citep{fgm} by using the model gradient and taking a step of length $\varepsilon$ in the direction that maximizes the loss with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
-    \item \textbf{Pixel} ($\ell_0$): the `Pixel' attack~\citep{pixelattack} is a multi-objective attack that seeks to minimize the number of perturbed pixels  while maximizing the false confidence using a classic multi-objective search function called NSGA2~\citep{nsga2}. This algorithm is iterative and we restricted it to ten such iterations. The control parameter for this was the number of perturbed pixels $\varepsilon \in \{4, 16, 64, 256\}$.
-
-    \item \textbf{Thresh} ($\ell_{\infty})$: the `Threshold' attack also uses the same multi-objective search algorithm as Pixel to optimize the attack, but tries to maximize false confidence while minimizing the $\ell_2$ perturbation distance. This algorithm is iterative and we restricted it to ten such iterations.
-
-    \item \textbf{Deep} ($\ell_2$): the Deepfool Attack~\citep{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient including the top $n$ outputs where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\citep{deepfool}. This algorithm is iterative and we restricted it to ten such iterations.
-
-    \item \textbf{HSJ} ($\ell_2$, \textit{queries}): the `HopSkipJump' attack, in contrast to the attacks above, does not need access to model gradients nor soft class labels, instead relying on an offline approximation of the gradient using the model's decision boundaries. In this case, the strength is denoted by the number of queries necessary to find an adversarial counterexample~\citep{hopskipjump}. This algorithm is iterative and we restricted it to ten such iterations.
-
-\end{itemize}
-
-
-
+\textbf{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$): The 'Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\citep{madry2017towards}. This algorithm is iterative, and we restricted it to ten such iterations. In short, this imposes feasibility conditions on the FGM attack with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
 \subsection{Identification of ResNet Model-, Defence- and Attack-Specific Covariates}
 For each attack type, we identified the attack-specific distance metric (or pseudo-metric) outlined in Sec.~\ref{attacks}. To compare the effect of this measure against other attacks, the valued were min-max scaled so that all values fell on the interval $[0,1]$. For defences, we did the same scaling. However, while a larger number always means more (marginal) noise in the case of attacks, a larger value for the FSQ defence indicates a larger bit-depth and more floating point error. For Gauss-in and Gauss-out, a larger number does indicate more noise, but a larger number for Conf indicates a larger rejection threshold for less-than-certain classifications, resulting in less low-confidence noise. For the models we tracked the number of epochs and the number of layers as well as the training and inference times.
