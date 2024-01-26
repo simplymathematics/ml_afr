@@ -182,3 +182,47 @@
 2024-01-26 15:54:38,334 - INFO - Removing cifar100 directory.
 2024-01-26 15:54:38,335 - INFO - Zipping temporary directory: /tmp/tmpfv86u63x
 2024-01-26 15:54:40,002 - INFO - Deleting temporary directory: /tmp/tmpfv86u63x
+2024-01-26 21:02:25,927 - INFO - Temporary directory: /tmp/tmpufsv6lka
+2024-01-26 21:02:25,928 - INFO - Creating temporary directory: /tmp/tmpufsv6lka
+2024-01-26 21:02:25,928 - INFO - Copying files to temporary directory: /tmp/tmpufsv6lka
+2024-01-26 21:02:26,196 - INFO - Flattening directories
+2024-01-26 21:02:26,197 - INFO - Flattening cifar directory.
+2024-01-26 21:02:26,213 - INFO - Flattening mnist directory.
+2024-01-26 21:02:26,220 - INFO - Flattening cifar100 directory.
+2024-01-26 21:02:26,228 - INFO - Removing unused files in directory: cifar with extension: .eps
+2024-01-26 21:02:26,231 - INFO - Removing unused files in directory: mnist with extension: .eps
+2024-01-26 21:02:26,233 - INFO - Removing unused files in directory: cifar100 with extension: .eps
+2024-01-26 21:02:26,235 - INFO - Removing git directories
+2024-01-26 21:02:26,235 - INFO - .git is a directory.
+2024-01-26 21:02:26,287 - INFO - .github is a directory.
+2024-01-26 21:02:26,287 - INFO - .gitignore not in use - deleting.
+2024-01-26 21:02:26,287 - INFO - Replacing contents
+2024-01-26 21:02:26,288 - INFO - Replacing image directory in cifar/aft_comparison.tex.
+2024-01-26 21:02:26,288 - INFO - Replacing cifar with cifar_
+2024-01-26 21:02:26,288 - INFO - Replacing mnist with mnist_
+2024-01-26 21:02:26,288 - INFO - Replacing cifar100 with cifar100_
+2024-01-26 21:02:26,288 - INFO - Replacing image directory in mnist/aft_comparison.tex.
+2024-01-26 21:02:26,289 - INFO - Replacing cifar with cifar_
+2024-01-26 21:02:26,289 - INFO - Replacing mnist with mnist_
+2024-01-26 21:02:26,289 - INFO - Replacing cifar100 with cifar100_
+2024-01-26 21:02:26,289 - INFO - Replacing image directory in cifar100/aft_comparison.tex.
+2024-01-26 21:02:26,289 - INFO - Replacing cifar with cifar_
+2024-01-26 21:02:26,289 - INFO - Replacing mnist with mnist_
+2024-01-26 21:02:26,289 - INFO - Replacing cifar100 with cifar100_
+2024-01-26 21:02:26,289 - INFO - Deleting files with extension: pdf
+2024-01-26 21:02:26,290 - INFO - Deleting files with extension: py
+2024-01-26 21:02:26,290 - INFO - arxiv.py not in use - deleting.
+2024-01-26 21:02:26,290 - INFO - Deleting files with extension: yaml
+2024-01-26 21:02:26,290 - INFO - dvc.yaml not in use - deleting.
+2024-01-26 21:02:26,291 - INFO - .pre-commit-config.yaml not in use - deleting.
+2024-01-26 21:02:26,291 - INFO - Deleting files with extension: csv
+2024-01-26 21:02:26,291 - INFO - cifar_data.csv not in use - deleting.
+2024-01-26 21:02:26,292 - INFO - mnist_aft_comparison.csv not in use - deleting.
+2024-01-26 21:02:26,292 - INFO - cifar100_aft_comparison.csv not in use - deleting.
+2024-01-26 21:02:26,292 - INFO - cifar_aft_comparison.csv not in use - deleting.
+2024-01-26 21:02:26,292 - INFO - Deleting image directories
+2024-01-26 21:02:26,292 - INFO - Removing cifar directory.
+2024-01-26 21:02:26,294 - INFO - Removing mnist directory.
+2024-01-26 21:02:26,295 - INFO - Removing cifar100 directory.
+2024-01-26 21:02:26,297 - INFO - Zipping temporary directory: /tmp/tmpufsv6lka
+2024-01-26 21:02:29,392 - INFO - Deleting temporary directory: /tmp/tmpufsv6lka
