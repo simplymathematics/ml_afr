@@ -1,30 +1,25 @@
 stages:
-  prepare_images:
-    foreach: 
-      - cifar
-      - mnist
-      - cifar100 
-    do:
-      cmd: python flatten.py --directories ${item}
-      deps:
-        - flatten.py
-        - ${item}/
-      plots:
-        - ${item}_adv_accuracy_vs_attack_type.eps
-        - ${item}_adv_accuracy_vs_defence_type.eps
-        - ${item}_adv_failure_rate_vs_train_time.eps
-        - ${item}_adv_failures_per_train_time_vs_attack_type.eps
-        - ${item}_adv_failures_per_train_time_vs_defence_type.eps
-        - ${item}_atk_param_vs_accuracy.eps
-        - ${item}_ben_accuracy_vs_defence_type.eps
-        - ${item}_ben_failures_per_train_time_vs_defence_type.eps
-        - ${item}_def_param_vs_accuracy.eps
-        - ${item}_def_param_vs_adv_failure_rate.eps
-        - ${item}_log_logistic_aft.eps
-        - ${item}_log_normal_aft.eps
-        - ${item}_log_normal_layers_partial_effect.eps
-        - ${item}_weibull_aft.eps
-      outs:
-        - ${item}_aft_comparison.tex
-    # metrics:
-    #    - ${item}_aft_comparison.json
+  arxiv:
+    cmd: python arxiv.py --directories cifar mnist cifar100 --extensions pdf py yaml csv --title "Survival Analysis for Deep Convolutional Neural Networks"
+    deps:
+      - arxiv.py
+      - cifar/
+      - mnist/
+      - cifar100/
+      - mnist_aft_comparison.tex
+      - cifar_aft_comparison.tex
+      - cifar100_aft_comparison.tex
+    outs:
+      - "Survival Analysis for Deep Convolutional Neural Networks.zip"
+  # render dvc_plots:
+  #   foreach:
+  #     - mnist
+  #     - cifar
+  #     - cifar100
+  #   do:
+  #     cmd: dvc plots show
+  #     plots:
+  #       - ${item}/aft_comparison.csv:
+  #           x : Distribution
+  #           y : Concordance
+  #           title : Concordance for each Distribution for the ${item} dataset

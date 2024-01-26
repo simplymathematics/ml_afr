@@ -4,7 +4,7 @@ stages:
     cmd: python flatten.py --directories cifar100
     deps:
     - path: cifar100/
-      md5: bb8b5ed55c49f4d125bf1590674b6560.dir
+      md5: db24398d5c6ceb7b5f9f3096873d861b.dir
       size: 2122108
       nfiles: 15
     - path: flatten.py
@@ -12,105 +12,105 @@ stages:
       size: 2761
     outs:
     - path: cifar100_adv_accuracy_vs_attack_type.eps
-      md5: a23e52020420a269984bb6dcbd2e6aee
+      md5: 84ae160447ea8cd7a872a982c3837584
       size: 109746
     - path: cifar100_adv_accuracy_vs_defence_type.eps
-      md5: d3f23b527e1059aaba303b5416ae9bb1
+      md5: 169b34edcb168e2f4211adf87b3d42a4
       size: 106548
     - path: cifar100_adv_failure_rate_vs_train_time.eps
-      md5: 6d2c3c1b3aee47aecf8975aa0e50f807
+      md5: 7765a2b879024f4fb1f3cdb570245e1e
       size: 1119464
     - path: cifar100_adv_failures_per_train_time_vs_attack_type.eps
-      md5: 24a361a0f0cd7025b1c9614570c5c589
+      md5: 74902bab65c6ce8dd989a45e625cf1d6
       size: 133752
     - path: cifar100_adv_failures_per_train_time_vs_defence_type.eps
-      md5: 345fb9f8e3c9fcbd925c8fe5a76c55d7
+      md5: 20fd22282e92660fb6107bf188fb3a84
       size: 121862
     - path: cifar100_aft_comparison.tex
       md5: e3d53b838dd94b98800609ed0c9c5e11
       size: 606
     - path: cifar100_atk_param_vs_accuracy.eps
-      md5: b080751ada988c919eacfba99663a641
+      md5: 73631441b3a77a334c42f560e72fc292
       size: 39663
     - path: cifar100_ben_accuracy_vs_defence_type.eps
-      md5: d0564205d5e3ee45f50a1d98fff77dcb
+      md5: 855f2ecd30b8a10b2e9e822640607f37
       size: 113268
     - path: cifar100_ben_failures_per_train_time_vs_defence_type.eps
-      md5: d746852bfaff5ad7177e5b1fddd068fd
+      md5: 5dfd57f90bd338c0572a64551e1f335a
       size: 118866
     - path: cifar100_def_param_vs_accuracy.eps
-      md5: c361b71d520f37effe6197146d2899de
+      md5: 764051dc8f8a0b3c6a575331c88ad16b
       size: 38049
     - path: cifar100_def_param_vs_adv_failure_rate.eps
-      md5: e0602899b055106cf2a0ab5ab0d00801
+      md5: 0922c6158a32388cc3862bfb27c079e3
       size: 36997
     - path: cifar100_log_logistic_aft.eps
-      md5: 9be37d4f99f533b3e78dbef2b385a13e
+      md5: 34accbd27057bb8b16e1e3718606defd
       size: 46636
     - path: cifar100_log_normal_aft.eps
-      md5: bad39dcbf96e80b71a77596c5551ad2c
+      md5: ec35034e57bd31921afa05a92cab9ea5
       size: 47394
     - path: cifar100_log_normal_layers_partial_effect.eps
-      md5: 72756304f681656bd45b59918338d01f
+      md5: 10290e8299562af43b0a6a8a018de2eb
       size: 44746
     - path: cifar100_weibull_aft.eps
-      md5: 548f459eb1443be1372895a0fdce26a4
+      md5: 29e366d68d0399782e0e57307d068923
       size: 44511
   prepare_images@cifar:
     cmd: python flatten.py --directories cifar
     deps:
     - path: cifar/
-      md5: f3eb66d97088789e3687d7a91cfaa504.dir
-      size: 1410069
+      md5: 81162598277558bb2a8294e9a85bee50.dir
+      size: 1408806
       nfiles: 15
     - path: flatten.py
       md5: d203bc3a88a44cda3b794373cb379b25
       size: 2761
     outs:
     - path: cifar_adv_accuracy_vs_attack_type.eps
-      md5: fd5bd838049b1398204d3578f644b420
+      md5: 431ebcf1cc479efa45e5c62c588561d6
       size: 106575
     - path: cifar_adv_accuracy_vs_defence_type.eps
-      md5: 90e5f140e9692f2c133b7d092012677e
+      md5: 38ce13bff5e61190e16510c27ed461fc
       size: 98548
     - path: cifar_adv_failure_rate_vs_train_time.eps
-      md5: 61a705f377502f5c181b711eb8e4548f
+      md5: 3bba94e6de8929e3c69f646a308fbeea
       size: 507471
     - path: cifar_adv_failures_per_train_time_vs_attack_type.eps
-      md5: 64c8c7f32038fac4f28fddfbee013516
+      md5: a8081610bed13d152fb9fa16c0ce0667
       size: 117314
     - path: cifar_adv_failures_per_train_time_vs_defence_type.eps
-      md5: a4d7f416795196b8a344d2c709e5d4de
+      md5: 3298a2b26bbf3c729a8ebacb0be3a190
       size: 99649
     - path: cifar_aft_comparison.tex
       md5: 569cc492fdd774c0a0af506af6724696
       size: 600
     - path: cifar_atk_param_vs_accuracy.eps
-      md5: 65e542d26e0ada90dabc320f33ac63d8
-      size: 38782
+      md5: 8aad83470b03ad67c6da20118c3db8a7
+      size: 37519
     - path: cifar_ben_accuracy_vs_defence_type.eps
-      md5: bff2629e0fd4fc0c7823349511d81af6
+      md5: 7aebdfba87139e9eeb5aa2db360769b7
       size: 83244
     - path: cifar_ben_failures_per_train_time_vs_defence_type.eps
-      md5: e9f85256329fe776ec4fb14e0d328907
+      md5: 0ebab1801507e829505743aca2f0382f
       size: 96490
     - path: cifar_def_param_vs_accuracy.eps
-      md5: 4708d71becf081f55335088ed4082968
+      md5: dbdf3817907a801c76c9609f03604158
       size: 37876
     - path: cifar_def_param_vs_adv_failure_rate.eps
-      md5: 477c0dbbb57d19bdcc6b222c8edd4073
+      md5: 90329883d47233ed28a238e4b7fd0d46
       size: 39890
     - path: cifar_log_logistic_aft.eps
-      md5: f3d8ebf23bed88b6073e7fd5b1ec06a4
+      md5: 4b86aff4f085c05963e16f7083ed9d88
       size: 46602
     - path: cifar_log_normal_aft.eps
-      md5: cc3c387731c50d5db1d97e5d0623d7a2
+      md5: fd0feb4a9f3fae154044354568441086
       size: 47357
     - path: cifar_log_normal_layers_partial_effect.eps
-      md5: 0ef45a84b66a5fe43c51b8965abc47c2
+      md5: d07f8960404fb5e58cef9d9d478225af
       size: 43910
     - path: cifar_weibull_aft.eps
-      md5: 224dc1d61f94b095440dcfda060739c6
+      md5: 784605f2ecdb2a8a24c6c8ad6e84b60a
       size: 45761
   prepare_images@mnist:
     cmd: python flatten.py --directories mnist
@@ -119,52 +119,84 @@ stages:
       md5: d203bc3a88a44cda3b794373cb379b25
       size: 2761
     - path: mnist/
-      md5: 37022e5300d33b26c285b88a5e4158fa.dir
+      md5: 870d669ff1855ee247fe09cea10e6e29.dir
       size: 1779456
       nfiles: 15
     outs:
     - path: mnist_adv_accuracy_vs_attack_type.eps
-      md5: 5e68101b5deda284b2af9e6d22e7653f
+      md5: 9ff93eaf038b28213e06d2ea38f3e1c9
       size: 113600
     - path: mnist_adv_accuracy_vs_defence_type.eps
-      md5: bad2272acc1161f7dd045511f9a18698
+      md5: 9a6efbb1b3a2e56bede2f3ba86d139c8
       size: 105721
     - path: mnist_adv_failure_rate_vs_train_time.eps
-      md5: 80ec531d2412405ab392e055adce2bd6
+      md5: 48ce0007c4753735bd8e473893979e2f
       size: 798746
     - path: mnist_adv_failures_per_train_time_vs_attack_type.eps
-      md5: c380fefe4643cb8c3d9c59b7810ccdd2
+      md5: ea1ca56a74c43f0a5085bcff31c4fab7
       size: 123494
     - path: mnist_adv_failures_per_train_time_vs_defence_type.eps
-      md5: c47cd69aa7b557546cca59a929878d9a
+      md5: 90541490880cd0cd91f2c56493d42140
       size: 116302
     - path: mnist_aft_comparison.tex
       md5: 0034975eb38ed6deb1b6f325f714571f
       size: 600
     - path: mnist_atk_param_vs_accuracy.eps
-      md5: 246c94693b7372e5e16e8a238a5cb9bc
+      md5: 9d705bb761229f7d0a793c8cbe98c2ce
       size: 37595
     - path: mnist_ben_accuracy_vs_defence_type.eps
-      md5: 32880f89f9ec0ff0bd94ca4d243e9b4c
+      md5: 77e57d983fac16bf0ebc603571cb8198
       size: 101387
     - path: mnist_ben_failures_per_train_time_vs_defence_type.eps
-      md5: aabe0da0ee21d012c7c2f00d089ef5d0
+      md5: 8283265b875a97ded978bc453c330c54
       size: 116879
     - path: mnist_def_param_vs_accuracy.eps
-      md5: c2ef7ec56666695955afc2356e62be6a
+      md5: 99366d86bd200d2cb06d68a57143509f
       size: 38918
     - path: mnist_def_param_vs_adv_failure_rate.eps
-      md5: d73b7c684813e94a1a20dcd81f411bbe
+      md5: 3ef4570eef03a5b0da4a5a9388feb941
       size: 40619
     - path: mnist_log_logistic_aft.eps
-      md5: b53ca1fcae1471dbb1e1a14a055b0fb7
+      md5: 9330a8f658e0f6e7c64bbf44c9df21a2
       size: 46346
     - path: mnist_log_normal_aft.eps
-      md5: fe7dc6e06d3c166210be737bf62f0988
+      md5: a34130b884bcd593fe4922fac9258433
       size: 48850
     - path: mnist_log_normal_layers_partial_effect.eps
-      md5: ffcd1d6285750415c687cede522be672
+      md5: d0c8f3f9d7229bdcf196b23c585720e2
       size: 44637
     - path: mnist_weibull_aft.eps
-      md5: 0e5226500ad2ebeffd02413ae683f326
+      md5: 90018d131799658a4f736789c22c7b8f
       size: 45762
+  arxiv:
+    cmd: python arxiv.py --directories cifar mnist cifar100 --extensions pdf py yaml
+      csv --title "Survival Analysis for Deep Convolutional Neural Networks"
+    deps:
+    - path: arxiv.py
+      md5: 5b3d7f38ceb69b9c9abc95ed1c479700
+      size: 7040
+    - path: cifar/
+      md5: 88a9176328f66e228abaf6c4e49ab86d.dir
+      size: 16244281
+      nfiles: 25
+    - path: cifar100/
+      md5: c1c16446d03a1ae8f0506e311ed86d7c.dir
+      size: 2885837
+      nfiles: 27
+    - path: cifar100_aft_comparison.tex
+      md5: e3d53b838dd94b98800609ed0c9c5e11
+      size: 606
+    - path: cifar_aft_comparison.tex
+      md5: 569cc492fdd774c0a0af506af6724696
+      size: 600
+    - path: mnist/
+      md5: 8589d4c078eb55fa0ca79287af199c03.dir
+      size: 2286297
+      nfiles: 24
+    - path: mnist_aft_comparison.tex
+      md5: 0034975eb38ed6deb1b6f325f714571f
+      size: 600
+    outs:
+    - path: Survival Analysis for Deep Convolutional Neural Networks.zip
+      md5: 30178946d7354d12a35ddd40443b981d
+      size: 10173428

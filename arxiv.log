@@ -1,0 +1,247 @@
+2024-01-26 00:21:57,574 - INFO - Temporary directory: /tmp/tmpj2465m7w
+2024-01-26 00:21:57,574 - INFO - Creating temporary directory: /tmp/tmpj2465m7w
+2024-01-26 00:21:57,575 - INFO - Flattening directories
+2024-01-26 00:21:57,575 - INFO - Flattening cifar directory.
+2024-01-26 00:21:57,579 - INFO - Flattening mnist directory.
+2024-01-26 00:21:57,584 - INFO - Flattening cifar100 directory.
+2024-01-26 00:21:57,590 - INFO - Copying files to temporary directory: /tmp/tmpj2465m7w
+2024-01-26 00:21:57,590 - INFO - Removing git directories
+2024-01-26 00:21:57,590 - INFO - Replacing contents
+2024-01-26 00:21:57,590 - INFO - Deleting files with extension: pdf
+2024-01-26 00:21:57,590 - INFO - Deleting files with extension: py
+2024-01-26 00:21:57,591 - INFO - Deleting files with extension: yaml
+2024-01-26 00:21:57,591 - INFO - Deleting files with extension: csv
+2024-01-26 00:21:57,591 - INFO - Deleting image directories
+2024-01-26 00:21:57,591 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:21:57,591 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:21:57,591 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:21:57,592 - INFO - Zipping temporary directory: /tmp/tmpj2465m7w
+2024-01-26 00:21:57,594 - INFO - Deleting temporary directory: /tmp/tmpj2465m7w
+2024-01-26 00:22:57,579 - INFO - Temporary directory: /tmp/tmpq1mvd47x
+2024-01-26 00:22:57,579 - INFO - Creating temporary directory: /tmp/tmpq1mvd47x
+2024-01-26 00:22:57,579 - INFO - Flattening directories
+2024-01-26 00:22:57,579 - INFO - Flattening cifar directory.
+2024-01-26 00:22:57,584 - INFO - Flattening mnist directory.
+2024-01-26 00:22:57,589 - INFO - Flattening cifar100 directory.
+2024-01-26 00:22:57,594 - INFO - Copying files to temporary directory: /tmp/tmpq1mvd47x
+2024-01-26 00:22:57,595 - INFO - Removing git directories
+2024-01-26 00:22:57,595 - INFO - Replacing contents
+2024-01-26 00:22:57,595 - INFO - Deleting files with extension: pdf
+2024-01-26 00:22:57,595 - INFO - Deleting files with extension: py
+2024-01-26 00:22:57,595 - INFO - Deleting files with extension: yaml
+2024-01-26 00:22:57,596 - INFO - Deleting files with extension: csv
+2024-01-26 00:22:57,596 - INFO - Deleting image directories
+2024-01-26 00:22:57,596 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:22:57,596 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:22:57,596 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:22:57,596 - INFO - Zipping temporary directory: /tmp/tmpq1mvd47x
+2024-01-26 00:22:57,598 - INFO - Deleting temporary directory: /tmp/tmpq1mvd47x
+2024-01-26 00:29:41,602 - INFO - Temporary directory: /tmp/tmpx5zbadem
+2024-01-26 00:29:41,603 - INFO - Creating temporary directory: /tmp/tmpx5zbadem
+2024-01-26 00:29:41,603 - INFO - Flattening directories
+2024-01-26 00:29:41,603 - INFO - Flattening cifar directory.
+2024-01-26 00:29:41,622 - INFO - Flattening mnist directory.
+2024-01-26 00:29:41,630 - INFO - Flattening cifar100 directory.
+2024-01-26 00:29:41,638 - INFO - Copying files to temporary directory: /tmp/tmpx5zbadem
+2024-01-26 00:29:41,639 - INFO - Removing git directories
+2024-01-26 00:29:41,639 - INFO - Replacing contents
+2024-01-26 00:29:41,639 - INFO - Deleting files with extension: pdf
+2024-01-26 00:29:41,639 - INFO - Deleting files with extension: py
+2024-01-26 00:29:41,640 - INFO - Deleting files with extension: yaml
+2024-01-26 00:29:41,640 - INFO - Deleting files with extension: csv
+2024-01-26 00:29:41,640 - INFO - Deleting image directories
+2024-01-26 00:29:41,640 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:29:41,640 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:29:41,640 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:29:41,641 - INFO - Zipping temporary directory: /tmp/tmpx5zbadem
+2024-01-26 00:29:41,643 - INFO - Deleting temporary directory: /tmp/tmpx5zbadem
+2024-01-26 00:30:43,561 - INFO - Temporary directory: /tmp/tmp254b5o3x
+2024-01-26 00:30:43,561 - INFO - Creating temporary directory: /tmp/tmp254b5o3x
+2024-01-26 00:30:43,561 - INFO - Flattening directories
+2024-01-26 00:30:43,561 - INFO - Flattening cifar directory.
+2024-01-26 00:30:43,580 - INFO - Flattening mnist directory.
+2024-01-26 00:30:43,589 - INFO - Flattening cifar100 directory.
+2024-01-26 00:30:43,597 - INFO - Copying files to temporary directory: /tmp/tmp254b5o3x
+2024-01-26 00:30:43,597 - INFO - Removing git directories
+2024-01-26 00:30:43,597 - INFO - Replacing contents
+2024-01-26 00:30:43,597 - INFO - Deleting files with extension: pdf
+2024-01-26 00:30:43,598 - INFO - Deleting files with extension: py
+2024-01-26 00:30:43,598 - INFO - Deleting files with extension: yaml
+2024-01-26 00:30:43,598 - INFO - Deleting files with extension: csv
+2024-01-26 00:30:43,598 - INFO - Deleting image directories
+2024-01-26 00:30:43,598 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:30:43,599 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:30:43,599 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:30:43,599 - INFO - Zipping temporary directory: /tmp/tmp254b5o3x
+2024-01-26 00:30:43,601 - INFO - Deleting temporary directory: /tmp/tmp254b5o3x
+2024-01-26 00:30:48,501 - INFO - Temporary directory: /tmp/tmp5_gr3ds3
+2024-01-26 00:30:48,501 - INFO - Creating temporary directory: /tmp/tmp5_gr3ds3
+2024-01-26 00:30:48,502 - INFO - Flattening directories
+2024-01-26 00:30:48,502 - INFO - Flattening cifar directory.
+2024-01-26 00:30:48,521 - INFO - Flattening mnist directory.
+2024-01-26 00:30:48,529 - INFO - Flattening cifar100 directory.
+2024-01-26 00:30:48,537 - INFO - Copying files to temporary directory: /tmp/tmp5_gr3ds3
+2024-01-26 00:30:48,537 - INFO - Removing git directories
+2024-01-26 00:30:48,537 - INFO - Replacing contents
+2024-01-26 00:30:48,538 - INFO - Deleting files with extension: pdf
+2024-01-26 00:30:48,538 - INFO - Deleting files with extension: py
+2024-01-26 00:30:48,538 - INFO - Deleting files with extension: yaml
+2024-01-26 00:30:48,538 - INFO - Deleting files with extension: csv
+2024-01-26 00:30:48,538 - INFO - Deleting image directories
+2024-01-26 00:30:48,539 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:30:48,539 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:30:48,539 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:30:48,539 - INFO - Zipping temporary directory: /tmp/tmp5_gr3ds3
+2024-01-26 00:30:48,541 - INFO - Deleting temporary directory: /tmp/tmp5_gr3ds3
+2024-01-26 00:30:50,746 - INFO - Temporary directory: /tmp/tmp8t4v5vix
+2024-01-26 00:30:50,746 - INFO - Creating temporary directory: /tmp/tmp8t4v5vix
+2024-01-26 00:30:50,746 - INFO - Flattening directories
+2024-01-26 00:30:50,746 - INFO - Flattening cifar directory.
+2024-01-26 00:30:50,765 - INFO - Flattening mnist directory.
+2024-01-26 00:30:50,773 - INFO - Flattening cifar100 directory.
+2024-01-26 00:30:50,780 - INFO - Copying files to temporary directory: /tmp/tmp8t4v5vix
+2024-01-26 00:30:50,781 - INFO - Removing git directories
+2024-01-26 00:30:50,781 - INFO - Replacing contents
+2024-01-26 00:30:50,781 - INFO - Deleting files with extension: pdf
+2024-01-26 00:30:50,781 - INFO - Deleting files with extension: py
+2024-01-26 00:30:50,782 - INFO - Deleting files with extension: yaml
+2024-01-26 00:30:50,782 - INFO - Deleting files with extension: csv
+2024-01-26 00:30:50,782 - INFO - Deleting image directories
+2024-01-26 00:30:50,782 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:30:50,782 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:30:50,783 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:30:50,783 - INFO - Zipping temporary directory: /tmp/tmp8t4v5vix
+2024-01-26 00:30:50,785 - INFO - Deleting temporary directory: /tmp/tmp8t4v5vix
+2024-01-26 00:31:52,654 - INFO - Temporary directory: /tmp/tmp_foqs6c1
+2024-01-26 00:31:52,654 - INFO - Creating temporary directory: /tmp/tmp_foqs6c1
+2024-01-26 00:31:52,655 - INFO - Flattening directories
+2024-01-26 00:31:52,655 - INFO - Flattening cifar directory.
+2024-01-26 00:31:52,673 - INFO - Flattening mnist directory.
+2024-01-26 00:31:52,681 - INFO - Flattening cifar100 directory.
+2024-01-26 00:31:52,690 - INFO - Copying files to temporary directory: /tmp/tmp_foqs6c1
+2024-01-26 00:31:52,690 - INFO - Removing git directories
+2024-01-26 00:31:52,690 - INFO - Replacing contents
+2024-01-26 00:31:52,690 - INFO - Deleting files with extension: pdf
+2024-01-26 00:31:52,691 - INFO - Deleting files with extension: py
+2024-01-26 00:31:52,691 - INFO - Deleting files with extension: yaml
+2024-01-26 00:31:52,691 - INFO - Deleting files with extension: csv
+2024-01-26 00:31:52,691 - INFO - Deleting image directories
+2024-01-26 00:31:52,692 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:31:52,692 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:31:52,692 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:31:52,692 - INFO - Zipping temporary directory: /tmp/tmp_foqs6c1
+2024-01-26 00:31:52,694 - INFO - Deleting temporary directory: /tmp/tmp_foqs6c1
+2024-01-26 00:32:54,543 - INFO - Temporary directory: /tmp/tmpziyubnn_
+2024-01-26 00:32:54,543 - INFO - Creating temporary directory: /tmp/tmpziyubnn_
+2024-01-26 00:32:54,544 - INFO - Flattening directories
+2024-01-26 00:32:54,544 - INFO - Flattening cifar directory.
+2024-01-26 00:32:54,562 - INFO - Flattening mnist directory.
+2024-01-26 00:32:54,570 - INFO - Flattening cifar100 directory.
+2024-01-26 00:32:54,578 - INFO - Copying files to temporary directory: /tmp/tmpziyubnn_
+2024-01-26 00:32:54,579 - INFO - Removing git directories
+2024-01-26 00:32:54,579 - INFO - Replacing contents
+2024-01-26 00:32:54,579 - INFO - Deleting files with extension: pdf
+2024-01-26 00:32:54,579 - INFO - Deleting files with extension: py
+2024-01-26 00:32:54,580 - INFO - Deleting files with extension: yaml
+2024-01-26 00:32:54,580 - INFO - Deleting files with extension: csv
+2024-01-26 00:32:54,580 - INFO - Deleting image directories
+2024-01-26 00:32:54,580 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:32:54,580 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:32:54,581 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:32:54,581 - INFO - Zipping temporary directory: /tmp/tmpziyubnn_
+2024-01-26 00:32:54,583 - INFO - Deleting temporary directory: /tmp/tmpziyubnn_
+2024-01-26 00:33:56,960 - INFO - Temporary directory: /tmp/tmp_66v9ts0
+2024-01-26 00:33:56,960 - INFO - Creating temporary directory: /tmp/tmp_66v9ts0
+2024-01-26 00:33:56,960 - INFO - Flattening directories
+2024-01-26 00:33:56,960 - INFO - Flattening cifar directory.
+2024-01-26 00:33:56,979 - INFO - Flattening mnist directory.
+2024-01-26 00:33:56,988 - INFO - Flattening cifar100 directory.
+2024-01-26 00:33:56,997 - INFO - Copying files to temporary directory: /tmp/tmp_66v9ts0
+2024-01-26 00:33:56,997 - INFO - Removing git directories
+2024-01-26 00:33:56,998 - INFO - Replacing contents
+2024-01-26 00:33:56,998 - INFO - Deleting files with extension: pdf
+2024-01-26 00:33:56,998 - INFO - Deleting files with extension: py
+2024-01-26 00:33:56,999 - INFO - Deleting files with extension: yaml
+2024-01-26 00:33:56,999 - INFO - Deleting files with extension: csv
+2024-01-26 00:33:56,999 - INFO - Deleting image directories
+2024-01-26 00:33:56,999 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:33:57,000 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:33:57,000 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:33:57,000 - INFO - Zipping temporary directory: /tmp/tmp_66v9ts0
+2024-01-26 00:33:57,002 - INFO - Deleting temporary directory: /tmp/tmp_66v9ts0
+2024-01-26 00:35:13,658 - INFO - Temporary directory: /tmp/tmp6utsmahe
+2024-01-26 00:35:13,658 - INFO - Creating temporary directory: /tmp/tmp6utsmahe
+2024-01-26 00:35:13,658 - INFO - Flattening directories
+2024-01-26 00:35:13,659 - INFO - Flattening cifar directory.
+2024-01-26 00:35:13,678 - INFO - Flattening mnist directory.
+2024-01-26 00:35:13,686 - INFO - Flattening cifar100 directory.
+2024-01-26 00:35:13,694 - INFO - Copying files to temporary directory: /tmp/tmp6utsmahe
+2024-01-26 00:35:13,694 - INFO - Removing git directories
+2024-01-26 00:35:13,695 - INFO - Replacing contents
+2024-01-26 00:35:13,695 - INFO - Deleting files with extension: pdf
+2024-01-26 00:35:13,695 - INFO - Deleting files with extension: py
+2024-01-26 00:35:13,696 - INFO - Deleting files with extension: yaml
+2024-01-26 00:35:13,696 - INFO - Deleting files with extension: csv
+2024-01-26 00:35:13,696 - INFO - Deleting image directories
+2024-01-26 00:35:13,696 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:35:13,697 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:35:13,697 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:35:13,697 - INFO - Zipping temporary directory: /tmp/tmp6utsmahe
+2024-01-26 00:35:13,699 - INFO - Deleting temporary directory: /tmp/tmp6utsmahe
+2024-01-26 00:35:51,730 - INFO - Temporary directory: /tmp/tmph6n3l1x2
+2024-01-26 00:35:51,730 - INFO - Creating temporary directory: /tmp/tmph6n3l1x2
+2024-01-26 00:35:51,731 - INFO - Flattening directories
+2024-01-26 00:35:51,731 - INFO - Flattening cifar directory.
+2024-01-26 00:35:51,750 - INFO - Flattening mnist directory.
+2024-01-26 00:35:51,758 - INFO - Flattening cifar100 directory.
+2024-01-26 00:35:51,766 - INFO - Copying files to temporary directory: /tmp/tmph6n3l1x2
+2024-01-26 00:35:51,766 - INFO - Removing git directories
+2024-01-26 00:35:51,767 - INFO - Replacing contents
+2024-01-26 00:35:51,767 - INFO - Deleting files with extension: pdf
+2024-01-26 00:35:51,767 - INFO - Deleting files with extension: py
+2024-01-26 00:35:51,768 - INFO - Deleting files with extension: yaml
+2024-01-26 00:35:51,768 - INFO - Deleting files with extension: csv
+2024-01-26 00:35:51,768 - INFO - Deleting image directories
+2024-01-26 00:35:51,768 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:35:51,768 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:35:51,769 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:35:51,769 - INFO - Zipping temporary directory: /tmp/tmph6n3l1x2
+2024-01-26 00:35:51,771 - INFO - Deleting temporary directory: /tmp/tmph6n3l1x2
+2024-01-26 00:38:57,501 - INFO - Temporary directory: /tmp/tmpv7jpvs4t
+2024-01-26 00:38:57,502 - INFO - Creating temporary directory: /tmp/tmpv7jpvs4t
+2024-01-26 00:38:57,502 - INFO - Flattening directories
+2024-01-26 00:38:57,502 - INFO - Flattening cifar directory.
+2024-01-26 00:38:57,521 - INFO - Flattening mnist directory.
+2024-01-26 00:38:57,529 - INFO - Flattening cifar100 directory.
+2024-01-26 00:38:57,537 - INFO - Copying files to temporary directory: /tmp/tmpv7jpvs4t
+2024-01-26 00:38:57,538 - INFO - Removing git directories
+2024-01-26 00:38:57,538 - INFO - Replacing contents
+2024-01-26 00:38:57,538 - INFO - Deleting files with extension: pdf
+2024-01-26 00:38:57,538 - INFO - Deleting files with extension: py
+2024-01-26 00:38:57,538 - INFO - Deleting files with extension: yaml
+2024-01-26 00:38:57,539 - INFO - Deleting files with extension: csv
+2024-01-26 00:38:57,539 - INFO - Deleting image directories
+2024-01-26 00:38:57,539 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:38:57,539 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:38:57,539 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:38:57,539 - INFO - Zipping temporary directory: /tmp/tmpv7jpvs4t
+2024-01-26 00:38:57,542 - INFO - Deleting temporary directory: /tmp/tmpv7jpvs4t
+2024-01-26 00:39:17,013 - INFO - Temporary directory: /tmp/tmpy3jlwws7
+2024-01-26 00:39:17,013 - INFO - Creating temporary directory: /tmp/tmpy3jlwws7
+2024-01-26 00:39:17,014 - INFO - Flattening directories
+2024-01-26 00:39:17,014 - INFO - Flattening cifar directory.
+2024-01-26 00:39:17,032 - INFO - Flattening mnist directory.
+2024-01-26 00:39:17,040 - INFO - Flattening cifar100 directory.
+2024-01-26 00:39:17,048 - INFO - Copying files to temporary directory: /tmp/tmpy3jlwws7
+2024-01-26 00:39:17,049 - INFO - Removing git directories
+2024-01-26 00:39:17,049 - INFO - Replacing contents
+2024-01-26 00:39:17,049 - INFO - Deleting files with extension: pdf
+2024-01-26 00:39:17,049 - INFO - Deleting files with extension: py
+2024-01-26 00:39:17,049 - INFO - Deleting files with extension: yaml
+2024-01-26 00:39:17,050 - INFO - Deleting files with extension: csv
+2024-01-26 00:39:17,050 - INFO - Deleting image directories
+2024-01-26 00:39:17,050 - INFO - Removing unused files in directory: cifar
+2024-01-26 00:39:17,050 - INFO - Removing unused files in directory: mnist
+2024-01-26 00:39:17,050 - INFO - Removing unused files in directory: cifar100
+2024-01-26 00:39:17,050 - INFO - Zipping temporary directory: /tmp/tmpy3jlwws7
+2024-01-26 00:39:17,053 - INFO - Deleting temporary directory: /tmp/tmpy3jlwws7
