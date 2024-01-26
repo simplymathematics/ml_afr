@@ -6,9 +6,8 @@ stages:
       - cifar/
       - mnist/
       - cifar100/
-      - mnist_aft_comparison.tex
-      - cifar_aft_comparison.tex
-      - cifar100_aft_comparison.tex
+      - mnist/
+      - cifar/
     outs:
       - "Survival Analysis for Deep Convolutional Neural Networks.zip"
   # render dvc_plots:
