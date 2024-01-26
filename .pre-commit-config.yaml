@@ -17,7 +17,4 @@ repos:
       - id: check-yaml
       - id: trailing-whitespace
         files: ".*\\.(?:tex|py)$"
-  - repo: https://github.com/cmhughes/latexindent.pl.git
-    rev: V3.23.6
-    hooks:
-      - id: latexindent
+

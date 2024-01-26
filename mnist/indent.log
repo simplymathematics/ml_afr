@@ -1,6 +1,6 @@
 INFO:  latexindent.pl version 3.23.6, 2024-01-17, a script to indent .tex files
        latexindent.pl lives here: /home/cmeyers/.cache/pre-commit/repob7thufii/perl_env-default/bin/
-       Fri Jan 26 05:00:19 2024
+       Fri Jan 26 05:05:27 2024
        Filenames:
           algorithmic.sty
           3-afr.tex
@@ -37,39 +37,27 @@ INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check
 INFO:  -wd switch active
-       Original body is *different* from indented body
-       activating overwrite switch, -w
-INFO:  Backup procedure (-w flag active):
-       Backing up algorithmic.sty to ./algorithmic.bak0...
-       algorithmic.sty will be overwritten after indentation
+       Original body matches indented body, NOT overwriting, no backup files created
 INFO:  Output routine:
-       Overwriting file algorithmic.sty
+       Not outputting to file; see -w and -o switches for more options.
 INFO:  Filename: 3-afr.tex (2 of 3)
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check
 INFO:  -wd switch active
-       Original body is *different* from indented body
-       activating overwrite switch, -w
-INFO:  Backup procedure (-w flag active):
-       Backing up 3-afr.tex to ./3-afr.bak0...
-       3-afr.tex will be overwritten after indentation
+       Original body matches indented body, NOT overwriting, no backup files created
 INFO:  Output routine:
-       Overwriting file 3-afr.tex
+       Not outputting to file; see -w and -o switches for more options.
 INFO:  Filename: mnist/aft_comparison.tex (3 of 3)
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check
 INFO:  -wd switch active
-       Original body is *different* from indented body
-       activating overwrite switch, -w
-INFO:  Backup procedure (-w flag active):
-       Backing up mnist/aft_comparison.tex to mnist/aft_comparison.bak0...
-       mnist/aft_comparison.tex will be overwritten after indentation
+       Original body matches indented body, NOT overwriting, no backup files created
 INFO:  Output routine:
-       Overwriting file mnist/aft_comparison.tex
+       Not outputting to file; see -w and -o switches for more options.
        --------------
 INFO:  Please direct all communication/issues to:
         https://github.com/cmhughes/latexindent.pl
