@@ -184,10 +184,10 @@ stages:
       size: 2883954
       nfiles: 29
     - path: mnist/
-      md5: 474a600b3cd3fda3a9620675ebfa62b2.dir
-      size: 2283615
+      md5: dadde74255c8632281b7caf18838053e.dir
+      size: 2015703
       nfiles: 26
     outs:
     - path: Survival Analysis for Deep Convolutional Neural Networks.zip
-      md5: ff423ee7f2951f676d44c5d947f0e7b1
-      size: 16444299
+      md5: e89755d7297f4829f2fd1bdd088f669b
+      size: 32853376
