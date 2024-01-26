@@ -3,3 +3,4 @@ install-tl-20240125/
 install-tl-unx.tar.gz
 main.log
 update-tlmgr-latest.sh
+*.bak0

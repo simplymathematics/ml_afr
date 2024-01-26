@@ -32,34 +32,34 @@ In all cases, the mean time until false classification is much larger than the m
 The concordance scores for all three distributions are in agreement as well, confirming our assumption that accuracy is not independent of attack time (e.g., Concordance $> 0.5$).
 We then used the Log-Normal AFR to demonstrate the partial effect of the the number of layers on the survival time as in Fig.~\ref{fig:layers}. In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the resulting inference time (see Fig.~\ref{fig:afr_models}) than the number of model layers.
 \begin{figure*}
-    % \centering
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100_weibull_aft.eps}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100_log_normal_aft.eps}
-    \end{subfigure}
-    ~
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar100_log_logistic_aft.eps}
-    \end{subfigure}
+	% \centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100_weibull_aft.eps}
+	\end{subfigure}%
+	~
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100_log_normal_aft.eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{cifar100_log_logistic_aft.eps}
+	\end{subfigure}
 
-    \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $h$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate. Additionally, $\lambda_{ben}$ refers to the benign accuracy (see Eq.~\ref{eq:acc}) and $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}.
-    \label{fig:afr_models}
+	\caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $h$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Sec.~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate. Additionally, $\lambda_{ben}$ refers to the benign accuracy (see Eq.~\ref{eq:acc}) and $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}.
+	\label{fig:afr_models}
 \end{figure*}
 \input{cifar100_aft_comparison}
 % \input{mnist_aft_comparison}
 \begin{figure}
-    % \begin{subfigure}
-    %     \input{cifar100_aft_comparison}
-    % \end{subfigure}
-    \centering\includegraphics[width=.5\textwidth]{cifar100_log_normal_epochs_partial_effect.eps}
-   \caption{The survival curve over time as a function of the number of model layers for the highest scoring AFR model (the Log-Normal distribution). The partial effects plots of other models are included in the Appendix \ref{appendix}, as the results were very similar.}
-    \label{fig:layers}
+	% \begin{subfigure}
+	%     \input{cifar100_aft_comparison}
+	% \end{subfigure}
+	\centering\includegraphics[width=.5\textwidth]{cifar100_log_normal_epochs_partial_effect.eps}
+	\caption{The survival curve over time as a function of the number of model layers for the highest scoring AFR model (the Log-Normal distribution). The partial effects plots of other models are included in the Appendix \ref{appendix}, as the results were very similar.}
+	\label{fig:layers}
 \end{figure}
 % \input{mnist_aft_comparison}
 
