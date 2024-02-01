@@ -42,7 +42,7 @@ def remove_unused_files(directory, logfile, enc, filetype=".eps"):
 
 def remove_git_directories():
     logger.info('Removing git directories')
-    git_directories = ['.git', '.github', '.gitignore', '.gitattributes']
+    git_directories = ['.git', '.github', '.gitignore', '.gitattributes', ".dvc"]
     for filename in git_directories:
         if os.path.isfile(filename):
             logger.info(f'{filename} not in use - deleting.')
