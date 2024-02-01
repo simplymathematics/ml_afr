@@ -1,256 +1,264 @@
+\clearpage
+\onecolumn
 \section{Appendix}
 \label{appendix}
 
 In addition to the results on the CIFAR10~\citep{cifar} dataset, presented in Section~\ref{results}, we provide the same analysis for the MNIST~\citep{mnist} and CIFAR100~\citep{cifar} datasets.
 
-
 \subsection{CIFAR100}
 
+We present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:strength}--\ref{fig:failures_per_train_time}.
 
-\begin{figure*}
+\begin{figure*}[h!]
     \centering
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/def_param_vs_accuracy.eps}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar/def_param_vs_accuracy.eps}
     \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/atk_param_vs_accuracy.eps}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar/atk_param_vs_accuracy.eps}
     \end{subfigure}
     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) accuracies across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength, and the definition can be found in Eq.~\ref{eq:acc}. The shaded areas reflect the 95\% confidence intervals for performance across random configurations of the data for each tuned attack and model configuration.}
     \label{fig:strength}
 \end{figure*}
 
-\begin{figure*}
-    \begin{subfigure}{0.45\textwidth}
+\begin{figure*}[!h]
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar100/def_param_vs_adv_failure_rate.eps}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar100/def_param_vs_adv_failure_rate.eps}
     \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{{cifar100/adv_failure_rate_vs_train_time.eps}}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar100/adv_failure_rate_vs_train_time.eps}
     \end{subfigure}
     \caption{The left plot shows the adversarial failure rate (see Eq.~\ref{eq:failure_rate}) as a function of the defence strength where the control parameter represents the number of model layers. The shaded areas reflect the 95\% confidence intervals for each tuned hyperparameter combination. The right plot depicts the adversarial failure rate as a function of training time and ResNet configuration.}
     \label{fig:failure_rate}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     \centering
-    \begin{subfigure}{.28\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar100/ben_failures_per_train_time_vs_defence_type.eps}
+        \includegraphics[trim={0 5pt 0 5pt},clip,width=.28\textwidth]{cifar100/ben_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}{0.28\textwidth}
-        \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_defence_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[trim={0 5pt 0 5pt},clip,width=.28\textwidth]{cifar100/adv_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}{0.42\textwidth}
-        \includegraphics[width=\textwidth]{cifar100/adv_failures_per_train_time_vs_attack_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[trim={0 5pt 0 5pt},clip,width=.42\textwidth]{cifar100/adv_failures_per_train_time_vs_attack_type.eps}
     \end{subfigure}
     \caption{This figure depicts the cost-normalized adversarial failure rate (see Eq.~\ref{eq:cost}) across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Sec.~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a diamond.}
     \label{fig:failures_per_train_time}
 \end{figure*}
 
-Below, we present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:strength}-~\ref{fig:failures_per_train_time}.
 
+
+% \clearpage
 \subsection{MNIST}
-Below, we present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:mnist/accuracies}-~\ref{fig:mnist/layers}.
+We present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:mnist_accuracies}--\ref{fig:mnist_partial_effect}.
 
-\begin{figure*}
-\begin{subfigure}[]{0.27\textwidth}
+\begin{figure*}[!h]
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{mnist/ben_accuracy_vs_defence_type.eps}
+    \includegraphics[trim={0 5pt 0 10pt},clip,width=.27\textwidth]{mnist/ben_accuracy_vs_defence_type.eps}
 \end{subfigure}
-\begin{subfigure}[]{0.27\textwidth}
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{mnist/adv_accuracy_vs_defence_type.eps}
+    \includegraphics[trim={0 5pt 0 10pt},clip,width=.27\textwidth]{mnist/adv_accuracy_vs_defence_type.eps}
 \end{subfigure}
-\begin{subfigure}[]{0.36\textwidth}
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{mnist/adv_accuracy_vs_attack_type.eps}
+    \includegraphics[trim={0 5pt 0 10pt},clip,width=.4\textwidth]{mnist/adv_accuracy_vs_attack_type.eps}
 \end{subfigure}
 \caption{The adversarial accuracy across various attacks pictured on the x-axis and outlined in Section~\ref{attacks}. The error bar reflects the 95\% confidence interval for the adversarial accuracy across all examined samples.}
-\label{fig:mnist/accuracies}
+\label{fig:mnist_accuracies}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     \centering
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/def_param_vs_accuracy.eps}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{mnist/def_param_vs_accuracy.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/atk_param_vs_accuracy.eps}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{mnist/atk_param_vs_accuracy.eps}
     \end{subfigure}
     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) failure rates across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength.}
-    \label{fig:mnist/strength}
+    \label{fig:mnist_strength}
 \end{figure*}
 
-\begin{figure*}
-    \begin{subfigure}[]{0.45\textwidth}
+\begin{figure*}[!h]
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/def_param_vs_adv_failure_rate.eps}
+        \includegraphics[width=.45\textwidth]{mnist/def_param_vs_adv_failure_rate.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{{mnist/adv_failure_rate_vs_train_time.eps}}
+        \includegraphics[width=.45\textwidth]{mnist/adv_failure_rate_vs_train_time.eps}
     \end{subfigure}
     \caption{The left shows the adversarial failure rate as a function of the defence strength where the control parameter represents the number of model layers. The right depicts the adversarial failure rate as a function of training time and the ResNet configuration.}
-    \label{fig:mnist/failure_rate}
+    \label{fig:mnist_failure_rate}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     \centering
-    \begin{subfigure}[]{.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/ben_failures_per_train_time_vs_defence_type.eps}
+        \includegraphics[width=.28\textwidth]{mnist/ben_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{mnist/adv_failures_per_train_time_vs_defence_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[width=.28\textwidth]{mnist/adv_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.35\textwidth}
-        \includegraphics[width=\textwidth]{mnist/adv_failures_per_train_time_vs_attack_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[width=.41\textwidth]{mnist/adv_failures_per_train_time_vs_attack_type.eps}
     \end{subfigure}
     \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}).}
-    \label{fig:mnist/failures_per_train_time}
+    \label{fig:mnist_failures_per_train_time}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     % \centering
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/weibull_aft.eps}
+        \includegraphics[width=.33\textwidth]{mnist/weibull_aft.eps}
     \end{subfigure}%
     ~
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/log_normal_aft.eps}
+        \includegraphics[width=.33\textwidth]{mnist/log_normal_aft.eps}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{mnist/log_logistic_aft.eps}
+        \includegraphics[width=.33\textwidth]{mnist/log_logistic_aft.eps}
     \end{subfigure}
 
     \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $\lambda$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Section~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate.}
-    \label{fig:mnist/afr_models}
+    \label{fig:mnist_afr_models}
 \end{figure*}
 
-\begin{figure*}
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering\includegraphics[width=\textwidth]{cifar/log_normal_layers_partial_effect.eps}
-        
+\begin{figure*}[!h]
+    \begin{subfigure}
+        \centering\includegraphics[width=.45\textwidth]{cifar/log_normal_layers_partial_effect.eps}
     \end{subfigure}
-    ~
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering\includegraphics[width=\textwidth]{cifar/log_normal_epochs_partial_effect.eps}
+    \begin{subfigure}
+        \centering\includegraphics[width=.45\textwidth]{cifar/log_normal_epochs_partial_effect.eps}
     \end{subfigure}
-        \label{fig:mnist/epochs}
-    
     \caption{This figure depicts the survival curve over time as a function of the number of model layers for the highest scoring model (the Log-Normal distribution). The partial effects plots of other models were excluded for space reasons, but the results were nearly identical.}
+    \label{fig:mnist_partial_effect}
 \end{figure*}
+
+
+
+
+
 
 \subsection{CIFAR10}
-Below, we present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:cifar/accuracies}-~\ref{fig:cifar_partial_effect}.
+Here we present supplementary data for the CIFAR10 dataset in Figures~\ref{fig:cifar_accuracies}--\ref{fig:cifar_partial_effect}.
 
 
-\begin{figure*}
-\begin{subfigure}[]{0.26\textwidth}
+\begin{figure*}[!h]
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{cifar/ben_accuracy_vs_defence_type.eps}
+    \includegraphics[width=.26\textwidth]{cifar/ben_accuracy_vs_defence_type.eps}
 \end{subfigure}
-\begin{subfigure}[]{0.26\textwidth}
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{cifar/adv_accuracy_vs_defence_type.eps}
+    \includegraphics[width=.26\textwidth]{cifar/adv_accuracy_vs_defence_type.eps}
 \end{subfigure}
-\begin{subfigure}[]{0.38\textwidth}
+\begin{subfigure}
     \centering
-    \includegraphics[width=\textwidth]{cifar/adv_accuracy_vs_attack_type.eps}
+    \includegraphics[width=.38\textwidth]{cifar/adv_accuracy_vs_attack_type.eps}
 \end{subfigure}
 \caption{The adversarial accuracy across various attacks pictured on the x-axis and outlined in Section~\ref{attacks}. The error bar reflects the 95\% confidence interval for the adversarial accuracy across all examined samples.}
-\label{fig:cifar/accuracies}
+\label{fig:cifar_accuracies}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     \centering
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/def_param_vs_accuracy.eps}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.48\textwidth]{cifar/def_param_vs_accuracy.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/atk_param_vs_accuracy.eps}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.48\textwidth]{cifar/atk_param_vs_accuracy.eps}
     \end{subfigure}
     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) failure rates across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength.}
-    \label{fig:cifar/strength}
+    \label{fig:cifar_strength}
 \end{figure*}
 
-\begin{figure*}
-    \begin{subfigure}[]{0.45\textwidth}
+\begin{figure*}[!h]
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/def_param_vs_adv_failure_rate.eps}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.48\textwidth]{cifar/def_param_vs_adv_failure_rate.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.45\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{{cifar/adv_failure_rate_vs_train_time.eps}}
+        \includegraphics[trim={0 10pt 0 10pt},clip,width=.48\textwidth]{cifar/adv_failure_rate_vs_train_time.eps}
     \end{subfigure}
     \caption{The left shows the adversarial failure rate as a function of the defence strength where the control parameter represents the number of model layers. The right depicts the adversarial failure rate as a function of training time and the ResNet configuration.}
-    \label{fig:cifar/failure_rate}
+    \label{fig:cifar_failure_rate}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     \centering
-    \begin{subfigure}[]{.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/ben_failures_per_train_time_vs_defence_type.eps}
+        \includegraphics[trim={5pt 5pt 5pt 10pt},clip,width=.29\textwidth]{cifar/ben_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{cifar/adv_failures_per_train_time_vs_defence_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[trim={5pt 5pt 5pt 10pt},clip,width=.29\textwidth]{cifar/adv_failures_per_train_time_vs_defence_type.eps}
     \end{subfigure}
-    \begin{subfigure}[]{0.35\textwidth}
-        \includegraphics[width=\textwidth]{cifar/adv_failures_per_train_time_vs_attack_type.eps}
+    \begin{subfigure}
         \centering
+        \includegraphics[trim={5pt 5pt 20pt 10pt},clip,width=.4\textwidth]{cifar/adv_failures_per_train_time_vs_attack_type.eps}
     \end{subfigure}
     \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}).}
-    \label{fig:cifar/failures_per_train_time}
+    \label{fig:cifar_failures_per_train_time}
 \end{figure*}
 
-\begin{figure*}
+\begin{figure*}[!h]
     % \centering
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/weibull_aft.eps}
-    \end{subfigure}%
-    ~
-    \begin{subfigure}[t]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{cifar/log_normal_aft.eps}
+        \includegraphics[width=.32\textwidth]{cifar/weibull_aft.eps}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.3\textwidth}
+    \begin{subfigure}
         \centering
-        \includegraphics[width=\textwidth]{cifar/log_logistic_aft.eps}
+        \includegraphics[width=.32\textwidth]{cifar/log_normal_aft.eps}
+    \end{subfigure}
+    ~
+    \begin{subfigure}
+        \centering
+        \includegraphics[width=.32\textwidth]{cifar/log_logistic_aft.eps}
     \end{subfigure}
 
     \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $\lambda$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Section~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate.}
-    \label{fig:cifar/afr_models}
+    \label{fig:cifar_afr_models}
 \end{figure*}
 
-\begin{figure*}
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering\includegraphics[width=\textwidth]{mnist/log_normal_layers_partial_effect.eps}
+\begin{figure*}[!h]
+    \begin{subfigure}
+        \centering
+        \includegraphics[width=.45\textwidth]{cifar/log_normal_layers_partial_effect.eps}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering\includegraphics[width=\textwidth]{mnist/log_normal_epochs_partial_effect.eps}
+    \begin{subfigure}
+        \centering
+        \includegraphics[width=.45\textwidth]{cifar/log_normal_epochs_partial_effect.eps}
     \end{subfigure}
-    \label{mnist_partial_effect}
     \caption{This figure depicts the survival curve over time as a function of the number of model layers for the highest scoring model (the Log-Normal distribution). The partial effects plots of other models were excluded for space reasons, but the results were nearly identical.}
+    \label{fig:cifar_partial_effect}
 \end{figure*}
 
+% \clearpage
 \input{tables}
