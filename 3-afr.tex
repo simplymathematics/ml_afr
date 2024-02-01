@@ -56,7 +56,7 @@ To compare the efficacy of different parametric aft models, we use the Akaike in
 \label{cost_normalization}
 
 
-So, finally, we can introduce the idea of a failure rate normalized cost. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this relative cost of failure in both benign and adversarial terms as,
+So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this relative cost of failure in both benign and adversarial terms as,
 \begin{equation}
 	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~and~~}
