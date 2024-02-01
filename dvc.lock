@@ -176,18 +176,18 @@ stages:
       md5: b3e276abe11378c1b5e47f737244fdfc
       size: 6950
     - path: cifar/
-      md5: 26eab89b85af2f2ace786ba9ea1389ef.dir
-      size: 16453157
-      nfiles: 26
+      md5: 6dabda5fe68df716aa63d226bc45dbb3.dir
+      size: 16461476
+      nfiles: 27
     - path: cifar100/
-      md5: 3b31ae985df7ea25a284a13712f1c2db.dir
-      size: 2872588
+      md5: 5516a564740adf33d9f2e2353b0a5053.dir
+      size: 2880751
       nfiles: 29
     - path: mnist/
-      md5: 4a8efea835937c1fa13e69cb3ffacb75.dir
-      size: 2559157
+      md5: 8720de1ac5f4b6b95cef347ec58dc660.dir
+      size: 2558556
       nfiles: 26
     outs:
     - path: Survival Analysis for Deep Convolutional Neural Networks.zip
-      md5: 0c13309daec0b38aa78fc92b5633d054
-      size: 1050986725
+      md5: 0c94d5c06d0fe1927c978b7a7a9d5927
+      size: 2102284926
