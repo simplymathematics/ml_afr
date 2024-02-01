@@ -13,11 +13,11 @@ We present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:stren
     \centering
     \begin{subfigure}
         \centering
-        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar/def_param_vs_accuracy.eps}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar100/def_param_vs_accuracy.eps}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar/atk_param_vs_accuracy.eps}
+        \includegraphics[trim={0 20pt 0 10pt},clip,width=.45\textwidth]{cifar100/atk_param_vs_accuracy.eps}
     \end{subfigure}
     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) accuracies across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength, and the definition can be found in Eq.~\ref{eq:acc}. The shaded areas reflect the 95\% confidence intervals for performance across random configurations of the data for each tuned attack and model configuration.}
     \label{fig:strength}
@@ -139,7 +139,7 @@ We present supplementary data for the CIFAR100 dataset in Figures~\ref{fig:mnist
         \includegraphics[width=.33\textwidth]{mnist/log_logistic_aft.eps}
     \end{subfigure}
 
-    \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $\lambda$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Section~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate.}
+    \caption{The coefficients represent the log scale effect of the covariates on the survival time, with a positive value indicating an increase in the survival time. Additionally, $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}
     \label{fig:mnist_afr_models}
 \end{figure*}
 
@@ -242,7 +242,7 @@ Here we present supplementary data for the CIFAR10 dataset in Figures~\ref{fig:c
         \includegraphics[width=.32\textwidth]{cifar/log_logistic_aft.eps}
     \end{subfigure}
 
-    \caption{The covariate estimates accelerated failure time models where the parameters $\rho$, $\lambda$, $\mu$, $\sigma$, $\alpha$, and $\beta$ represent the intercepts for those parameters as described in Section~\ref{afr_models} for the Weibull, Log-Normal, and Log-Logistic AFR Models. The coefficients represent the log scale effect of the covariates on the failure rate.}
+    \caption{The coefficients represent the log scale effect of the covariates on the survival time, with a positive value indicating an increase in the survival time. Additionally, $f_{adv.}$ refers to the adversarial hazard function (see: Eq.~\ref{eq:adv_failure_rate})}
     \label{fig:cifar_afr_models}
 \end{figure*}
 
@@ -260,5 +260,5 @@ Here we present supplementary data for the CIFAR10 dataset in Figures~\ref{fig:c
     \label{fig:cifar_partial_effect}
 \end{figure*}
 
-% \clearpage
+\clearpage
 \input{tables}
