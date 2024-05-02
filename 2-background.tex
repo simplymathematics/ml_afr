@@ -22,14 +22,14 @@ where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean 
 \subsubsection{Accuracy and Failure Rate}
 The accuracy refers to the percentage or proportion of examples that cause the targeted ML model to misclassify or produce incorrect outputs and is a measure of the vulnerability or susceptibility of the model to noise-induced failures. A lower accuracy indicates a higher rate of misclassifications or incorrect predictions. The accuracy, $\lambda$, is defined as:
 \begin{equation}
-    \lambda := 1 -  \frac{\textrm{False~Classifications}}{N},
+    \lambda := 1 -  \frac{\mathrm{False~Classifications}}{N},
     \label{eq:acc}
 \end{equation}
 where $N$ is the number of samples.
 
 However, accuracy is known to vary with things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring}, the number of classes ~\cite{dohmatob_generalized_2019} or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}. Likewise, many of these factors can also influence an attack's run time. Instead, we can think in terms of \textbf{failure rate}:
 \begin{equation}
-    \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t},
+    \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t} ,
     \label{eq:failure_rate}
 \end{equation}
 where $\Delta t$ is a time interval. This failure rate varies as a function of time, and we would like to model this behaviour with respect to various attributes and parameters of a model.
