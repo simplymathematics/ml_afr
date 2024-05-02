@@ -9,7 +9,7 @@ $$
 $$
 where $\phi$ is an acceleration factor that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs. We can use the survival function to compute the expected survival time,
 \[
-	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty} t \cdot S_\theta(t) \,dt.
+	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty}S_\theta(t) \,dt.
 \]
 
 While non-parametric AFR models like Cox's \textbf{proportional hazard model} do exist, they don't allow us to estimate the underlying distribution~\cite{kleinbaum1996survival} --- merely the proportional effects of the covariates~\citep{aft_models}. Furthermore, parametric distributions are known to be robust to omitted covariates~\citep{lambert2004parametric}.

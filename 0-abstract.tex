@@ -2,11 +2,11 @@
 
 
 %  Big Topic Intro  
-Machine learning models- deep neural networks in particular- have performed remarkably well on small-scale benchmark datasets across a wide variety of domains. However, the ease of finding adversarial counter-examples remains a persistent problem when training times are measured in hours or days and the time needed to find a successful adversarial counter-example is measured in seconds.
+ Machine learning models---deep neural networks in particular---have performed remarkably well on small-scale benchmark datasets across a wide variety of domains. However, the ease of finding adversarial counter-examples remains a persistent problem when training times are measured in hours or days and the time needed to find a successful adversarial counter-example is measured in seconds.
 %  Problem Statement and Drawbacks  
 Much work has gone into generating and defending against these adversarial counter-examples, however the cost of a given decision is rarely discussed, while test/train split verification is computationally infeasible at the scales required by safety-critical standards.
 %  Our solution and Advantages of our solution  
-By using accelerated failure rate models, worst-case examples, and a cost-aware analysis, we can precisely, and accurately reject a particular change during routine model training procedures rather than relying on real-world deployment.
+By using accelerated failure rate models, worst-case examples, and a cost-aware analysis, \cm{our method} can precisely and accurately reject a particular model change during routine model training procedures rather than relying on real-world deployment.
 %  Conclusion  
 Through a survey of many pre-processing techniques, adversarial counter-examples, and ResNet configurations, we show that deeper models do offer marginal gains in survival times compared to their more shallow counterparts, but that this gain is driven more by the model query time than inherent robustness due to model depth.
 
