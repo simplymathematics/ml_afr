@@ -176,8 +176,9 @@ stages:
       md5: f5bb6d08229986ad1aef6393da99720d
       size: 6958
     - path: cifar/
-      md5: 5d2d8f94bf0281472e6ef0d1bfb8f37b.dir
-      size: 16456182
+      hash: md5
+      md5: 8e6f10ed657e5a72d358c238663aee57.dir
+      size: 58105231
       nfiles: 27
     - path: cifar100/
       md5: 3e5916964ba49add4c0de1c1054c9658.dir
