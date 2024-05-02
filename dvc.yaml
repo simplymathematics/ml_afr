@@ -8,15 +8,3 @@ stages:
       - cifar100/
     outs:
       - "Survival Analysis for Deep Convolutional Neural Networks.zip"
-  # render dvc_plots:
-  #   foreach:
-  #     - mnist
-  #     - cifar
-  #     - cifar100
-  #   do:
-  #     cmd: dvc plots show
-  #     plots:
-  #       - ${item}/aft_comparison.csv:
-  #           x : Distribution
-  #           y : Concordance
-  #           title : Concordance for each Distribution for the ${item} dataset
