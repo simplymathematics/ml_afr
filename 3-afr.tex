@@ -63,11 +63,11 @@ concordance score, which is equivalent to the area under (AUC) the receiver oper
 \label{cost_normalization}
 
 
-So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} \propto \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
+So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto T_{train}$) or the attacker ($C_{adv.} \propto \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
 \begin{equation}
-	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
+	\bar{C}_{ben.} = \frac{T_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~and~~}
-	\bar{C}_{adv.}=\frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
+	\bar{C}_{adv.}=\frac{T_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
 If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{i.e.}, that our model is \textit{broken}), because it is cheaper to attack the model than it is to train it. Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
