@@ -11,14 +11,14 @@ $$
 where $\phi$ is an acceleration factor that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs.
 \cm{Unlike the aforementioned exponential and gamma models, we can use Cox and other models to model a situation in which the failure rate is dependent on other variables. Like the Cox model, accelerated failure time models (\textit{e.g.~} Weibull, log-logistic and log-normal models) rely on the accelerated failure time assumption where}
 $$
-	S_\theta(t) = S_0(\phi(\theta, x) t).
+	S_\theta(t) = S_0(\phi(\theta, x) \cdot t).
 $$
-\cm{which conveniently allows us to to find a value of $\phi$ for each covariate that is independent of time and the other covariates, whereas the Cox model estimates for $\phi$ are proportional to each other and therefore sensitive to changes in these covariates \cite{kleinbaum1996survival,lambert2004parametric}.
+\cm{which conveniently allows us to to find a value of $\phi$ for each covariate that is independent of time and the other covariates, whereas the Cox model estimates for $\phi$ are proportional to each other and therefore sensitive to changes in these covariates \cite{kleinbaum1996survival,lambert2004parametric}. Furthermore, parametric models are known to be robust to omitted covariates~\citep{lambert2004parametric}
  Regardless, for any of the listed models,} we can use the survival function to compute the expected survival time,
 \[
 	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty}S_\theta(t) \,dt.
 \]
-\cm{Unlike the exponential and gamma models that assume a constant failure rate, both the Cox and AFR models can be fit to time-variant data. However, unlike the Cox model, the AFR models listed below are fully parametric and the }Furthermore, parametric models are known to be robust to omitted covariates~\citep{lambert2004parametric}.
+\cm{Unlike the exponential and gamma models that assume a constant failure rate, both the Cox and AFR models can be fit to time-variant data. However, unlike the Cox model, the AFR models listed below are fully parametric and the }.
 
 \subsection{Weibull AFR}
 The first AFR model we tested was using the Weibull distribution, which has the form
@@ -51,7 +51,7 @@ where $\theta = (\alpha, \beta)$.
 \label{metrics}
 
 To compare the efficacy of different parametric aft models, we use the Akaike information criterion (AIC) and the Bayesian information model ~\citep{stoica2004model,taddy2019business}, \cm{where the preferred model will be the one with the smallest value. In addition to these metrics, we also include the 
-concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or \textbf{ICI}), and the median value of these deltas (e.g. the error at the 50th percentile or the E50).}
+concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI), and the median value of these deltas (e.g. the error at the 50th percentile or the E50).}
 
 
 
@@ -63,7 +63,7 @@ concordance score, which is equivalent to the area under (AUC) the receiver oper
 \label{cost_normalization}
 
 
-So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \propto t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
+So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} \propto \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
 \begin{equation}
 	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~and~~}
