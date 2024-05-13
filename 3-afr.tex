@@ -56,13 +56,13 @@ To compare the efficacy of different parametric aft models, we use the Akaike in
 \label{cost_normalization}
 
 
-So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this relative cost of failure in both benign and adversarial terms as,
+So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto t_{train}$) or the attacker ($C_{adv.} = \mathbb{E}_{S_\theta}[T] \propto t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
 \begin{equation}
 	\bar{C}_{ben.} = \frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~and~~}
 	\bar{C}_{adv.}=\frac{t_{train}}{\mathbb{E}_{S_\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
-If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{e.g.}, that our model is \textit{broken}). Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
+If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{i.e.}, that our model is \textit{broken}), because it is cheaper to attack the model than it is to train it. Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
 This approach has two advantages over the traditional train-test split method. Firstly, we can quantify the effects of covariates like model depth or noise distance to compare the effect of model changes. Secondly, the train-test split methodology relies on an ever-larger number of samples to increase precision, whereas the accelerated failure method is able to precisely and accurately compare models using only a small number of samples~\cite{schmoor2000sample,lachin1981introduction} relative to the many billions required of the train/test split methodology and safety-critical standards~\cite{iso26262,IEC61508,IEC62034,meyers}.
 In short, by generating worst-case examples (\textit{e.g.}, adversarial ones), we can test \textit{and compare} arbitrarily complex models \textit{before} they leave the lab, drive a car, predict the presence of cancer, or pilot a drone.
