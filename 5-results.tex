@@ -66,10 +66,9 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
 % \end{figure}
 
 
-
 \subsection{AFR Models}
 \input{plots/aft_comparison}
-Table~\ref{tab:combined} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that log-logistic and exponential models marginally outperforms the other models when measured with AIC/BIC. Concordance is identical for both the test and train sets, with gamma and exponential falling behind the others. However, the ICI and E50 across the test train sets is superior for the Weibull, so we then used that model to infer the effect of the covariates (Fig.~\ref{fig:covariates}) as well as different attacks, defences, and datasets (Fig.~\ref{fig:dumies}). In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see $t_predict$ in Fig.~\ref{fig:covariates}) than the number of model layers.
+Table~\ref{tab:afr_models} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that log-logistic and exponential models marginally outperforms the other models when measured with AIC/BIC. Concordance is identical for both the test and train sets, with gamma and exponential falling behind the others. However, the ICI and E50 across the test train sets is superior for the Weibull, so we then used that model to infer the effect of the covariates (Fig.~\ref{fig:covariates}) as well as different attacks, defences, and datasets (Fig.~\ref{fig:dumies}). In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see $t_predict$ in Fig.~\ref{fig:covariates}) than the number of model layers.
 
 \begin{figure*}
 	% \centering
