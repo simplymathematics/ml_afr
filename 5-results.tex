@@ -1,5 +1,14 @@
 \section{Results and Discussion}
-\cm{Note: This section has been substantially rewritten.}
+
+
+Through tens of thousands experiments across many signal-processing techniques (\textit{e.g.}, defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts--- regardless of configuration; that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFR models are a powerful tool for comparing model architectures and examining the effects of covariates. In the section below, we display and discuss the results for the CIFAR100, CIFAR10, and MNIST datasets for all attacks and defences. 
+
+\subsection{Benign and Adversarial Accuracy}
+\cm{
+Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across the various attacks and defences. We can clearly see that no defence consistently outperforms the undefended (control) model in either the benign (top) or adversarial context (middle). We also see that for all defences, we can find at least one configuration with arbitrarily high accuracy, though finding it might involve an expensive hyper-parameter search as evidenced by the large variance (see top plot of Fig.~\ref{fig:accuracies}). Likewise, the adversarial accuracy benefits greatly from model tuning, but that attacks are still effective on roughly 75\% of samples in the best case for most attacks (see middle plot of Fig.~\ref{fig:accuracies}). Despite varying methods and computational costs, the attacks seem to be more or less equally effective with respect to adversarial accuracy (see bottom plot of Fig.~\ref{fig:accuracies}).
+}
+
+
 \label{results}
 \begin{figure}[!h]
 \begin{subfigure}
@@ -65,32 +74,26 @@
 \end{figure}
 
 
-Through tens of thousands experiments across many signal-processing techniques (\textit{e.g.}, defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts--- regardless of configuration; that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFR models are a powerful tool for comparing model architectures and examining the effects of covariates. In the section below, we display and discuss the results for the CIFAR100, CIFAR10, and MNIST datasets for all attacks and defences. Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across the various attacks and defences. We can clearly see that no defence consistently outperforms the undefended (control) model in either the benign (top) or adversarial context (middle).
 
 
+\subsection{Attack and Defence Strength}
+In Fig.~\ref{fig:strength}, \cm{we can see the effect of the (min-max scaled) control parameter on the benign and adversarial accuracy}. Furthermore, the relationship between the defence control parameter and the benign accuracy is not monotonic, meaning that tuning is will be expensive. We can see that the relationship between the attack parameters and failure rate is also not monotonic. However, all defences appear to perform much worse in the average adversarial case (right) than in the benign (left). Additionally we see in the right side of Fig.~\ref{fig:strength} that the attack types yield relatively consistent results, with the mean of one falling in the 95 confidence intervals of all the others. We can also see that defence choice follows the same pattern, except for Gauss-in, which rapidly decreases the accuracy as we increase the input noise beyond some threshold in which accuracy tends to increase.
 
-% \subsection{Attack and Defence Strength}
-% In Fig.~\ref{fig:strength},  (denoted in blue). Furthermore, the relationship between the defence control parameter and the benign accuracy is not monotonic, meaning that tuning is will be expensive. We can see that the relationship between the attack parameters and failure rate is also not monotonic. However, all defences appear to perform much worse in the average adversarial case (right) than in the benign (left). Additionally we see in the right side of Fig.~\ref{fig:strength} that the attack types yield relatively consistent results, with the mean of one falling in the 95 confidence intervals of all the others. We can also see that defence choice follows the same pattern, except for Gauss-in, which rapidly decreases the accuracy as we increase the input noise.
 
+\subsection{Failures and Cost}
 
-% \subsection{Failure Rate}
-% Fig.~\ref{fig:failure_rate} depicts the adversarial failure rate of all tested attacks, defences, and model configurations. 
-% Clearly, increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. 
-% Furthermore, it reveals something surprising---that increasing the number of hidden layers tends to increase the failure rate---even across model architectures and all defences. 
-% Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see left side of Fig.~\ref{fig:failure_rate}). The right subplot of Fig.~\ref{fig:failure_rate} shows that there is no general relationship between training time and adversarial failure rate.
-% As the training time increases, however, the variance of attack times decreases, likely due to the increase in inference time (see:~\ref{fig:afr_models}) rather than inherent robustness.
-% We formalize this analysis  in the next subsection.
 
 Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (left) figure and adversarial cases (middle and right figures). Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations.
 
 
 
 \subsection{AFR Models}
-
+\input{plots/aft_comparison}
 Fig.~\ref{fig:afr_models} reveals very similar estimates for the model parameters despite the models having different forms, suggesting that these parameter estimates reflect the true effect of these covariates on the failure rate. Table~\ref{tab:combined} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that Log-Normal model marginally outperforms the Weibull model when measured with AIC/BIC as well as the Concordance.
 In all cases, the mean time until false classification is much larger than the median, indicating the long-tailed nature of these distributions.
 The concordance scores for all three distributions are in agreement as well, confirming our assumption that accuracy is not independent of attack time (e.g., Concordance $> 0.5$).
 We then used the Log-Normal AFR to demonstrate the partial effect of the the number of layers on the survival time as in Fig.~\ref{fig:covariates}. In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see Fig.~\ref{fig:afr_models}) than the number of model layers.
+
 \begin{figure*}
 	% \centering
 	\begin{subfigure}
@@ -121,12 +124,20 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
 		\centering
 		\includegraphics[width=.32\textwidth]{plots/cox_qq.pdf}
 	\end{subfigure}
-	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (red) and 20\% to be the test set (blue). 
+	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). 
  % The absence of one of the lines means that the \texttt{lifelines} fitter failed to converge for that subset.
  }
 	\label{fig:afr_models}
 \end{figure*}
-\input{plots/aft_comparison}
+
+\subsection{Effect of Covariates}
+Fig.~\ref{fig:dummies} depicts the effect of all attacks, defences, and model configurations on the survival time and Fig.~\ref{fig:covariates} depicts the effect of the covariates. 
+Fig.~\ref{fig:covariates} clearly demonstrates that increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. 
+Furthermore, it reveals something surprising---that increasing the number of epochs tends to increase the failure rate---even across model architectures and all defences. 
+Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see Fig.~\ref{fig:dummies}). Fig.~\ref{fig:covariates} shows that there is no general relationship between training time and adversarial failure rate.
+As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see:~\ref{fig:covariates}) rather than inherent robustness.
+We formalize this analysis  in the next subsection.
+
 \begin{figure}
     \centering
 	\begin{subfigure}
@@ -141,6 +152,3 @@ We then used the Log-Normal AFR to demonstrate the partial effect of the the num
     \end{subfigure}
     \caption{The coefficients represent the log scale effect of the dummy variables for dataset, attack, and defence on the survival time, with a positive value indicating an increase in the survival time.}
 \end{figure}
-
-
-
