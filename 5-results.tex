@@ -27,19 +27,7 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
 \label{fig:accuracies}
 \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \begin{subfigure}
-        \centering
-        \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{plots/def_param_vs_accuracy.pdf}
-    \end{subfigure}
-    \begin{subfigure}
-        \centering
-        \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{plots/atk_param_vs_accuracy.pdf}
-    \end{subfigure}
-    \caption{This depicts the benign (unperturbed) and adversarial (perturbed) failure rates across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength. The bars indicate the first standard deviation of measures across all model configurations.}
-    \label{fig:strength}
-\end{figure}
+
 
 % \begin{figure}[!h]
 %     \centering
@@ -54,6 +42,33 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
 %     \caption{The left shows the adversarial failure rate as a function of the defence strength where the control parameter represents the number of model layers. The right depicts the adversarial failure rate as a function of training time and the ResNet configuration. The bars indicate the first standard deviation of measures across all model configurations.}
 %     \label{fig:failure_rate}
 % \end{figure}
+
+
+
+
+
+
+% \subsection{Attack and Defence Strength}
+% In Fig.~\ref{fig:strength}, \cm{we can see the effect of the (min-max scaled) control parameter on the benign and adversarial accuracy}. Furthermore, the relationship between the defence control parameter and the benign accuracy is not monotonic, meaning that tuning is will be expensive. We can see that the relationship between the attack parameters and failure rate is also not monotonic. However, all defences appear to perform much worse in the average adversarial case (right) than in the benign (left). Additionally we see in the right side of Fig.~\ref{fig:strength} that the attack types yield relatively consistent results, with the mean of one falling in the 95 confidence intervals of all the others. We can also see that defence choice follows the same pattern, except for Gauss-in, which rapidly decreases the accuracy as we increase the input noise beyond some threshold in which accuracy tends to increase.
+
+% \begin{figure}[!h]
+%     \centering
+%     \begin{subfigure}
+%         \centering
+%         \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{plots/def_param_vs_accuracy.pdf}
+%     \end{subfigure}
+%     \begin{subfigure}
+%         \centering
+%         \includegraphics[trim={0 10pt 0 10pt},clip,width=.45\textwidth]{plots/atk_param_vs_accuracy.pdf}
+%     \end{subfigure}
+%     \caption{This depicts the benign (unperturbed) and adversarial (perturbed) failure rates across all defences attacks, and models. The left shows how the benign accuracy varies with the defence strength where the control parameter describes the number of layers. The right shows the adversarial accuracy as a function of attack strength. The bars indicate the first standard deviation of measures across all model configurations.}
+%     \label{fig:strength}
+% \end{figure}
+
+\subsection{Failures and Cost}
+
+
+Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (left) figure and adversarial cases (middle and right figures). Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations.
 
 \begin{figure}[!h]
     \centering
@@ -72,20 +87,6 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
     \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
     \label{fig:failures_per_train_time}
 \end{figure}
-
-
-
-
-\subsection{Attack and Defence Strength}
-In Fig.~\ref{fig:strength}, \cm{we can see the effect of the (min-max scaled) control parameter on the benign and adversarial accuracy}. Furthermore, the relationship between the defence control parameter and the benign accuracy is not monotonic, meaning that tuning is will be expensive. We can see that the relationship between the attack parameters and failure rate is also not monotonic. However, all defences appear to perform much worse in the average adversarial case (right) than in the benign (left). Additionally we see in the right side of Fig.~\ref{fig:strength} that the attack types yield relatively consistent results, with the mean of one falling in the 95 confidence intervals of all the others. We can also see that defence choice follows the same pattern, except for Gauss-in, which rapidly decreases the accuracy as we increase the input noise beyond some threshold in which accuracy tends to increase.
-
-
-\subsection{Failures and Cost}
-
-
-Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (left) figure and adversarial cases (middle and right figures). Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations.
-
-
 
 \subsection{AFR Models}
 \input{plots/aft_comparison}
