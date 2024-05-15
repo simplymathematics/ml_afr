@@ -110,8 +110,8 @@ Table~\ref{tab:afr_models} contains the performance of each of these models on t
 Fig.~\ref{fig:dummies} depicts the effect of all attacks, defences, and model configurations on the survival time and Fig.~\ref{fig:covariates} depicts the effect of the covariates. 
 Fig.~\ref{fig:covariates} clearly demonstrates that increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time. 
 Furthermore, it reveals something surprising---that increasing the number of epochs tends to increase the failure rate---even across model architectures and all defences. 
-Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see Fig.~\ref{fig:dummies}). The scale of $t_train$  in Fig.~\ref{fig:covariates} shows that there is no general relationship between training time and adversarial survival time. \cm{Additionally, we see that an increase in accuracy tends to correspond to a decrease in survival time, confirming the inverse relationship noted by many researchers ~\cite{carlini_towards_2017,biggio_evasion_2013,croce_reliable_2020}.}
-As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see:~\ref{fig:covariates}) rather than inherent robustness.
+Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see Fig.~\ref{fig:dummies}). The scale of $t_{train}$  in Fig.~\ref{fig:covariates} shows that there is no general relationship between training time and adversarial survival time. \cm{Additionally, we see that an increase in accuracy tends to correspond to a decrease in survival time, confirming the inverse relationship noted by many researchers ~\cite{carlini_towards_2017,biggio_evasion_2013,croce_reliable_2020}.}
+As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see Fig.~\ref{fig:covariates}, covariate $t_{predict}$) rather than inherent robustness (see covariate "Layers").
 We formalize this analysis  in the next subsection.
 
 \begin{figure}
@@ -126,7 +126,7 @@ We formalize this analysis  in the next subsection.
     \includegraphics[width=.38\textwidth]{plots/weibull_aft.pdf}
     \label{fig:dummies}
     \end{subfigure}
-    \caption{The coefficients represent the log scale effect of the dummy variables for dataset, attack, and defence on the survival time, with a positive value indicating an increase in the survival time.}
+    \caption{The coefficients represent the log scale effect of the dummy variables for dataset (Data:), attack (Atk:), and defence (Def:) on the survival time, with a positive value indicating an increase in the survival time.}
 \end{figure}
 
 \subsection{Failures and Cost}
@@ -138,15 +138,15 @@ Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate 
     \centering
     \begin{subfigure}
         \centering
-        \includegraphics[width=.45\textwidth]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.42\textwidth]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.45\textwidth]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.42\textwidth]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.45\textwidth]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
+        \includegraphics[width=.42\textwidth]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
     \end{subfigure}
     \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
     \label{fig:failures_per_train_time}
