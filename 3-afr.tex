@@ -1,43 +1,75 @@
 
-\section{Accelerated Failure Models for ML}
+\section{Survival Analysis for ML} 
 \label{afr_models}
-Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles). When, for example, a car manufacturer wants to test a motor for next-year's production model, they cannot simply sample a collection of motors from their upstream suppliers since the motor is intended to last a decade or more. Instead, they \textit{induce} failures by introducing extreme circumstances~\citep{liu2013development,lawless1995methods} into the verification procedures. For example, this might include running the motor in extremely cold or hot environments, cycling between temperatures rapidly, or using extreme vibration to \textit{accelerate} the effect of normal wear-and-tear~\citep{meeker1998accelerated}. By measuring the effect of each of these test scenarios on the tested component and keeping track of the real-world circumstances and usage of their products, they can estimate the long-term behavior of a component without relying on long-term testing that would drastically slow development. That is, they can successfully estimate the expected survival time of a component using statistical methods. 
-
-
-\cm{Introductory statistics textbooks~\cite{stats} begin the discussion of failure modelling quite simply by using the exponential distribution, which models the probability of an event occurring at a certain time when there is a constant failure rate, such that: $S(t) = \exp(-\lambda t)$~\cite{stats}. Likewise, the gamma distribution can be used to calculate the time between failures when the failure rate is constant~\cite{stats}. Kleinbaum notes that survival time, failure rate, and probability of failure can all be calculated if you know one of these and the data can be fit by one of the described models. Beyond these, the author also notes the efficacy of the Cox semi-parametric approach where:}
-$$
-S_\theta(t) = S_0(t) \cdot \phi(\theta, x)
-$$
-where $\phi$ is an acceleration factor that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs.
-\cm{Unlike the aforementioned exponential and gamma models, we can use Cox and other models to model a situation in which the failure rate is dependent on other variables. Like the Cox model, accelerated failure time models (\textit{e.g.~} Weibull, log-logistic and log-normal models) rely on the accelerated failure time assumption where}
-$$
-	S_\theta(t) = S_0(\phi(\theta, x) \cdot t).
-$$
-\cm{which conveniently allows us to to find a value of $\phi$ for each covariate that is independent of time and the other covariates, whereas the Cox model estimates for $\phi$ are proportional to each other and therefore sensitive to changes in these covariates \cite{kleinbaum1996survival,lambert2004parametric}. Furthermore, parametric models are known to be robust to omitted covariates~\citep{lambert2004parametric}
- Regardless, for any of the listed models,} we can use the survival function to compute the expected survival time,
+Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  In this work, leverage evasion attacks to examine their time-to-failure   that model the survival time or time to failure, $S_{\theta}(t)$ for a model with covariates, $\theta$. For all survival models we can use the survival function to compute the expected survival time,
 \[
 	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty}S_\theta(t) \,dt.
 \]
-\cm{Unlike the exponential and gamma models that assume a constant failure rate, both the Cox and AFR models can be fit to time-variant data. However, unlike the Cox model, the AFR models listed below are fully parametric and the }.
+For the purposes of inferential statistics, we can broadly separate these models into two categories: proportional hazard models and accelerated failure time models, each of which has a subsection below. Furthermore, by parameterizing our performance with time, we are able to do the cost-value analysis outlined in Sec.~\ref{cost_normalization}.
 
-\subsection{Weibull AFR}
+\subsection{Proportional Hazard Models}
+Proportional hazard models try to fit a parameter $\phi$ to a matrix of covariates, $\theta$, to predict the survival time on unseen configurations of covariates or used for inferential statistics, such that
+$$
+S_\theta(t) = S_0(t) \cdot \phi(\theta, x), 
+$$
+where $\phi$ is a \textit{proportional hazard} that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs.
+
+
+\subsubsection{Cox}
+The Cox model is can be defined in terms of the hazard function:
+$$
+h(t) = h_0(t) \cdot \exp(\phi_1 \theta_1 + \phi_2 \theta_2... \phi_p \theta_p)
+$$
+where $\phi_p$ is the $p$-th proportional hazard coefficient and $\theta_p$ is the value of the $p$-th covariate. One downside of Cox compared to the other models is that it is semi-parametric since $h_0(t)$ is not defined by a parametric model. Furthermore, this means that $\phi_1, \phi_2... \phi_p$ are only defined for a particular dataset and only describe the proportional effect of the covariates rather than the more general acceleration factor discussed in the next section.
+
+
+\subsection{Accelerated Failure Time Models}
+Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\citep{liu2013development,lawless1995methods}. For manufacturing, this is n done by accelerating normal wear and tear on a particular component (e.g. a motor or aircraft sensor)~\citep{liu2013development}. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of various things on the expected lifetime of an individual. For machine learning, we can leverage the worst-case perturbations of an adversary to model the effect of various model parameters for both predictive and inferential statistics. That is, they can successfully estimate the expected survival time of a component using statistical methods and routine results from model training. These accelerated models are of the form:
+$$
+	S_\theta(t) = S_0(\phi(\theta, x) \cdot t).
+$$
+where $\phi$ is an \textit{acceleration factor} that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs.
+
+\subsubsection{Generalized Gamma}
+The generalized gamma model uses three parameters $\sigma, \lambda,\gamma$. Let
+
+$$
+u (x,y)= \Gamma \left ( \frac{1}{(\lambda(x, \alpha))^2}; \frac{\exp \left( \lambda(x, \alpha) \left( \frac{log(t) - \mu(\gamma, x)}{\sigma(\beta, y)} \right ) \right) }{(\lambda(x, \alpha))^2} \right )
+$$
+where $\Gamma(k, x)$ is the incomplete Gamma function and $ \lambda(x, \alpha) = \alpha x^T, \sigma(\beta, y) = \exp(\beta y ),   \mu(\gamma, x) = \gamma x^T$ ~\cite{aft_models}. Then we can express the survival function as a piece-wise function:
+$$
+S(t; x) =  1 - u~\text{when}~\lambda > 0 
+$$
+and
+$$
+S(t; x) =  u~\text{when}~\lambda \leq 0 .
+$$ 
+The exponential, Weibull, and log-normal models outlined below are all special cases of this model ~\cite{kleinbaum1996survival}.
+
+\subsubsection{Exponential Model}
+The exponential survival model can be defined in terms of the cumulative survival function:
+$$
+S(t; x, y) = \exp \left( -\frac{t}{\lambda_0 \cdot \exp(\beta x + \gamma y)} \right)
+$$
+where $\beta, \gamma$ are the coefficients associated with the vector of covariates, $x$, and the vector of failure events, $y$
+
+\subsubsection{Weibull AFR}
 The first AFR model we tested was using the Weibull distribution, which has the form
 \[
 	S_\theta(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(\beta, x)} \right)^{\rho(\alpha, y)} \right)},
 \]
-where $\theta=(\alpha, \beta)$, the $x = (x_1, \ldots, x_p)$ is the set of covariates and $y=(y_1, \ldots, y_n)$ is the count of failure events, and where $\lambda(\beta, x)=\exp(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p)$ is a scale parameter and $\rho(\alpha, y)=\exp(\alpha_0 + \alpha_1 y_1 + \cdots + \alpha_p y_p)$ is a shape parameter that determines the direction of acceleration over time.
+where $\theta=(\alpha, \beta)$, $\lambda(\beta, x)=\exp(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p)$ is a scale parameter, and $\rho(\alpha, y)=\exp(\alpha_0 + \alpha_1 y_1 + \cdots + \alpha_p y_p)$ is a shape parameter that determines the direction of acceleration over time.
 
-\subsection{Log-Normal AFR}
+\subsubsection{Log-Normal AFR}
 
 The Log-Normal AFR model introduces the parameters $\mu(\alpha, x) = \alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p $ and $\sigma(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$ with the survival function given by,
 \[
-	S_\theta(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(\alpha, x) }{ \sigma(\beta, y) } \right) \right),
+	S_\theta(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(\alpha, x) }{ \sigma(\beta, y) } \right) \right).
 \]
-where $\theta = (\alpha, \beta)$.
 
 
 
-\subsection{Log-Logistic AFR}
+\subsubsection{Log-Logistic AFR}
 
 Another form of the AFR model, the Log-Logistic AFR, introduces the scale and shape parameters $a(\alpha, x) = \exp(\alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p )$ and $b(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$, respectively, with survival function,
 \[
@@ -47,11 +79,12 @@ where $\theta = (\alpha, \beta)$.
 
 
 
-\subsection{AFR Model Comparison Scores}
+\subsection{\cm{Survival Model Validation}}
 \label{metrics}
 
 To compare the efficacy of different parametric aft models, we use the Akaike information criterion (AIC) and the Bayesian information model ~\citep{stoica2004model,taddy2019business}, \cm{where the preferred model will be the one with the smallest value. In addition to these metrics, we also include the 
-concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI), and the median value of these deltas (e.g. the error at the 50th percentile or the E50).}
+concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), which depict the relationship between our fitted model (y-axis) and the model in which the covariates are ignored (x-axis). In addition, we
+the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI), and the median value of these differences (e.g. the error at the 50th percentile or the E50). TODO: mention log likelihood ratio.}
 
 
 
@@ -71,5 +104,5 @@ So, finally, we can introduce the idea of a failure rate normalized cost, or tra
 	\label{eq:cost}
 \end{equation}
 If $\bar{C} \gg 1$ (in either case) then it's clear that our approach is invalid (\textit{i.e.}, that our model is \textit{broken}), because it is cheaper to attack the model than it is to train it. Also, if you treat $\varepsilon$ as a covariate in ${S_\theta}(t)$, then these costs can be computed from the same model.
-This approach has two advantages over the traditional train-test split method. Firstly, we can quantify the effects of covariates like model depth or noise distance to compare the effect of model changes. Secondly, the train-test split methodology relies on an ever-larger number of samples to increase precision, whereas the accelerated failure method is able to precisely and accurately compare models using only a small number of samples~\cite{schmoor2000sample,lachin1981introduction} relative to the many billions required of the train/test split methodology and safety-critical standards~\cite{iso26262,IEC61508,IEC62034,meyers}.
-In short, by generating worst-case examples (\textit{e.g.}, adversarial ones), we can test \textit{and compare} arbitrarily complex models \textit{before} they leave the lab, drive a car, predict the presence of cancer, or pilot a drone.
+This approach has two advantages over the traditional train-test split method. Firstly, we can quantify the effects of covariates like model depth or noise distance to compare the effect of model changes. Secondly, the train-test split methodology relies on an ever-larger number of samples to increase precision, whereas the accelerated failure method is able to precisely and accurately compare models using only a small number of samples~\cite{schmoor2000sample,lachin1981introduction} relative to the many billions required of the train/test split methodology and safety-critical standards~\cite{iso26262,IEC61508,IEC62034,meyers}. 
+In short, by generating worst-case examples (\textit{e.g.}, adversarial ones), we can test \textit{and compare} arbitrarily complex models \textit{before} they leave the lab, drive a car, predict the presence of cancer, or pilot a drone. 

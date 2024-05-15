@@ -25,9 +25,7 @@ The accuracy refers to the percentage or proportion of examples that cause the t
     \lambda := 1 -  \frac{\mathrm{False~Classifications}}{N},
     \label{eq:acc}
 \end{equation}
-where $N$ is the number of samples.
-
-However, accuracy is known to vary with things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring}, the number of classes ~\cite{dohmatob_generalized_2019} or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}. Likewise, many of these factors can also influence an attack's run time. Instead, we can think in terms of \textbf{failure rate}:
+where $N$ is the number of samples. The accuracy on a given test set, presumed to be drawn from the same distribution as the training set, is called the \textbf{benign accuracy}, $\lambda_{ben.}$. The \textbf{adversarial accuracy}, $\lambda_{adv.}$, is a measure of false classifications in the presence of noise intended to be adversarial. However, accuracy is known to vary with things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring}, the number of classes ~\cite{dohmatob_generalized_2019} or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}. Likewise, many of these factors can also influence an attack's run time. Instead, we can think in terms of \textbf{failure rate}:
 \begin{equation}
     \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t} ,
     \label{eq:failure_rate}
@@ -43,24 +41,27 @@ where $T$ is time until a false classification occurs, also referred to as \text
 probability of not observing a failure before a given time, $t$, giving the \textbf{cumulative survival function},
 \begin{equation}
     S_{\theta}(t) := \exp \left\{- \int_0^{t} h_{\theta}(\tau) d\tau) \right\}.
+    % := \exp( - H_{\theta}(t)), 
 \label{eq:cdf}
 \end{equation}
+% as well as the \textbf{cumulative hazard function}, $H(t)$.
 The probability density of observing a failure at time, $t$, is~\cite{kleinbaum1996survival},
 \begin{equation*}
     f(t; \theta) := h_{\theta}(t)S_{\theta}(t).
     \label{eq:pdf}
 \end{equation*}
-If we assume the probability of failure and time-to-failure is uniform across the samples for a particular set of covariates, we can estimate the probability of failure on the unperturbed test set,
-\begin{equation}
-    f_{ben.}(t; \theta) \approx \frac{1 - \lambda_{ben.}}{t_{predict}} \cdot t,
-    \label{eq:ben_failure_rate}
-\end{equation}
-where $t_{predict}$ indicates the inference time per sample. As we can plainly see, at $t=t_{predict}$, this reduces to one minus the test-set \textbf{benign accuracy}. However, this is, at best, an optimistic lower bound to the the real-world failure rate~\cite{meyers,croce_reliable_2020}. To get a realistic picture of the worst-case scenario, we can look at $f$ in the presence of adversarial noise,
-\begin{equation}
-    f_{adv.}(t; \theta) \approx \frac{ 1 - \lambda_{adv.}}{t_{attack}} \cdot t,
-    \label{eq:adv_failure_rate}
-\end{equation}
-where $t_{attack}$ refers to the attack generation time per sample. Hence, at $t=t_{attack}$ this reduces to one minus the \textbf{adversarial accuracy}.
+\cm{In practice, $h_{\theta}(t), S_{\theta}(t)$ and/or $f(t; \theta)$ can be calculated if one of them is known ~\cite{kleinbaum1996survival}}.
+% If we assume the probability of failure and time-to-failure is uniform across the samples\footnote{We don't use this assumption elsewhere---this is only mentioned to develop an intuition about the relationship between test set accuracy, the language of survival analysis, and the adversarial/benign distinction.} for a particular set of covariates, we can estimate the probability of failure on the unperturbed test set,
+% \begin{equation}
+%     f_{ben.}(t; \theta) \approx \frac{1 - \lambda_{ben.}}{t_{predict}} \cdot t,
+%     \label{eq:ben_failure_rate}
+% \end{equation}
+% where $t_{predict}$ indicates the inference time per sample. As we can plainly see, at $t=t_{predict}$, this reduces to one minus the test-set \textbf{benign accuracy}. However, this is, at best, an optimistic lower bound to the the real-world failure rate~\cite{meyers,croce_reliable_2020}. To get a realistic picture of the worst-case scenario, we can look at $f$ in the presence of adversarial noise,
+% \begin{equation}
+%     f_{adv.}(t; \theta) \approx \frac{ 1 - \lambda_{adv.}}{t_{attack}} \cdot t,
+%     \label{eq:adv_failure_rate}
+% \end{equation}
+% where $t_{attack}$ refers to the attack generation time per sample. Hence, at $t=t_{attack}$ this reduces to one minus the \textbf{adversarial accuracy}.
 
 
 \subsection{Cost}
