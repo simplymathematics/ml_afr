@@ -1,7 +1,7 @@
 
 \section{Survival Analysis for ML} 
 \label{afr_models}
-Failure rate analysis has been widely explored in other fields~\citep{aft_models} from medicine to industrial quality control~\citep{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\citep{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  In this work, leverage evasion attacks to examine their time-to-failure   that model the survival time or time to failure, $S_{\theta}(t)$ for a model with covariates, $\theta$. For all survival models we can use the survival function to compute the expected survival time,
+Failure rate analysis has been widely explored in other fields~\cite{aft_models} from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there's very little published research in the context of ML. However, as noted by many researchers~\cite{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.  In this work, leverage evasion attacks to examine their time-to-failure   that model the survival time or time to failure, $S_{\theta}(t)$ for a model with covariates, $\theta$. For all survival models we can use the survival function to compute the expected survival time,
 \[
 	\mathbb{E}_{S_\theta}[T] = \int_0^{\infty}S_\theta(t) \,dt.
 \]
@@ -26,14 +26,14 @@ where $\phi_p$ is the $p$-th proportional hazard coefficient and $\theta_p$ is t
 \subsection{Accelerated Failure Time Models}
 \cm{Note: This subsection has been re-written.}
 
-Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\citep{liu2013development,lawless1995methods}. For manufacturing, this is n done by accelerating normal wear and tear on a particular component (e.g. a motor or aircraft sensor)~\citep{liu2013development}. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of various things on the expected lifetime of an individual. For machine learning, we can leverage the worst-case perturbations of an adversary to model the effect of various model parameters for both predictive and inferential statistics. That is, they can successfully estimate the expected survival time of a component using statistical methods and routine results from model training. These accelerated models are of the form:
+Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\cite{liu2013development,lawless1995methods}. For manufacturing, this is n done by accelerating normal wear and tear on a particular component (e.g. a motor or aircraft sensor)~\cite{liu2013development}. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of various things on the expected lifetime of an individual. For machine learning, we can leverage the worst-case perturbations of an adversary to model the effect of various model parameters for both predictive and inferential statistics. That is, they can successfully estimate the expected survival time of a component using statistical methods and routine results from model training. These accelerated models are of the form:
 $$
 	S_\theta(t) = S_0(\phi(\theta, x) \cdot t).
 $$
 where $\phi$ is an \textit{acceleration factor} that depends on the covariates, typically $\phi(\theta, x) = \exp{(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)}$ and $S_0$ is the baseline survivor function. For example, the covariates might be things like perturbation distance, model depth, or number of training epochs.
 
-\subsubsection{Generalized Gamma}
-The generalized gamma model uses three parameters $\sigma, \lambda,\gamma$. Let
+\subsubsection{Generalised Gamma}
+The generalised gamma model uses three parameters $\sigma, \lambda,\gamma$. Let
 
 $$
 u (x,y)= \Gamma \left ( \frac{1}{(\lambda(x, \alpha))^2}; \frac{\exp \left( \lambda(x, \alpha) \left( \frac{log(t) - \mu(\gamma, x)}{\sigma(\beta, y)} \right ) \right) }{(\lambda(x, \alpha))^2} \right )
@@ -84,21 +84,21 @@ where $\theta = (\alpha, \beta)$.
 \subsection{\cm{Survival Model Validation}}
 \label{metrics}
 
-To compare the efficacy of different parametric aft models, we use the Akaike information criterion (AIC) and the Bayesian information model ~\citep{stoica2004model,taddy2019business}, \cm{where the preferred model will be the one with the smallest value. In addition to these metrics, we also include the 
-concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), which depict the relationship between our fitted model (y-axis) and a model fit to the data using cubic splines (x-axis) as in this paper ~\cite{ici}. In addition, we
+To compare the efficacy of different parametric aft models, we use the Akaike information criterion (AIC) and the Bayesian information model ~\cite{stoica2004model,taddy2019business}, \cm{where the preferred model will be the one with the smallest value. In addition to these metrics, we also include the 
+concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), which depict the relationship between our fitted model (y-axis) and a model fit to the data using cubic splines (x-axis) as in this paper~\cite{ici}. In addition, we
 the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI) and the median value of these differences (e.g. the error at the 50th percentile or the E50). TODO: mention log likelihood ratio.}
 
 
 
 
 
-\section{Failure Rates and Cost Normalization}
+\section{Failure Rates and Cost Normalisation}
 
 
 \label{cost_normalization}
 
 
-So, finally, we can introduce the idea of a failure rate normalized cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalize it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto T_{train}$) or the attacker ($C_{adv.} \propto \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
+So, finally, we can introduce the idea of a failure rate normalised cost, or training time to attack time ratio. If we assume that the cost scales linearly with $t_{train}$ (Eq.~\ref{eq:naive_cost}), then we can normalise it by the expected survival time to get a rough estimate of the costs for the model builder ($C_{train} \propto T_{train}$) or the attacker ($C_{adv.} \propto \mathbb{E}_{S_\theta}[T] \approx t_{attack}$). Recalling the definition of $\varepsilon$ from Section~\ref{perturbation_distance}, we can separately consider the cases $\varepsilon=0$ and $\varepsilon > 0$. Then, we can express this cost of failure in both benign and adversarial terms as,
 \begin{equation}
 	\bar{C}_{ben.} = \frac{T_{train}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
 	\text{~~and~~}
