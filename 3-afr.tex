@@ -16,7 +16,7 @@ where $\phi$ is a \textit{proportional hazard} that depends on the covariates, t
 
 
 \subsubsection{Cox}
-The Cox model is can be defined in terms of the hazard function:
+One example of proportional hazard models is the Cox variety, which can be defined in terms of the hazard function:
 $$
 h(t) = h_0(t) \cdot \exp(\phi_1 \theta_1 + \phi_2 \theta_2... \phi_p \theta_p)
 $$
@@ -24,6 +24,8 @@ where $\phi_p$ is the $p$-th proportional hazard coefficient and $\theta_p$ is t
 
 
 \subsection{Accelerated Failure Time Models}
+\cm{Note: This subsection has been re-written.}
+
 Accelerated Failure Rate (AFR) models have been widely used to investigate the causes and likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\citep{liu2013development,lawless1995methods}. For manufacturing, this is n done by accelerating normal wear and tear on a particular component (e.g. a motor or aircraft sensor)~\citep{liu2013development}. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of various things on the expected lifetime of an individual. For machine learning, we can leverage the worst-case perturbations of an adversary to model the effect of various model parameters for both predictive and inferential statistics. That is, they can successfully estimate the expected survival time of a component using statistical methods and routine results from model training. These accelerated models are of the form:
 $$
 	S_\theta(t) = S_0(\phi(\theta, x) \cdot t).
@@ -36,22 +38,22 @@ The generalized gamma model uses three parameters $\sigma, \lambda,\gamma$. Let
 $$
 u (x,y)= \Gamma \left ( \frac{1}{(\lambda(x, \alpha))^2}; \frac{\exp \left( \lambda(x, \alpha) \left( \frac{log(t) - \mu(\gamma, x)}{\sigma(\beta, y)} \right ) \right) }{(\lambda(x, \alpha))^2} \right )
 $$
-where $\Gamma(k, x)$ is the incomplete Gamma function and $ \lambda(x, \alpha) = \alpha x^T, \sigma(\beta, y) = \exp(\beta y ),   \mu(\gamma, x) = \gamma x^T$ ~\cite{aft_models}. Then we can express the survival function as a piece-wise function:
+where $\Gamma(k, x)$ is the incomplete Gamma function$ \lambda(x, \alpha) = \alpha x^T, \sigma(\beta, y) = \exp(\beta y ),   \mu(\gamma, x) = \gamma x^T$, and $\theta = (\lambda, \sigma, \mu) $~\cite{aft_models}. Then we can express the survival function as a piece-wise function:
 $$
-S(t; x) =  1 - u~\text{when}~\lambda > 0 
+S_{\theta}(t; x, y) =  1 - u~\text{when}~\lambda > 0 
 $$
 and
 $$
-S(t; x) =  u~\text{when}~\lambda \leq 0 .
+S_{\theta}(t; x, y) =  u~\text{when}~\lambda \leq 0 .
 $$ 
 The exponential, Weibull, and log-normal models outlined below are all special cases of this model ~\cite{kleinbaum1996survival}.
 
 \subsubsection{Exponential Model}
 The exponential survival model can be defined in terms of the cumulative survival function:
 $$
-S(t; x, y) = \exp \left( -\frac{t}{\lambda_0 \cdot \exp(\beta x + \gamma y)} \right)
+S_{\theta}(t; x, y) = \exp \left( -\frac{t}{\lambda_0 \cdot \exp(\beta x + \gamma y)} \right)
 $$
-where $\beta, \gamma$ are the coefficients associated with the vector of covariates, $x$, and the vector of failure events, $y$
+where $\beta, \gamma$ are the coefficients associated with the vector of covariates, $x$, the vector of failure events, $y$ and $\theta = (\alpha, \beta, \gamma)$
 
 \subsubsection{Weibull AFR}
 The first AFR model we tested was using the Weibull distribution, which has the form
@@ -83,8 +85,8 @@ where $\theta = (\alpha, \beta)$.
 \label{metrics}
 
 To compare the efficacy of different parametric aft models, we use the Akaike information criterion (AIC) and the Bayesian information model ~\citep{stoica2004model,taddy2019business}, \cm{where the preferred model will be the one with the smallest value. In addition to these metrics, we also include the 
-concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), which depict the relationship between our fitted model (y-axis) and the model in which the covariates are ignored (x-axis). In addition, we
-the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI), and the median value of these differences (e.g. the error at the 50th percentile or the E50). TODO: mention log likelihood ratio.}
+concordance score, which is equivalent to the area under (AUC) the receiver operating characteristic curve (ROC)~\cite{pantoja2021concordance}.} In particular we note that a concordance index $> .5$ indicates that the failure rate is a function of time, undermining the efficacy of the time-independent train/test split methodology that is standard in the literature \cite{concordance}.\cm{Following recent research~\cite{ici}, we also include graphical calibration curves (see Fig.~\ref{fig:afr_models}), which depict the relationship between our fitted model (y-axis) and a model fit to the data using cubic splines (x-axis) as in this paper ~\cite{ici}. In addition, we
+the mean difference between the predicted and observed failure probabilities (e.g. integrated calibration index or ICI) and the median value of these differences (e.g. the error at the 50th percentile or the E50). TODO: mention log likelihood ratio.}
 
 
 
