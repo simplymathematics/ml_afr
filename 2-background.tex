@@ -8,14 +8,11 @@ However, this work formalises methods for modelling the effect of attacks and de
 
 In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. Here, we are addressing \textbf{evasion}~\cite{carlini_towards_2017} attacks that attempt to induce a misclassification at run-time though our analysis extends to other types of attacks like database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service ~\cite{santos2021universal}. For all sections below, we collect metrics on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben.} and \textit{adv.} are used throughout, respectively.
 
-
-\subsubsection{Perturbation Distance}
-
-\label{perturbation_distance}
 The strength of an attack is generally thought of in terms of perturbation `distance'~\cite{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
-\[
+\begin{equation}
     \varepsilon := \| x' - x \| \leq \varepsilon^*,
-\]
+    \label{eq:perturbation_distance}
+\end{equation}
 where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon^*$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different optimization criteria, see Section~\ref{attacks}.
 
 
