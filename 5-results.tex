@@ -74,31 +74,31 @@ Table~\ref{tab:afr_models} contains the performance of each of these models on t
 	% \centering
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/weibull_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/weibull_qq.pdf}
 	\end{subfigure}%
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/log_normal_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/log_normal_qq.pdf}
 	\end{subfigure}
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/log_logistic_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/log_logistic_qq.pdf}
 	\end{subfigure}
  \begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/exponential_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/exponential_qq.pdf}
 	\end{subfigure}%
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/gamma_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/gamma_qq.pdf}
 	\end{subfigure}
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.32\textwidth]{plots/cox_qq.pdf}
+		\includegraphics[width=.30\textwidth]{plots/cox_qq.pdf}
 	\end{subfigure}
 	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). 
  % The absence of one of the lines means that the \texttt{lifelines} fitter failed to converge for that subset.
@@ -132,21 +132,21 @@ We formalize this analysis  in the next subsection.
 \subsection{Failures and Cost}
 
 
-Fig.~\ref{fig:failures_per_train_time} depicts the cost-normalized failure rate in both the benign (top) figure and adversarial cases (middle and bottom figures), using the Weibull model to calculate $\mathbb{E}_{S_\theta}$. Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the intersectional relationship between model choice and optimal defence is highlighted since the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations. \cm{Finally- and most importantly- we see that, while there is at least one configuration of each Resnet model that is cheaper to train than to fool in the benign context, that every single tested configuration costs orders of magnitude more to train than they do to attack with the Deep, FGM, or PGD attacks.}
+Fig.~\ref{fig:failures_per_train_time} depicts the cost-failure ratio (see Eq.~\ref{eq:cost}) in both the benign (top) figure and adversarial cases (middle and bottom figures), using the Weibull model to calculate $\mathbb{E}_{S_\theta}$. Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see: left side of Fig.~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Fig.~\ref{fig:failures_per_train_time}). Likewise, the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning as demonstrated by the large variance in Figs ~\ref{fig:accuracies}~&~\ref{fig:failures_per_train_time}.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations. \cm{Finally- and most importantly- we see that, while there is at least one configuration of each Resnet model that is cheaper to train than to fool in the benign context, that every single tested configuration costs orders of magnitude more to train than they do to attack with the Deep, FGM, or PGD attacks.}
 
 \begin{figure}[!h]
     \centering
     \begin{subfigure}
         \centering
-        \includegraphics[width=.42\textwidth]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.38\textwidth]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.42\textwidth]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.38\textwidth]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.42\textwidth]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
+        \includegraphics[width=.38\textwidth]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
     \end{subfigure}
     \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
     \label{fig:failures_per_train_time}
