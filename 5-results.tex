@@ -11,17 +11,18 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
 
 \label{results}
 \begin{figure}[!h]
+\centering
 \begin{subfigure}
     \centering
-    \includegraphics[trim={0 5pt 0 10pt},clip,width=.45\textwidth]{plots/ben_accuracy_vs_defence_type.pdf}
+    \includegraphics[trim={7pt 10pt 20pt 0pt},clip,width=.40\textwidth]{plots/ben_accuracy_vs_defence_type.pdf}
 \end{subfigure}
 \begin{subfigure}
     \centering
-    \includegraphics[trim={0 5pt 0 10pt},clip,width=.45\textwidth]{plots/adv_accuracy_vs_defence_type.pdf}
+    \includegraphics[trim={7pt 10pt 20pt pt 0pt},clip,width=.40\textwidth]{plots/adv_accuracy_vs_defence_type.pdf}
 \end{subfigure}
 \begin{subfigure}
     \centering
-    \includegraphics[trim={0 5pt 0 10pt},clip,width=.45\textwidth]{plots/adv_accuracy_vs_attack_type.pdf}
+    \includegraphics[trim={7pt 10pt 20pt pt 0pt},clip,width=.40\textwidth]{plots/adv_accuracy_vs_attack_type.pdf}
 \end{subfigure}
 \caption{The adversarial accuracy across various attacks pictured on the x-axis and outlined in Section~\ref{attacks}. The error bar reflects the 95\% confidence interval for the adversarial accuracy across all examined samples. The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
 \label{fig:accuracies}
@@ -65,42 +66,59 @@ Fig.~\ref{fig:accuracies} depicts the benign and adversarial accuracies across t
 %     \label{fig:strength}
 % \end{figure}
 
-
 \subsection{AFR Models}
-\input{plots/aft_comparison}
+
+\begin{table*}
+\centering
+\begin{tabular}{lllrrrrrr}
+\toprule
+ & AIC & BIC & Concordance & Test Concordance & ICI & Test ICI & E50 & Test E50 \\
+\midrule
+Cox & -- & -- & 0.92 & 0.92 & 0.06 & 0.26 & 0.04 & 0.08 \\
+Gamma & 1.03e+05 & 1.03e+05 & 0.51 & 0.52 & 0.29 & 0.12 & 0.25 & 0.15 \\
+Weibull & 9.05e+04 & 9.05e+04 & 0.92 & 0.92 & 0.02 & 0.02 & 0 & 0.01 \\
+Exponential & 7.93e+04 & 7.93e+04 & 0.86 & 0.86 & 0.04 & 0.03 & 0 & 0.02 \\
+Log Logistic & 9.79e+04 & 9.79e+04 & 0.92 & 0.92 & 0.05 & 0.08 & 0.01 & 0.01 \\
+Log Normal & 1.14e+05 & 1.14e+05 & 0.91 & 0.91 & 0.15 & 0.26 & 0.08 & 0.19 \\
+\bottomrule
+\end{tabular}
+\caption{This table depicts the performance metrics (see Sec.~\ref{metrics}) for various survival analysis models (see Sec.~\ref{afr_models}) according to the methodology described in Sec.~\ref{methods}.}
+\label{tab:afr_models}
+\end{table*}
+
 Table~\ref{tab:afr_models} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, we can see that they are roughly comparable with regards to Concordance, but that log-logistic and exponential models marginally outperforms the other models when measured with AIC/BIC. Concordance is identical for both the test and train sets, with gamma and exponential falling behind the others. However, the ICI and E50 across the test train sets is superior for the Weibull, so we then used that model to infer the effect of the covariates (Fig.~\ref{fig:covariates}) as well as different attacks, defences, and datasets (Fig.~\ref{fig:dumies}). In that figure can clearly see that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see $t_predict$ in Fig.~\ref{fig:covariates}) than the number of model layers.
 
 \begin{figure*}
-	% \centering
+	\centering
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/weibull_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/weibull_qq.pdf}
 	\end{subfigure}%
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/log_normal_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/log_normal_qq.pdf}
 	\end{subfigure}
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/log_logistic_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/log_logistic_qq.pdf}
 	\end{subfigure}
  \begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/exponential_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/exponential_qq.pdf}
 	\end{subfigure}%
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/gamma_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/gamma_qq.pdf}
 	\end{subfigure}
 	~
 	\begin{subfigure}
 		\centering
-		\includegraphics[width=.30\textwidth]{plots/cox_qq.pdf}
+		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/cox_qq.pdf}
 	\end{subfigure}
-	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). 
+	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). The time for each model was chosen to depict the best fit of the curve when $ [ 0 \geq t \leq 10 ] $ seconds. 
  % The absence of one of the lines means that the \texttt{lifelines} fitter failed to converge for that subset.
  }
 	\label{fig:afr_models}
@@ -112,21 +130,21 @@ Fig.~\ref{fig:covariates} clearly demonstrates that increasing the depth of the 
 Furthermore, it reveals something surprising---that increasing the number of epochs tends to increase the failure rate---even across model architectures and all defences. 
 Certain defences can outperform the control model---at the cost of expensive tuning---evidenced by the large variance in performance (see Fig.~\ref{fig:dummies}). The scale of $t_{train}$  in Fig.~\ref{fig:covariates} shows that there is no general relationship between training time and adversarial survival time. \cm{Additionally, we see that an increase in accuracy tends to correspond to a decrease in survival time, confirming the inverse relationship noted by many researchers ~\cite{carlini_towards_2017,biggio_evasion_2013,croce_reliable_2020}.}
 As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see Fig.~\ref{fig:covariates}, covariate $t_{predict}$) rather than inherent robustness (see covariate "Layers").
-We formalize this analysis  in the next subsection.
+We formalise this analysis  in the next subsection.
 
 \begin{figure}
     \centering
 	\begin{subfigure}
 	\centering
-    \includegraphics[width=.38\textwidth]{plots/weibull_aft_dummies.pdf}
-    \label{fig:covariates}
+    \includegraphics[width=.40\textwidth,trim={25pt 20pt 20pt 10pt},clip]{plots/weibull_aft_dummies.pdf}
     \end{subfigure}
     \begin{subfigure}
 	\centering
-    \includegraphics[width=.38\textwidth]{plots/weibull_aft.pdf}
+    \includegraphics[width=.40\textwidth,trim={25pt 20pt 20pt 10pt},clip]{plots/weibull_aft.pdf}
     \label{fig:dummies}
     \end{subfigure}
     \caption{The coefficients represent the log scale effect of the dummy variables for dataset (Data:), attack (Atk:), and defence (Def:) on the survival time, with a positive value indicating an increase in the survival time.}
+    \label{fig:covariates}
 \end{figure}
 
 \subsection{Failures and Cost}
@@ -138,16 +156,16 @@ Fig.~\ref{fig:failures_per_train_time} depicts the cost-failure ratio (see Eq.~\
     \centering
     \begin{subfigure}
         \centering
-        \includegraphics[width=.38\textwidth]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.38\textwidth,trim={12pt 10pt 20pt pt},clip]{plots/ben_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.38\textwidth]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
+        \includegraphics[width=.38\textwidth,trim={12pt 10pt 20pt 10pt},clip]{plots/adv_failures_per_train_time_vs_defence_type.pdf}
     \end{subfigure}
     \begin{subfigure}
         \centering
-        \includegraphics[width=.38\textwidth]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
+        \includegraphics[width=.38\textwidth,trim={12pt 10pt 20pt 10pt},clip]{plots/adv_failures_per_train_time_vs_attack_type.pdf}
     \end{subfigure}
-    \caption{This figure depicts the cost-normalized adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
+    \caption{This figure depicts the cost-normalised adversarial failure rate across a variety of defences and attacks, where training time (middle~\&~right Figs.) and inference time (left figure) is a stand-in for cost (see Section~\ref{cost}). The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
     \label{fig:failures_per_train_time}
 \end{figure}

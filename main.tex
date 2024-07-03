@@ -1,5 +1,5 @@
 
-\documentclass[lettersize,journal]{IEEEtran}
+\documentclass[journal]{IEEEtran}
 \usepackage{amsmath,amsfonts}
 \usepackage{algorithmic}
 \usepackage{array}
@@ -21,10 +21,12 @@
 \usepackage{placeins}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{natbib}
+\usepackage[maxcitenames=3,natbib=true,giveninits=true]{biblatex}
+\addbibresource{bibliography.bib}
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{subfigure}
+
 \usepackage{booktabs} % for professional tables
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -65,8 +67,8 @@
 \input{4-methods}
 \input{5-results}
 \input{6-conclusions}
-\bibliographystyle{IEEEtran}
-\bibliography{bibliography}
+\bibliographystyle{IEEEtranN}
+\printbibliography
 \end{document}
 
 

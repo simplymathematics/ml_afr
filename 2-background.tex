@@ -1,21 +1,18 @@
 \section{Background}
 
 
-Much work has already gone into explaining the dangers of adversarial attacks on ML pipelines \citep{carlini_towards_2017,croce_reliable_2020,pixelattack,fgm,biggio_evasion_2013} though that work is limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, overconfident~\citep{meyers,ma2020imbalanced}. Here, we are addressing \textbf{evasion}~\citep{carlini_towards_2017} attacks that attempt to induce a misclassification at run-time though our analysis extends to other types of attacks like database poisoning~\citep{biggio_poisoning_2013, saha2020hidden}, model inversion~\citep{choquette2021label,li2021membership}, or data stealing~\citep{orekondy2019knockoff}. This work formalizes methods for quantifying the adversarial failure rate of a model and comparing the efficacy of model changes in the context of fixed compute budget.
+Much work has already gone into explaining the dangers of adversarial attacks on ML pipelines \cite{carlini_towards_2017,croce_reliable_2020,pixelattack,fgm,biggio_evasion_2013} though that work is limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, overconfident~\cite{meyers,ma2020imbalanced}. \cm{Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments ~\cite{vehicle_formal}, or infeasible formal methods~\cite{formal_adversarial}. 
+However, this work formalises methods for modelling the effect of attacks and defences on a given model and reveals a simple cost-to-performance metric for quickly discarding ineffective strategies.}
 
 \subsection{Adversarial Attacks}
 
-In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. These attacks are designed to change the model's behavior by introducing carefully crafted input data that can cause the model to make incorrect predictions or otherwise produce undesired outputs.
-The goal of an attacker is often to exploit vulnerabilities in the model's decision-making process or to probe its weaknesses. These attacks can occur during various stages of the ML pipeline, including during training \citep{biggio_poisoning_2013}, inference\citep{biggio_evasion_2013}, or deployment \citep{santos2021universal}. For all sections below, we collect metrics on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben.} and \textit{adv.} are used throughout, respectively.
+In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. Here, we are addressing \textbf{evasion}~\cite{carlini_towards_2017} attacks that attempt to induce a misclassification at run-time though our analysis extends to other types of attacks like database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service ~\cite{santos2021universal}. For all sections below, we collect metrics on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben.} and \textit{adv.} are used throughout, respectively.
 
-
-\subsubsection{Perturbation Distance}
-
-\label{perturbation_distance}
-The strength of an attack is generally thought of in terms of perturbation `distance'~\citep{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
-\[
+The strength of an attack is generally thought of in terms of perturbation `distance'~\cite{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
+\begin{equation}
     \varepsilon := \| x' - x \| \leq \varepsilon^*,
-\]
+    \label{eq:perturbation_distance}
+\end{equation}
 where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon^*$ the maximum allowed deviation or distortion from the original input while still being within the feasible sample space. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different optimization criteria, see Section~\ref{attacks}.
 
 
@@ -82,4 +79,4 @@ C_{train} \propto t_{train} \text{~~~and~~~} C_{attack} \propto t_{attack}.
 \label{eq:naive_cost}
 \end{equation}
 
-Furthermore, a fast attack will be lower-bounded by $t_{predict}$, which is generally much smaller than the training time, $t_{train}$. Of course the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{train}$) is much, much larger than the cost of finding a counterexample ($\propto t_{attack}$) within some imperceptible noise distance of untainted samples. However, this merely encapsulates the cost of a particular model architecture or signal pre-processing choice and doesn't consider the likelihood of noise induced failure. Our cost normalized metric is introduced below in Eq.~\ref{eq:cost} in Section~\ref{cost_normalization}. Before we can compare this cost to the failure rate, we must estimate the attack time per sample, or expected survival time, $\mathbb{E}[T]$. For that, we use an accelerated failure rate model.
+Furthermore, a fast attack will be lower-bounded by $t_{predict}$, which is generally much smaller than the training time, $t_{train}$. Of course the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{train}$) is much, much larger than the cost of finding a counterexample ($\propto t_{attack}$) within some imperceptible noise distance of untainted samples. However, this merely encapsulates the cost of a particular model architecture or signal pre-processing choice and doesn't consider the likelihood of noise induced failure. Our cost normalised metric is introduced below in Eq.~\ref{eq:cost} in Section~\ref{cost_normalization}. Before we can compare this cost to the failure rate, we must estimate the attack time per sample, or expected survival time, $\mathbb{E}[T]$. For that, we use an accelerated failure rate model.
