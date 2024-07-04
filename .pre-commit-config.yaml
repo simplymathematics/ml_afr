@@ -8,8 +8,15 @@ repos:
               "--emph=et al.",
               "--emph=a priori",
               "--emph=a posteriori",
+              "--emph=e.g.",
+              "--emph=i.e.",
+              "--emph=etc.",
             ]
       - id: no-space-in-cite
+      - id: ensure-labels-for-sections
+      - id: no-space-in-cite
+      - id: tilde-cite
+      - id: unique-labels
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
