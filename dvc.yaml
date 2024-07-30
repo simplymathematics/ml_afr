@@ -1,10 +1,8 @@
 stages:
   arxiv:
-    cmd: python arxiv.py --directories cifar mnist cifar100 --extensions pdf py yaml csv --title "Survival Analysis for Deep Convolutional Neural Networks"
+    cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title "Survival Analysis for Deep Convolutional Neural Networks"
     deps:
       - arxiv.py
-      - cifar/
-      - mnist/
-      - cifar100/
+      - plots/
     outs:
       - "Survival Analysis for Deep Convolutional Neural Networks.zip"
