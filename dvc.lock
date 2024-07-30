@@ -185,8 +185,8 @@ stages:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 3e55fa8fda652e62e2dcfd871be31e50
-      size: 111768
+      md5: 7ce313e9c75c09c6d14d40136b8838ce
+      size: 106394
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -233,7 +233,7 @@ stages:
       size: 23761
     - path: main.log
       hash: md5
-      md5: c28a0c34b9b56aaf5e1c123968549d70
+      md5: 8b850aa0fe78c0cccf899d9fc6959e90
       size: 63221
     - path: main.out
       hash: md5
@@ -241,7 +241,7 @@ stages:
       size: 4698
     - path: main.pdf
       hash: md5
-      md5: 1cdc7d378bf665f7168d335be0c8f666
+      md5: 06fef35d38b1d513a2660eda5926bebe
       size: 549814
     - path: main.run.xml
       hash: md5
@@ -348,7 +348,7 @@ stages:
       size: 67311
     - path: new_main.log
       hash: md5
-      md5: add4508caf154e1fcf93b425d68ecb19
+      md5: 22a2398f84db588e89561830522e80e9
       size: 44419
     - path: new_main.out
       hash: md5
@@ -356,7 +356,7 @@ stages:
       size: 4698
     - path: new_main.pdf
       hash: md5
-      md5: ed067f7f35e6c10d4bd5491957c806c0
+      md5: 650b6319ffa45500ede9616d1c469a57
       size: 571492
     - path: new_main.run.xml
       hash: md5
