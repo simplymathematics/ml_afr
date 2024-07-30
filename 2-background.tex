@@ -1,6 +1,6 @@
 \section{Background}
 
-Much work has gone into explaining the dangers of adversarial attacks on ML pipelines~\cite{carlini_towards_2017,croce_reliable_2020,pixelattack,fgm,biggio_evasion_2013}, though studies on adversarial robustness have generally been limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, optimistic~\cite{meyers,ma2020imbalanced}. Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments~\cite{vehicle_formal}, or methods that are too computationally expensive to be useful for model selection~\cite{formal_adversarial}. 
+Much work has gone into explaining the dangers of adversarial attacks on ML pipelines~\cite{carlini_towards_2017,croce_reliable_2020,pixelattack,fgm,biggio_evasion_2013}, though studies on adversarial robustness have generally been limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, optimistic~\cite{meyers,ma2020imbalanced}. Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments~\cite{vehicle_formal}, or methods that are too computationally expensive to be useful for model selection~\cite{formal_adversarial}.
 However, the present work formalises methods to model the effect of attacks and defences on a given ML model and reveals a simple cost-to-performance metric to quickly discard ineffective strategies.
 
 
@@ -41,7 +41,7 @@ where  $P(\cdot)$ is a probability and $T$ is the time until a false classificat
      H(t) := \int_0^{t} h(\tau) \,d\tau.
      \label{eq:cdf}
 \end{equation}
-Then, the \texit{cumulative survival function} is 
+Then, the \textit{cumulative survival function} is
 \begin{equation}
     S(t) := P(T \geq t) = \exp(-H(t)) = 1 - F(t) = 1-   \int_0^t f(u)du
     \label{eq:S(t)}
@@ -83,5 +83,5 @@ where $C_h$ is the cost per time unit of a particular piece of hardware. Hence, 
 $$
     C_{\mathrm{attack}} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{\mathrm{attack}} \cdot N_{\mathrm{attack}},
 $$
-where $N_{\mathrm{attack}}$ is the number of attacked samples. Furthermore, a fast attack will be lower-bounded by the model inference time, $t_{\mathrm{predict}}$, which is generally much smaller than the training time, $t_{\mathrm{train}}$. Of course, the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{\mathrm{train}}$) is larger than the cost of finding a counterexample ($\propto t_{\mathrm{attack}}$) within the bounds outlined in Equation~\ref{eq:perturbation_distance}. \cm{The training cost per sample does not consider how well the model performs, and a good model is one that both generalises and is reasonably cheap to train.}
+where $ N_{\mathrm{attack}} $ is the number of attacked samples. Furthermore, a fast attack will be lower-bounded by the model inference time, $ t_{\mathrm{predict}} $, which is generally much smaller than the training time, $ t_{\mathrm{train}} $. Of course, the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{\mathrm{train}}$) is larger than the cost of finding a counterexample ($\propto t_{\mathrm{attack}}$) within the bounds outlined in Equation~\ref{eq:perturbation_distance}. The training cost per sample does not consider how well the model performs, and a good model is one that both generalises and is reasonably cheap to train.
 Therefore, a cost-normalised metric is introduced in Equation~\ref{eq:cost} in Section~\ref{cost_normalization}. Before comparing this cost to the failure rate, the attack time per sample -- or the expected survival time --  must be estimated. For that, survival models can be used.
