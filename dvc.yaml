@@ -1,8 +1,76 @@
 stages:
+  pre-commmit:
+    cmd: pre-commit run --all-files 
+    # deps:
+    #   - .pre-commit-config.yaml
+    # outs:
+    #   - main.tex:
+    #       persist: true
+    #   - 0-abstract.tex:
+    #       persist: true
+    #   - 1-introduction.tex:
+    #       persist: true
+    #   - 2-background.tex:
+    #       persist: true
+    #   - 3-afr.tex:
+    #       persist: true
+    #   - 4-methods.tex:
+    #       persist: true
+    #   - 5-results.tex:
+    #       persist: true
+    #   - 6-conclusions.tex:
+    #       persist: true
+  first_run:
+    cmd: pdflatex  main.tex
+    deps:
+      - main.tex
+      - 0-abstract.tex
+      - 1-introduction.tex
+      - 2-background.tex
+      - 3-afr.tex
+      - 4-methods.tex
+      - 5-results.tex
+      - 6-conclusions.tex
+    outs:
+      - main.aux
+      - main-blx.bib
+      - main.log
+      - main.out
+      - main.run.xml
+      - main.pdf
+  remove_unused_citations:
+    cmd: python remove-unused-citations.py bibliography.bib <( checkcites main.aux )>| new_bibliography.bib 
+    deps:
+      - main.aux
+      - bibliography.bib
+    outs:
+      - new_bibliography.bib
+  replace_bib:
+    cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g' new_main.tex
+    deps:
+      - new_bibliography.bib
+      - main.tex
+    outs:
+      - new_main.tex
+
+  big_run:
+    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
+    deps:
+      - main.tex
+      - main.aux
+      - new_bibliography.bib
+    outs:
+      - new_main.pdf
+      - new_main-blx.bib
+      - new_main.aux
+      - new_main.log
+      - new_main.out
+      - new_main.run.xml
+      - new_main.bbl
   arxiv:
-    cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title "Survival Analysis for Deep Convolutional Neural Networks"
+    cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)"
     deps:
       - arxiv.py
       - plots/
     outs:
-      - "Survival Analysis for Deep Convolutional Neural Networks.zip"
+      - "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE).zip"

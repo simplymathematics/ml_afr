@@ -690,3 +690,135 @@
 2024-02-01 23:16:20,413 - INFO - Removing cifar100 directory.
 2024-02-01 23:16:20,415 - INFO - Zipping temporary directory: /tmp/tmp2nmatrbh
 2024-02-01 23:16:20,718 - INFO - Deleting temporary directory: /tmp/tmp2nmatrbh
+2024-07-30 12:07:16,227 - INFO - Temporary directory: /tmp/tmpfshvu0zy
+2024-07-30 12:07:16,227 - INFO - Creating temporary directory: /tmp/tmpfshvu0zy
+2024-07-30 12:07:16,228 - INFO - Copying files to temporary directory: /tmp/tmpfshvu0zy
+2024-07-30 12:07:17,709 - INFO - Flattening directories
+2024-07-30 12:07:17,710 - INFO - Flattening plots directory.
+2024-07-30 12:07:17,737 - INFO - Removing unused files in directory: plots with extension: .eps
+2024-07-30 12:07:17,738 - INFO - Removing git directories
+2024-07-30 12:07:17,738 - INFO - .git is a directory.
+2024-07-30 12:07:17,973 - INFO - .github is a directory.
+2024-07-30 12:07:17,973 - INFO - .gitignore not in use - deleting.
+2024-07-30 12:07:17,974 - INFO - .dvc is a directory.
+2024-07-30 12:07:17,980 - INFO - Replacing contents
+2024-07-30 12:07:17,981 - INFO - Replacing image directory in plots/aft_comparison.tex.
+2024-07-30 12:07:17,981 - INFO - Replacing plots with plots_
+2024-07-30 12:07:17,982 - INFO - Deleting files with extension: pdf
+2024-07-30 12:07:17,982 - INFO - plots_def_param_vs_adv_failure_rate.pdf not in use - deleting.
+2024-07-30 12:07:17,983 - INFO - plots_exponential_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,983 - INFO - plots_weibull_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,983 - INFO - plots_gamma_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,983 - INFO - plots_cox_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,988 - INFO - plots_log_logistic_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,989 - INFO - plots_weibull_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,989 - INFO - plots_ben_failure_rate_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,989 - INFO - plots_log_logistic_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,990 - INFO - plots_adv_accuracy_vs_attack_type.pdf not in use - deleting.
+2024-07-30 12:07:17,990 - INFO - plots_log_logistic_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,990 - INFO - plots_trash_score_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,990 - INFO - plots_log_normal_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,991 - INFO - plots_adv_failures_per_train_time_vs_attack_type.pdf not in use - deleting.
+2024-07-30 12:07:17,991 - INFO - plots_ben_accuracy_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,991 - INFO - plots_log_normal_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,992 - INFO - plots_gamma_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,992 - INFO - plots_def_param_vs_accuracy.pdf not in use - deleting.
+2024-07-30 12:07:17,992 - INFO - plots_adv_failures_per_test_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,992 - INFO - plots_cox_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,993 - INFO - plots_ben_failures_per_train_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,993 - INFO - plots_adv_failure_rate_vs_train_time.pdf not in use - deleting.
+2024-07-30 12:07:17,993 - INFO - plots_exponential_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,993 - INFO - plots_exponential_qq.pdf not in use - deleting.
+2024-07-30 12:07:17,994 - INFO - plots_log_normal_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,994 - INFO - plots_weibull_aft.pdf not in use - deleting.
+2024-07-30 12:07:17,994 - INFO - plots_cox_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,995 - INFO - plots_atk_param_vs_accuracy.pdf not in use - deleting.
+2024-07-30 12:07:17,995 - INFO - plots_gamma_aft_dummies.pdf not in use - deleting.
+2024-07-30 12:07:17,995 - INFO - plots_adv_failures_per_train_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,995 - INFO - plots_adv_accuracy_vs_defence_type.pdf not in use - deleting.
+2024-07-30 12:07:17,996 - INFO - plots_trash_score_vs_attack_type.pdf not in use - deleting.
+2024-07-30 12:07:17,996 - INFO - plots_def_param_vs_adv_accuracy.pdf not in use - deleting.
+2024-07-30 12:07:17,996 - INFO - Deleting files with extension: py
+2024-07-30 12:07:17,996 - INFO - arxiv.py not in use - deleting.
+2024-07-30 12:07:17,997 - INFO - remove-unused-citations.py not in use - deleting.
+2024-07-30 12:07:17,997 - INFO - Deleting files with extension: yaml
+2024-07-30 12:07:17,997 - INFO - dvc.yaml not in use - deleting.
+2024-07-30 12:07:17,998 - INFO - .pre-commit-config.yaml not in use - deleting.
+2024-07-30 12:07:17,998 - INFO - Deleting files with extension: csv
+2024-07-30 12:07:17,999 - INFO - plots_exponential_summary.csv not in use - deleting.
+2024-07-30 12:07:17,999 - INFO - plots_log_normal_summary.csv not in use - deleting.
+2024-07-30 12:07:17,999 - INFO - plots_aft_comparison.csv not in use - deleting.
+2024-07-30 12:07:17,999 - INFO - plots_gamma_summary.csv not in use - deleting.
+2024-07-30 12:07:18,000 - INFO - plots_log_logistic_summary.csv not in use - deleting.
+2024-07-30 12:07:18,000 - INFO - plots_cox_summary.csv not in use - deleting.
+2024-07-30 12:07:18,000 - INFO - Deleting image directories
+2024-07-30 12:07:18,000 - INFO - Removing plots directory.
+2024-07-30 12:07:18,003 - INFO - Zipping temporary directory: /tmp/tmpfshvu0zy
+2024-07-30 12:07:18,048 - INFO - Deleting temporary directory: /tmp/tmpfshvu0zy
+2024-07-30 14:04:31,653 - INFO - Temporary directory: /tmp/tmpfh8425e9
+2024-07-30 14:04:31,653 - INFO - Creating temporary directory: /tmp/tmpfh8425e9
+2024-07-30 14:04:31,653 - INFO - Copying files to temporary directory: /tmp/tmpfh8425e9
+2024-07-30 14:04:33,060 - INFO - Flattening directories
+2024-07-30 14:04:33,064 - INFO - Flattening plots directory.
+2024-07-30 14:04:33,104 - INFO - Removing unused files in directory: plots with extension: .eps
+2024-07-30 14:04:33,104 - INFO - Removing git directories
+2024-07-30 14:04:33,105 - INFO - .git is a directory.
+2024-07-30 14:04:33,478 - INFO - .github is a directory.
+2024-07-30 14:04:33,479 - INFO - .gitignore not in use - deleting.
+2024-07-30 14:04:33,479 - INFO - .dvc is a directory.
+2024-07-30 14:04:33,495 - INFO - Replacing contents
+2024-07-30 14:04:33,496 - INFO - Replacing image directory in plots/aft_comparison.tex.
+2024-07-30 14:04:33,496 - INFO - Replacing plots with plots_
+2024-07-30 14:04:33,497 - INFO - Deleting files with extension: pdf
+2024-07-30 14:04:33,497 - INFO - plots_adv_failures_per_train_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,498 - INFO - plots_weibull_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,498 - INFO - plots_def_param_vs_accuracy.pdf not in use - deleting.
+2024-07-30 14:04:33,498 - INFO - plots_trash_score_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,499 - INFO - plots_log_logistic_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,499 - INFO - plots_cox_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,499 - INFO - plots_ben_failures_per_train_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,500 - INFO - plots_adv_accuracy_vs_attack_type.pdf not in use - deleting.
+2024-07-30 14:04:33,500 - INFO - plots_adv_failure_rate_vs_train_time.pdf not in use - deleting.
+2024-07-30 14:04:33,501 - INFO - plots_weibull_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,501 - INFO - plots_adv_failures_per_train_time_vs_attack_type.pdf not in use - deleting.
+2024-07-30 14:04:33,502 - INFO - plots_exponential_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,502 - INFO - plots_ben_failure_rate_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,502 - INFO - plots_atk_param_vs_accuracy.pdf not in use - deleting.
+2024-07-30 14:04:33,503 - INFO - plots_cox_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,503 - INFO - plots_gamma_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,504 - INFO - new_main.pdf not in use - deleting.
+2024-07-30 14:04:33,504 - INFO - plots_gamma_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,504 - INFO - plots_def_param_vs_adv_failure_rate.pdf not in use - deleting.
+2024-07-30 14:04:33,505 - INFO - plots_log_logistic_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,505 - INFO - plots_gamma_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,506 - INFO - plots_log_normal_aft_dummies.pdf not in use - deleting.
+2024-07-30 14:04:33,506 - INFO - plots_adv_failures_per_test_time_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,507 - INFO - plots_exponential_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,507 - INFO - plots_ben_accuracy_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,508 - INFO - main.pdf not in use - deleting.
+2024-07-30 14:04:33,508 - INFO - plots_adv_accuracy_vs_defence_type.pdf not in use - deleting.
+2024-07-30 14:04:33,508 - INFO - plots_exponential_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,509 - INFO - plots_log_normal_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,509 - INFO - plots_log_normal_aft.pdf not in use - deleting.
+2024-07-30 14:04:33,510 - INFO - plots_log_logistic_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,510 - INFO - plots_weibull_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,511 - INFO - plots_def_param_vs_adv_accuracy.pdf not in use - deleting.
+2024-07-30 14:04:33,511 - INFO - plots_trash_score_vs_attack_type.pdf not in use - deleting.
+2024-07-30 14:04:33,511 - INFO - plots_cox_qq.pdf not in use - deleting.
+2024-07-30 14:04:33,512 - INFO - Deleting files with extension: py
+2024-07-30 14:04:33,512 - INFO - arxiv.py not in use - deleting.
+2024-07-30 14:04:33,513 - INFO - remove-unused-citations.py not in use - deleting.
+2024-07-30 14:04:33,513 - INFO - Deleting files with extension: yaml
+2024-07-30 14:04:33,514 - INFO - dvc.yaml not in use - deleting.
+2024-07-30 14:04:33,514 - INFO - .pre-commit-config.yaml not in use - deleting.
+2024-07-30 14:04:33,514 - INFO - Deleting files with extension: csv
+2024-07-30 14:04:33,515 - INFO - plots_cox_summary.csv not in use - deleting.
+2024-07-30 14:04:33,515 - INFO - plots_log_logistic_summary.csv not in use - deleting.
+2024-07-30 14:04:33,516 - INFO - plots_exponential_summary.csv not in use - deleting.
+2024-07-30 14:04:33,517 - INFO - plots_aft_comparison.csv not in use - deleting.
+2024-07-30 14:04:33,517 - INFO - plots_log_normal_summary.csv not in use - deleting.
+2024-07-30 14:04:33,517 - INFO - plots_gamma_summary.csv not in use - deleting.
+2024-07-30 14:04:33,518 - INFO - Deleting image directories
+2024-07-30 14:04:33,518 - INFO - Removing plots directory.
+2024-07-30 14:04:33,522 - INFO - Zipping temporary directory: /tmp/tmpfh8425e9
+2024-07-30 14:04:33,577 - INFO - Deleting temporary directory: /tmp/tmpfh8425e9
