@@ -1,7 +1,7 @@
 \section{Survival Analysis for ML}
 \label{afr_models}
 
-Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML. However, as noted by many researchers~\cite{madry2017towards, carlini_towards_2017, croce_reliable_2020, meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
+Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML. However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,croce_reliable_2020,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
 In this work, we leverage evasion attacks to examine the parameterised time-to-failure -- or survival time -- denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
 $$
 	S_{\theta}(t) := \exp\big\{-H_{\theta}(t)\big\} := 1 - F_{\theta}(t) := 1 - \int_0^t f_\theta(u) du,

@@ -3,7 +3,6 @@
 \usepackage{amsmath,amsfonts}
 \usepackage{algorithmic}
 \usepackage{array}
-\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
 \usepackage{textcomp}
 \usepackage{stfloats}
 \usepackage{url}
@@ -20,38 +19,23 @@
 \usepackage{hyperref}
 \usepackage{placeins}
 \usepackage{caption}
+\usepackage{subfigure}
 \usepackage{subcaption}
-\usepackage[maxcitenames=3,natbib=true,giveninits=true]{biblatex}
+\usepackage[maxcitenames=3,natbib=true,giveninits=true,backend=bibtex]{biblatex}
 \addbibresource{bibliography.bib}
 \usepackage{microtype}
 \usepackage{graphicx}
-\usepackage{subfigure}
-\usepackage[citetracker=true]{biblatex}
 \usepackage{booktabs} % for professional tables
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \usepackage{balance}
-\defbibcheck{uncited}{
-  \ifciteseen
-    {\skipentry}
-    {}
-}
+
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\minimise}{\textrm{minimise}}
 \DeclareMathOperator*{\maximise}{\textrm{maximise}}
-\newcommand{\Ie}{\textit{I.e.}\xspace}
-\newcommand{\ie}{\textit{i.e.}\xspace}
-\newcommand{\Eg}{\textit{E.g.}\xspace}
-\newcommand{\eg}{\textit{e.g.}\xspace}
-\newcommand{\probP}{\text{I\kern-0.15em P}}
-\newcommand{\tl}[1]{\textit{[{\color{red}#1}]}}
-\newcommand{\cm}[1]{\textit{{\color{blue}#1}}}
-\newcommand{\erik}[1]{\textit{[{\color{brown}Erik: #1}]}}
-\newcommand{\mr}[1]{\textit{[{\color{brown}Mohammed: #1}]}}
 
 \begin{document}
-% \title{A Systematic Approach to Robustness Modelling for Deep Convolutional Neural Networks}
 \title{A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)}
 \author[1]{Charles Meyers}
 \author[2]{Mohammad Reza Saleh Sedghpour}
@@ -59,10 +43,7 @@
 \author[1]{Erik Elmroth}
 \affil[1]{Department of Computing Science, Ume{\aa} University, {Ume\aa}, Sweden}
 \affil[2]{Elastisys AB, Sweden}
-% \thanks{Manuscript created October, 2020; This work was developed by the IEEE Publication Technology Department. This work is distributed under the \LaTeX \ Project Public License (LPPL) ( http://www.latex-project.org/ ) version 1.3. A copy of the LPPL, version 1.3, is included in the base \LaTeX \ documentation of all distributions of \LaTeX \ released 2003/12/01 or later. The opinions expressed here are entirely that of the author. No warranty is expressed or implied. User assumes all risk.}}
 
-% \markboth{Journal of \LaTeX\ Class Files,~Vol.~18, No.~9, September~2020}%
-% {How to Use the IEEEtran \LaTeX \ Templates}
 
 \maketitle
 \input{0-abstract}
@@ -72,9 +53,7 @@
 \input{4-methods}
 \input{5-results}
 \input{6-conclusions}
-
-% \printbibliography
-\newpage
+\printbibliography
 \end{document}
 
 

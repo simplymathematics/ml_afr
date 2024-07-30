@@ -14,8 +14,6 @@ Experiments were performed on both the CIFAR100, CIFAR10~\cite{cifar}, and MNIST
 \label{models}
 
 The Residual Neural Network (ResNet)~\cite{resnet} is a popular classification model\footnote{More than 180 thousand citations: \href{https://scholar.google.com/scholar?cites=9281510746729853742}{ResNet citations on Google Scholar.}} because of its ability to train neural networks with many layers efficiently through \textit{residual connections}.
-% \textit{Deep} networks, \textit{e.g.}, VGG~\cite{vgg}, ResNet~\cite{resnet}, rely on the depth of the network, which, despite leading to more accurate or robust results~\cite{rolnick2017power, carlini_towards_2017}, tends to lead to the `vanishing gradient problem'~\cite{hochreiter1998vanishing}, making learning difficult and slow.
-% However,
 The residual connections allow models to have hundreds of layers rather than tens of layers~\cite{resnet,vgg}. Despite the prevalence of the reference architecture, several modifications have been proposed that trade off, for instance, robustness and computational cost by varying the number of convolutional layers in the model. We tested the \textit{ResNet-18}, \textit{-34}, \textit{-51}, \textit{-101}, and \textit{-152} reference architectures, that get their names from their respective number of layers. We used the the \texttt{pytorch} framework and the Stochastic Gradient Descent minimiser with a momentum parameter of 0.9 and learning rates $\in \{10, 1, 0.1, 0.01, 0.001, 0.0001, .00001, 0.000001\}$ for epochs $\in \{ 10, 20, 30, 50, 100\}$. The learning rate that maximised the benign accuracy for a given layer/defence configuration was used in further analyses (\textit{i.e.}, the learning rate was tuned).
 
 \subsection{Tested Defences}
