@@ -220,8 +220,8 @@ stages:
       size: 5088
     - path: main.tex
       hash: md5
-      md5: 7eefbdecf1e4378672b30a5f69a12efd
-      size: 1582
+      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
+      size: 1606
     outs:
     - path: main-blx.bib
       hash: md5
@@ -233,7 +233,7 @@ stages:
       size: 23761
     - path: main.log
       hash: md5
-      md5: 8b850aa0fe78c0cccf899d9fc6959e90
+      md5: 551aa6c5a91bd6ff3cf4fbbc7cae0719
       size: 63221
     - path: main.out
       hash: md5
@@ -241,7 +241,7 @@ stages:
       size: 4698
     - path: main.pdf
       hash: md5
-      md5: 06fef35d38b1d513a2660eda5926bebe
+      md5: c56d858512556fb082f7f0e5a18f9086
       size: 549814
     - path: main.run.xml
       hash: md5
@@ -310,8 +310,8 @@ stages:
     deps:
     - path: main.tex
       hash: md5
-      md5: 7eefbdecf1e4378672b30a5f69a12efd
-      size: 1582
+      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
+      size: 1606
     - path: new_bibliography.bib
       hash: md5
       md5: da181c0ccc91a95acc3060e33681f9d3
@@ -319,8 +319,8 @@ stages:
     outs:
     - path: new_main.tex
       hash: md5
-      md5: 800d26549f2ddf82e4f2aff46ba2f410
-      size: 1586
+      md5: c612bedaa1577a2b87b73bdf7dc6bfa0
+      size: 1610
   big_run:
     cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
       && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
@@ -331,8 +331,8 @@ stages:
       size: 62310
     - path: new_main.tex
       hash: md5
-      md5: 800d26549f2ddf82e4f2aff46ba2f410
-      size: 1586
+      md5: c612bedaa1577a2b87b73bdf7dc6bfa0
+      size: 1610
     outs:
     - path: new_main-blx.bib
       hash: md5
@@ -348,7 +348,7 @@ stages:
       size: 67311
     - path: new_main.log
       hash: md5
-      md5: 22a2398f84db588e89561830522e80e9
+      md5: 753086acb39c335d45939e9915743ec9
       size: 44419
     - path: new_main.out
       hash: md5
@@ -356,7 +356,7 @@ stages:
       size: 4698
     - path: new_main.pdf
       hash: md5
-      md5: 650b6319ffa45500ede9616d1c469a57
+      md5: 1fc1c87ff8298bee9ade1b0e3278128f
       size: 571492
     - path: new_main.run.xml
       hash: md5
@@ -399,5 +399,5 @@ stages:
       size: 5088
     - path: main.tex
       hash: md5
-      md5: 7eefbdecf1e4378672b30a5f69a12efd
-      size: 1582
+      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
+      size: 1606
