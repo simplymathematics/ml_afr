@@ -367,8 +367,8 @@ stages:
     deps:
     - path: .pre-commit-config.yaml
       hash: md5
-      md5: f9a091a9b291cda5383df15153d97677
-      size: 1732
+      md5: 92ed596de0da62579c231f38b981d1bd
+      size: 1924
     - path: 0-abstract.tex
       hash: md5
       md5: 04f793df45964622106e4fced993abef
