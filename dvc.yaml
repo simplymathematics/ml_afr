@@ -1,25 +1,16 @@
 stages:
   pre-commmit:
     cmd: pre-commit run --all-files 
-    # deps:
-    #   - .pre-commit-config.yaml
-    # outs:
-    #   - main.tex:
-    #       persist: true
-    #   - 0-abstract.tex:
-    #       persist: true
-    #   - 1-introduction.tex:
-    #       persist: true
-    #   - 2-background.tex:
-    #       persist: true
-    #   - 3-afr.tex:
-    #       persist: true
-    #   - 4-methods.tex:
-    #       persist: true
-    #   - 5-results.tex:
-    #       persist: true
-    #   - 6-conclusions.tex:
-    #       persist: true
+    deps:
+      - .pre-commit-config.yaml
+      - main.tex
+      - 0-abstract.tex
+      - 1-introduction.tex
+      - 2-background.tex
+      - 3-afr.tex
+      - 4-methods.tex
+      - 5-results.tex
+      - 6-conclusions.tex
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -53,12 +44,10 @@ stages:
       - main.tex
     outs:
       - new_main.tex
-
   big_run:
-    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
+    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
     deps:
-      - main.tex
-      - main.aux
+      - new_main.tex
       - new_bibliography.bib
     outs:
       - new_main.pdf
