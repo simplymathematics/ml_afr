@@ -42,10 +42,10 @@ Log Normal & 1.14e+05 & 1.14e+05 & 0.91 & 0.91 & 0.15 & 0.26 & 0.08 & 0.19 \\
 \bottomrule
 \end{tabular}
 \caption{This table depicts the performance metrics (see Section~\ref{metrics}) for various survival analysis models (see Section~\ref{afr_models}) according to the methodology described in Section~\ref{methods}.}
-\label{tab:afr_models}
+\label{tab:afr_summary}
 \end{table*}
 
-Table~\ref{tab:afr_models} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, the results are roughly comparable with regards to Concordance, but the log-logistic and exponential models marginally outperforms the other models when measured with AIC/BIC. Concordance is identical for both the test and train sets, with gamma and exponential falling behind the others. However, the ICI and E50 across the test train sets is superior for the Weibull, so that model was used to infer the effect of the covariates (Figure~\ref{fig:covariates}) as well as different attacks, defences, and datasets (Figure~\ref{fig:dummies}). Figure~\ref{fig:dummies} clearly shows that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see $t_{\mathrm{predict}}$ in Figure~\ref{fig:covariates}) than the number of model layers.
+Table~\ref{tab:afr_summary} contains the performance of each of these models on the CIFAR10 dataset. For all datasets, the results are roughly comparable with regards to Concordance, but the log-logistic and exponential models marginally outperforms the other models when measured with AIC/BIC\@. Concordance is identical for both the test and train sets, with gamma and exponential falling behind the others. However, the ICI and E50 across the test train sets is superior for the Weibull, so that model was used to infer the effect of the covariates (Figure~\ref{fig:covariates}) as well as different attacks, defences, and datasets (Figure~\ref{fig:dummies}). Figure~\ref{fig:dummies} clearly shows that more hidden layers do increase the survival time. However, that seems to driven more by the model query time (see $t_{\mathrm{predict}}$ in Figure~\ref{fig:covariates}) than the number of model layers.
 
 \begin{figure*}
 	\centering
@@ -53,12 +53,10 @@ Table~\ref{tab:afr_models} contains the performance of each of these models on t
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/weibull_qq.pdf}
 	\end{subfigure}%
-	~
 	\begin{subfigure}
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/log_normal_qq.pdf}
 	\end{subfigure}
-	~
 	\begin{subfigure}
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/log_logistic_qq.pdf}
@@ -67,12 +65,10 @@ Table~\ref{tab:afr_models} contains the performance of each of these models on t
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/exponential_qq.pdf}
 	\end{subfigure}%
-	~
 	\begin{subfigure}
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/gamma_qq.pdf}
 	\end{subfigure}
-	~
 	\begin{subfigure}
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/cox_qq.pdf}
@@ -88,7 +84,7 @@ Figure~\ref{fig:dummies} depicts the effect of all attacks, defences, and model 
 Figure~\ref{fig:covariates} clearly demonstrates that increasing the depth of the model architecture does little for adversarial robustness while universally increasing the training time.
 Furthermore, it reveals something surprising -- that increasing the number of epochs tends to increase the failure rate -- even across model architectures and all defences.
 Certain defences can outperform the control model -- at the cost of expensive tuning -- evidenced by the large variance in performance (see Figure~\ref{fig:dummies}). The scale of $t_{\mathrm{train}}$  in Figure~\ref{fig:covariates} shows that there is no general relationship between training time and adversarial survival time. Additionally, we see that an increase in accuracy tends to correspond to a decrease in survival time, confirming the inverse relationship noted by many researchers~\cite{carlini_towards_2017,biggio_evasion_2013,croce_reliable_2020}.
-As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see Figure~\ref{fig:covariates}, covariate $t_{\mathrm{predict}}$) rather than inherent robustness (see covariate ``Layers").
+As the training time increases, however, the variance of attack times decreases, likely due to the corresponding increase in inference time (see Figure~\ref{fig:covariates}, covariate $t_{\mathrm{predict}}$) rather than inherent robustness (see covariate `Layers').
 We formalise this analysis in the next subsection.
 
 \begin{figure}
@@ -110,7 +106,7 @@ We formalise this analysis in the next subsection.
 \subsection{Failures and Cost}
 
 Figure~\ref{fig:failures_per_train_time} depicts the cost-failure ratio (see Equation~\ref{eq:cost}) in both the benign (top) figure and adversarial cases (middle and bottom figures), using the Weibull model to calculate $\mathbb{E}[T]$. Counter-intuitively, we see that the smallest model (ResNet18) tends to outperform both larger models (ResNet50 and ResNet152). Furthermore, we see that defence tuning is about as important as choosing the right type of defence (see left side of Figure~\ref{fig:failures_per_train_time}), with all defences falling within the normal ranges of each other. However, adding noise to the model output (Gauss-out) tends to underperform relative to the control for all models (see left side of Figure~\ref{fig:failures_per_train_time}). Likewise, the efficacy of a defence depends as much on model architecture as it does on hyperparameter tuning as demonstrated by the large variance in Figures~\ref{fig:accuracies}~\&~\ref{fig:failures_per_train_time}.  Furthermore, performance across all attacks is remarkably consistent with intra-class variation being smaller than inter-class variation almost universally across defences and model configurations.
-Finally -- and most importantly -- we see that every single tested configuration performs incredibly poorly against FGM and PGD.
+Finally -- and most importantly -- we see that every single tested configuration performs incredibly poorly against FGM and PGD\@.
 
 \begin{figure}[!h]
     \centering
@@ -123,5 +119,5 @@ Finally -- and most importantly -- we see that every single tested configuration
         \includegraphics[width=.38\textwidth,trim={12pt 10pt 20pt 10pt},clip]{plots/trash_score_vs_attack_type.pdf}
     \end{subfigure}
     \caption{This figure depicts the TRASH metric that reflects the ratio of training-to-attack times, where a value$\gg 1 $  indicates an essential advantage for the attacker. The violin plots reflect the 95\% confidence intervals for each tuned hyperparameter combination. Outliers are indicated with a circle.}
-    \label{fig:failures_per_train_time}
+	\label{fig:failures_per_train_time}
 \end{figure}

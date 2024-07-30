@@ -212,12 +212,12 @@ stages:
       size: 9985
     - path: 5-results.tex
       hash: md5
-      md5: 16c61068d00fd88334ccd6e96cb459b6
-      size: 10427
+      md5: 44d59d460051eb4ef541c505c893f0e7
+      size: 10429
     - path: 6-conclusions.tex
       hash: md5
-      md5: d387ca06e64bdf3eda75e7e83475e612
-      size: 5088
+      md5: 5e52257617096be7247a6c9a63b2e737
+      size: 5089
     - path: main.tex
       hash: md5
       md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
@@ -229,19 +229,19 @@ stages:
       size: 342
     - path: main.aux
       hash: md5
-      md5: 5de78e9735de9342673159b601b7f99e
-      size: 23761
+      md5: 164aa09f02d0f34a801e26b34dc6fd10
+      size: 23762
     - path: main.log
       hash: md5
-      md5: 551aa6c5a91bd6ff3cf4fbbc7cae0719
-      size: 63221
+      md5: fce5b1c62cfcb3d88f9820bd9a6a259a
+      size: 63223
     - path: main.out
       hash: md5
       md5: 336943489b1b4629c41ebe3dcc90963a
       size: 4698
     - path: main.pdf
       hash: md5
-      md5: c56d858512556fb082f7f0e5a18f9086
+      md5: c0013423cc9e0ef8c4b6dbb89a52ff02
       size: 549814
     - path: main.run.xml
       hash: md5
@@ -293,8 +293,8 @@ stages:
       size: 62310
     - path: main.aux
       hash: md5
-      md5: 5de78e9735de9342673159b601b7f99e
-      size: 23761
+      md5: 164aa09f02d0f34a801e26b34dc6fd10
+      size: 23762
     - path: remove-unused-citations.py
       hash: md5
       md5: 927290ac3e417fb12efe93114b14f9d1
@@ -367,8 +367,8 @@ stages:
     deps:
     - path: .pre-commit-config.yaml
       hash: md5
-      md5: 92ed596de0da62579c231f38b981d1bd
-      size: 1924
+      md5: dcd5d6f2c8ed77099100bbfd96e5c909
+      size: 2216
     - path: 0-abstract.tex
       hash: md5
       md5: 04f793df45964622106e4fced993abef
@@ -391,12 +391,12 @@ stages:
       size: 9985
     - path: 5-results.tex
       hash: md5
-      md5: 16c61068d00fd88334ccd6e96cb459b6
-      size: 10427
+      md5: 44d59d460051eb4ef541c505c893f0e7
+      size: 10429
     - path: 6-conclusions.tex
       hash: md5
-      md5: d387ca06e64bdf3eda75e7e83475e612
-      size: 5088
+      md5: 5e52257617096be7247a6c9a63b2e737
+      size: 5089
     - path: main.tex
       hash: md5
       md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b

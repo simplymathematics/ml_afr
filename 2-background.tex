@@ -6,8 +6,7 @@ However, the present work formalises methods to model the effect of attacks and 
 
 \subsection{Adversarial Attacks}
 
-In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. The presented work focuses on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{afr_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service ~\cite{santos2021universal}. In all sections below, metrics were collected on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben} and \textit{adv} are used throughout, respectively.
-
+In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. The presented work focuses on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{afr_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service~\cite{santos2021universal}. In all sections below, metrics were collected on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben} and \textit{adv} are used throughout, respectively.
 The strength of an attack is often measured in terms of a perturbation distance~\cite{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon\geq0$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
 \begin{equation}
     \varepsilon := \| x' - x \| \leq \varepsilon^*,
@@ -80,8 +79,8 @@ Assume that the cost of training a model, $C_{\mathrm{train}}$, is a function of
     \label{eq:naive_cost}
 \end{equation}
 where $C_h$ is the cost per time unit of a particular piece of hardware. Hence, the cost is assumed to scale linearly with per-sample training time and sample size, $N_{\mathrm{train}}$. By assuming the attacker and model builder are using similar hardware then the cost to an attacker, $C_{\mathrm{attack}}$, is
-$$
+\[
     C_{\mathrm{attack}} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{\mathrm{attack}} \cdot N_{\mathrm{attack}},
-$$
+\]
 where $ N_{\mathrm{attack}} $ is the number of attacked samples. Furthermore, a fast attack will be lower-bounded by the model inference time, $ t_{\mathrm{predict}} $, which is generally much smaller than the training time, $ t_{\mathrm{train}} $. Of course, the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{\mathrm{train}}$) is larger than the cost of finding a counterexample ($\propto t_{\mathrm{attack}}$) within the bounds outlined in Equation~\ref{eq:perturbation_distance}. The training cost per sample does not consider how well the model performs, and a good model is one that both generalises and is reasonably cheap to train.
 Therefore, a cost-normalised metric is introduced in Equation~\ref{eq:cost} in Section~\ref{cost_normalization}. Before comparing this cost to the failure rate, the attack time per sample -- or the expected survival time --  must be estimated. For that, survival models can be used.

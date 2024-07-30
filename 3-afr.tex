@@ -1,15 +1,15 @@
 \section{Survival Analysis for ML}
 \label{afr_models}
 
-Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML. However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,croce_reliable_2020,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
+Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML\@. However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,croce_reliable_2020,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
 In this work, we leverage evasion attacks to examine the parameterised time-to-failure -- or survival time -- denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
-$$
+\[
 	S_{\theta}(t) := \exp\big\{-H_{\theta}(t)\big\} := 1 - F_{\theta}(t) := 1 - \int_0^t f_\theta(u) du,
-$$
+\]
 and the expected survival time is thus
-$$
+\[
 	\mathbb{E}_{S_\theta}[T] =  \int_{0}^{t^*} S_{\theta}(u) du \approx t_{\mathrm{attack}},
-$$
+\]
 where $t_{\mathrm{attack}}$ is an estimate of the time it takes for the average attacker to induce a failure subject to the condition in Equation~\ref{eq:perturbation_distance} and $t^*$ is the latest observed time (regardless of failure or success). The parameters, $\theta$, are estimated from model evaluation data such that: $h_{\theta}(t=t_{attack}) \approx 1 - \mathrm{Acc}_{\mathrm{adv}}$.
 
 Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\cite{liu2013development,lawless1995methods}. These models allow us to examine the effect of the specified covariates on the failure rate of the classifier. For manufacturing, this is done by simulating normal wear and tear on a particular component (\textit{e.g.}, a motor or aircraft sensor)~\cite{liu2013development} by exposing the component to vibration, temperatures, or impacts. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of things like age, gender, and/or treatment on the expected survival time of a patient.
@@ -20,9 +20,9 @@ These survival analysis models can broadly be separated into two categories: pro
 
 \subsection{The Cox Proportional Hazard Model}
 The Cox proportional hazard model tries to find model parameters, $\theta$, corresponding to covariates, $x$, to predict the hazard function on unseen configurations of the covariates, such that
-$$
+\[
     h_\theta(t) = h_0(t)\phi_\theta(x) = h_0(t) \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
-$$
+\]
 where $\theta_i$ is the $i$-th model parameter and $x_i$ is the measurement of the $i$-th covariate. One downside of the Cox model compared to the accelerated failure time models discussed below is that there are few distributions that fit the proportional hazards assumption. A common choice is therefore to use a non-parametric approximation of the baseline hazards function~\cite{collett2023modelling}.
 Additionally, unlike the accelerated failure time models discussed below, the coefficients in the Cox model, $\theta$, are interdependent (they are said to be \textit{adjusted} for each other) and, as such, their interpretation is not straightforward~\cite{collett2023modelling}.
 
@@ -37,13 +37,13 @@ where $\phi_\theta$ is an \textit{acceleration factor} that depends on the covar
 
 \subsubsection{Exponential}
 The simplest AFT model of the hazard function is one that assumes a constant value over time,
-$$
+\[
     h(t) = \lambda,
-$$
+\]
 where $\lambda$ is the false classification rate and $t$ is time. The survival time for the exponential model can be expressed as in Equation~\ref{eq:def_aft_model} when $\phi_\theta(x) = \exp \left( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p \right) $ and
-$$
+\[
     S_0(t) = \exp(-\lambda t),
-$$
+\]
 and if we divide $t$ by $\phi_\theta$ (letting $\phi_\theta$ consume $\lambda$), we obtain Equation~\ref{eq:def_aft_model}.
 
 
@@ -56,146 +56,76 @@ and if we divide $t$ by $\phi_\theta$ (letting $\phi_\theta$ consume $\lambda$),
 % gamma --> sigma
 % lambda --> lambda
 Weibull models are flexible AFT models that assume the survival times, $T$, follow a Weibull distribution, as
-$$  % Collett pg. 198, line 7
+\[  % Collett pg. 198, line 7
     T \sim \mathcal{W}(\lambda, \sigma),
-$$
+\]
 where $\lambda$ and $\sigma$ are scale and shape parameters of the Weibull distribution, respectively. In the Weibull AFT model, the baseline survival function is
-$$ %2 Equations after 5.66 Collett
-    S_0(t) = \exp( -(\lambda t)^{\frac{1}{\sigma}}).
-$$
+\[ %2 Equations after 5.66 Collett
+    S_0(t) = \exp( {-(\lambda t)}^{\frac{1}{\sigma}}).
+\]
 Let
-$$
+\[
     \phi_\theta(x) = \exp( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p ).
-$$
+\]
 Then, the parameterised survival function can be expressed as
-$$ % Equation after 5.66 Collett
-    S_\theta(t) = \exp \left(- (\phi_\theta(x) t)^{\frac{1}{\sigma}} \right),
-$$
+\[ % Equation after 5.66 Collett
+    S_\theta(t) = \exp{ \left({- (\phi_\theta(x) t)}^{\frac{1}{\sigma}} \right)},
+\]
 letting $\phi_\theta$ consume $\lambda$.
 
 
 
 \subsubsection{Log-Normal}
 The Log-Normal AFT model assumes that the logarithm of the survival time follows a normal distribution. This model can capture scenarios where the hazard function is not monotonic over time. The logarithm of the survival time $T$ is
-$$ % From Tommy's comment, Collet's notation
+\[ % From Tommy's comment, Collet's notation
    \log T \sim \mathcal{N}(\mu, \sigma^2),
-$$
+\]
 with mean $\mu$ and variance $\sigma^2$.
 The baseline survival function is
-$$ % First Eq. in 5.12.3
+\[ % First Eq. in 5.12.3
     S_0(t) = 1 - \Phi\left( \frac{\log t - \mu}{\sigma} \right),
-$$
+\]
 where $\Phi$ is the cumulative distribution function of the standard normal distribution.
 % Phi defined under 5.10
 Let $\mu=0$ then with
-$$ % https://www.stata.com/manuals13/ststreg.pdf page 6
+\[ % https://www.stata.com/manuals13/ststreg.pdf page 6
     \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
-$$
+\]
 we obtain that
-$$ % Equation 5.73 in Collett 2023
+\[ % Equation 5.73 in Collett 2023
     S_{\theta}(t) = 1 - \Phi \left( \frac{\log t  -  \log(\phi_\theta(x))}{\sigma}\right).
-$$
+\]
 
 % DO NOT CHANGE ANYTHING ABOVE THIS LINE
 
 \subsubsection{Log-Logistic}
 The Log-Logistic AFT model assumes that the logarithm of the survival time follows a logistic distribution. This model is useful for capturing scenarios where the hazard function first increases and then decreases over time. The survival time $T$ is expressed as
-$$ % From Tommy's comment, Collet's notation
+\[ % From Tommy's comment, Collet's notation
     \log T \sim \mathcal{L}(\mu, \sigma),
-$$
+\]
 where $\mathcal{L}$ is a standard logistic density with mean $\mu$
 % $\phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$
 and scale parameter $\sigma > 0$.  The baseline survival function is
-$$ %
-    S_0(t) = \left(1 + \exp\left( \frac{\log t - \mu}{\sigma} \right)\right) ^{-1}.
-$$
+\[ %
+    S_0(t) = {\left(1 + \exp\left( \frac{\log t - \mu}{\sigma} \right)\right)} ^{-1}.
+\]
 Let $\mu=0$ then with
-$$
+\[
     \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
-$$
+\]
 the parameterised survival function for the Log-Logistic AFT model can be expressed as
-$$ % Equation after 5.70 in Collett
-    S_{\theta}(t) = \left( 1 + \exp \left( \frac{\log t - \log(\phi_\theta(x))}{\sigma}\right) \right)^{-1}.
-$$
+\[ % Equation after 5.70 in Collett
+    S_{\theta}(t) = {\left( 1 + \exp \left( \frac{\log t - \log(\phi_\theta(x))}{\sigma}\right) \right)}^{-1}.
+\]
 
 
 \subsubsection{Generalised Gamma}
 The Generalised Gamma AFT model is a flexible model that encompasses several other models as special cases, including the Exponential, Weibull, and Log-Normal models.
-% The survival function for the Generalised Gamma model is
-% $$
-%     S(t) = 1 - F(t) = 1 - \int_0^t f(u) \, du,
-% $$
-% The integrand can be expressed in terms of the incomplete Gamma function, $\Gamma_{\theta}$, where
-% $$
-%     \Gamma_{\theta}(\rho,z) = \frac{1}{\Gamma(\rho)}\int_0^{z}u^{\rho -1}e^{-u}du.
-% $$
-% The probability density % function, $f(t)$ is given by
-% % Translating from section 5.1.6 in Collett 2023:
-% % Theirs = Ours
-% % \lambda = \lambda
-% % \rho = \rho
-% % \theta = \beta
-% $$
-%     f(t) = \frac{\beta \lambda^{\rho \beta} t^{\rho \beta -1} \exp( -(\lambda t)^\beta)}{\Gamma(\rho)},
-% $$
-% where $\lambda > 0$ is a scale parameter, $\rho, \beta > 0 $ are shape parameters, and $\Gamma$ denotes the Gamma function.
-% Assuming $\beta > 0$ and
 With $\phi_{\theta}(x) = \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p$, the parameterised survival function can be written as
-% in terms of the incomplete gamma function defined above
-$$
-    S_{\theta}(t) = 1 - \Gamma_{\theta}\left(\rho, \left(\lambda \frac{t}{\phi_\theta(x)}\right)^\beta\right),
-$$
+\[
+    S_{\theta}(t) = 1 - \Gamma_{\theta}\left(\rho, {\left(\lambda \frac{t}{\phi_\theta(x)}\right)}^\beta\right),
+\]
 where $\Gamma_{\theta}$ is the incomplete Gamma function, $\lambda > 0$ is a scale parameter, and $\rho>0$ and $\beta > 0$ are shape parameters.
-
-% Replaced with the above
-% \subsubsection{Generalised Gamma}
-% The generalised gamma model uses three parameters $\sigma, \lambda,\gamma$. Let
-% $$
-%     u(x,y)= \Gamma \left ( \frac{1}{(\lambda(x, \alpha))^2}; \frac{\exp \left( \lambda(x, \alpha) \left( \frac{log(t) - \mu(\gamma, x)}{\sigma(\beta, y)} \right ) \right) }{(\lambda(x, \alpha))^2} \right )
-% $$
-% where $\Gamma(k, x)$ is the incomplete Gamma function, $\lambda(x, \alpha) = \alpha x^T$, $\sigma(\beta, y) = \exp(\beta y )$, $\mu(\gamma, x) = \gamma x^T$, and $\theta = (\lambda, \sigma, \mu)$. Then the survival function can be expressed as:
-% $$
-% S_{\theta}(t; x, y) =
-% \begin{cases}
-%     1 - u~\text{when}~\lambda > 0 \\
-%     u~\text{when}~\lambda \leq 0.
-% \end{cases}
-% $$
-
-% The exponential, Weibull, and log-normal models outlined below are all special cases of this model~\cite{kleinbaum1996survival}.
-
-
-% \subsubsection{Exponential Model}
-
-% The exponential survival model can be defined in terms of the cumulative survival function:
-% $$
-%     S_{\theta}(t; x, y) = \exp \left( -\frac{t}{\lambda_0 \cdot \exp(\beta x + \gamma y)} \right)
-% $$
-% where $\beta, \gamma$ are the coefficients associated with the vector of covariates, $x$, the vector of failure events, $y$ and $\theta = (\alpha, \beta, \gamma)$
-
-% \subsubsection{Weibull }
-% The Weibull function has the form:
-% $$
-% 	S_\theta(t; x, y) = \exp{\left( - \left( \frac{t}{\lambda(\beta, x)} \right)^{\rho(\alpha, y)} \right)},
-% $$
-% where $\theta=(\alpha, \beta)$, $\lambda(\beta, x)=\exp(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p)$ is a scale parameter, and $\rho(\alpha, y)=\exp(\alpha_0 + \alpha_1 y_1 + \cdots + \alpha_p y_p)$ is a shape parameter that determines the direction of acceleration over time.
-
-% \subsubsection{Log-Normal }
-
-% The Log-Normal  model introduces the parameters $\mu(\alpha, x) = \alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p $ and $\sigma(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$ with the survival function given by,
-% $$
-% 	S_\theta(t; x, y) = 1 - \log \left( 1 - \Phi \left (  \frac{\log(t) - \mu(\alpha, x) }{ \sigma(\beta, y) } \right) \right).
-% $$
-
-
-
-% \subsubsection{Log-Logistic }
-
-% Another form of the  model, the Log-Logistic , introduces the scale and shape parameters $a(\alpha, x) = \exp(\alpha_0 + \alpha_1 x_1 + \cdots + \alpha_n x_p )$ and $b(\beta, y) = \exp(\beta_0 + \beta_1 y_1 + \cdots + \beta_n y_p)$, respectively, with survival function,
-% $$
-% 	S_\theta(t; x, y) = 1 - \log \left( 1 + \left (  \frac{t - a(\alpha, x) }{ b(\beta, y) }\right)\right),
-% $$
-% where $\theta = (\alpha, \beta)$.
 
 
 

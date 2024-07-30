@@ -22,16 +22,16 @@ The residual connections allow models to have hundreds of layers rather than ten
 In order to simulate various conditions affecting the model's efficacy, we have also tested several defences that modify the model's inputs or predictions in an attempt to reduce its susceptibility to adversarial perturbations. Just like with the attacks, we used the Adversarial Robustness Toolbox~\cite{art2018} for their convenient implementations. The evaluated defences follow.
 
 
-\textit{Gauss-in} ($\ell_2$): The 'Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples. Here, we set this proportion to 50\%, allowing to simulate the effect of noise on the resulting model~\cite{gauss_aug}. Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
+\textit{Gauss-in} ($\ell_2$): The `Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples. Here, we set this proportion to 50\%, allowing to simulate the effect of noise on the resulting model~\cite{gauss_aug}. Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
 
 
-\textit{Conf} ($\ell_{\infty}$): The 'High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain. This allows to simulate the effects of rejecting 'adversarial' or otherwise 'confusing' queries~\cite{high_conf} that fall outside the given confidence range by ignoring ambiguous results without penalty. Confidence levels in $\{.1, .5, .9, .99, .999\}$ were tested.
+\textit{Conf} ($\ell_{\infty}$): The `High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain. This allows to simulate the effects of rejecting `adversarial' or otherwise `confusing' queries~\cite{high_conf} that fall outside the given confidence range by ignoring ambiguous results without penalty. Confidence levels in $\{.1, .5, .9, .99, .999\}$ were tested.
 
 
-\textit{Gauss-out} ($\ell_2$): The 'Gaussian Noise' defence, rather than adding noise to the input data, adds noise during inference~\cite{gauss_out}, allowing to reduce precision to grey- and black-box attacks without going through costly training iterations. Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
+\textit{Gauss-out} ($\ell_2$): The `Gaussian Noise' defence, rather than adding noise to the input data, adds noise during inference~\cite{gauss_out}, allowing to reduce precision to grey- and black-box attacks without going through costly training iterations. Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
 
 
-\textit{FSQ}: The 'Feature Squeezing' defence changes the bit-depth of the input data to minimise the noise induced by floating-point operations. It was included here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\cite{feature_squeezing}. Bit-depths in $\{2, 4, 8, 16, 32, 64\}$ were tested.
+\textit{FSQ}: The `Feature Squeezing' defence changes the bit-depth of the input data to minimise the noise induced by floating-point operations. It was included here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\cite{feature_squeezing}. Bit-depths in $\{2, 4, 8, 16, 32, 64\}$ were tested.
 
 
 
@@ -41,13 +41,13 @@ In order to simulate various conditions affecting the model's efficacy, we have 
 Several attacks using the Adversarial Robustness Toolbox~\cite{art2018} were evaluated in order to simulate attacks that vary in information and run-time requirements across distance metrics. Other researchers have noted the importance of testing against multiple types of attacks~\cite{carlini_towards_2017}. For the purposes here, \textit{attack strength} refers to the degree to which an input is modified by an attacker, as described in Section~\ref{eq:perturbation_distance}. Below is a brief description of the attacks that were tested against. One or more norms or pseudo-norms were used in each attack, as given in the parentheses next to the attack name.
 
 
-\textit{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): The 'Fast Gradient Method' quickly generates a noisy sample, with no feasibility conditions beyond a specified step size and number of iterations~\cite{fgm}. It generates adversarial samples by using the model gradient and taking a step of length $\varepsilon$ in the direction that maximises the loss with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
+\textit{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): The `Fast Gradient Method' quickly generates a noisy sample, with no feasibility conditions beyond a specified step size and number of iterations~\cite{fgm}. It generates adversarial samples by using the model gradient and taking a step of length $\varepsilon$ in the direction that maximises the loss with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
 
-\textit{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$): The 'Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\cite{madry2017towards}. This method is iterative, and was restricted here to ten such iterations. The imposed feasibility conditions on the FGM attack were in $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
+\textit{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$): The `Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\cite{madry2017towards}. This method is iterative, and was restricted here to ten such iterations. The imposed feasibility conditions on the FGM attack were in $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
 
-\textit{Deep} ($\ell_2$): the Deepfool Attack~\cite{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient by approximating the $n$ most likely class gradients where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\cite{deepfool}. This method is iterative and was restricted here to ten such iterations.
+\textit{Deep} ($\ell_2$): the `Deepfool Attack'~\cite{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient by approximating the $n$ most likely class gradients where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\cite{deepfool}. This method is iterative and was restricted here to ten such iterations.
 
 \textit{Pixel} ($\ell_{0})$: the `PixelAttack' uses a well-known multi-objective search algorithm~\cite{pixelattack}, but tries to maximise false confidence while minimising the number of perturbed pixels. This method is iterative and was restricted here to ten such iterations. For $\varepsilon$, we tested $\{
 1,4,16,64,256

@@ -1,6 +1,6 @@
 stages:
   pre-commmit:
-    cmd: pre-commit run --all-files 
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 8  -n 24 
     deps:
       - .pre-commit-config.yaml
       - main.tex

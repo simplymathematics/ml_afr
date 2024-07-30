@@ -42,13 +42,22 @@ repos:
               "--emph=etc.",
               "--regex=hyperparameter=\bhyper-parameter",
               "--regex=hyperparameters=\bhyper-parameters",
-              "--regex=data set=\bdata-set",
+              "--regex=dataset=\bdataset",
+              "--regex=datasets=\bdata-sets",
+              "main.tex",
+              "0-abstract.tex",
+              "1-introduction.tex",
+              "2-background.tex",
+              "3-afr.tex",
+              "4-methods.tex",
+              "5-results.tex",
+              "6-conclusions.tex",
             ]
       - id: csquotes
-      # - id: ensure-labels-for-sections
+      - id: ensure-labels-for-sections
       - id: no-space-in-cite
-      # - id: tilde-cite
-      # - id: unique-labels
+      - id: tilde-cite
+      - id: unique-labels
         # args:
         #     [
         #       # If present only check that there is a \label{} but not the value
