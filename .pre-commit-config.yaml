@@ -1,7 +1,35 @@
+# repos:
+#   - repo: https://github.com/jonasbb/pre-commit-latex-hooks
+#     rev: v1.4.0
+#     hooks:
+#       - id: consistent-spelling
+#         args:
+#             [
+#               "--emph=et al.",
+#               "--emph=a priori",
+#               "--emph=a posteriori",
+#               "--emph=e.g.",
+#               "--emph=i.e.",
+#               "--emph=etc.",
+#             ]
+#       - id: no-space-in-cite
+#       - id: ensure-labels-for-sections
+#       - id: no-space-in-cite
+#       - id: tilde-cite
+#       - id: unique-labels
+#   - repo: https://github.com/pre-commit/pre-commit-hooks
+#     rev: v3.3.0
+#     hooks:
+#       - id: check-merge-conflict
+#       - id: check-yaml
+#       - id: trailing-whitespace
+#         files: ".*\\.(?:tex|py)$"
+
 repos:
   - repo: https://github.com/jonasbb/pre-commit-latex-hooks
     rev: v1.4.0
     hooks:
+      - id: cleveref-capitalization
       - id: consistent-spelling
         args:
             [
@@ -10,13 +38,32 @@ repos:
               "--emph=a posteriori",
               "--emph=e.g.",
               "--emph=i.e.",
+              '--regex=naive=\bna(i|\\"i)ve',
               "--emph=etc.",
+              "--regex=hyperparameter=\bhyper-parameter",
+              "--regex=hyperparameters=\bhyper-parameters",
+              "--regex=dataset=\bdataset",
+              "--regex=datasets=\bdata-sets",
+              "main.tex",
+              "0-abstract.tex",
+              "1-introduction.tex",
+              "2-background.tex",
+              "3-afr.tex",
+              "4-methods.tex",
+              "5-results.tex",
+              "6-conclusions.tex",
             ]
-      - id: no-space-in-cite
+      - id: csquotes
       - id: ensure-labels-for-sections
       - id: no-space-in-cite
       - id: tilde-cite
       - id: unique-labels
+        # args:
+        #     [
+        #       # If present only check that there is a \label{} but not the value
+        #       "--ignore-label-content",
+        #     ]
+      - id: cleveref-instead-of-autoref
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
@@ -24,4 +71,3 @@ repos:
       - id: check-yaml
       - id: trailing-whitespace
         files: ".*\\.(?:tex|py)$"
-
