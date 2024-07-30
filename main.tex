@@ -26,16 +26,12 @@
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{subfigure}
-\usepackage[citetracker=true]{biblatex}
+
 \usepackage{booktabs} % for professional tables
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \usepackage{balance}
-\defbibcheck{uncited}{
-  \ifciteseen
-    {\skipentry}
-    {}
-}
+
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\minimise}{\textrm{minimise}}
@@ -72,9 +68,8 @@
 \input{4-methods}
 \input{5-results}
 \input{6-conclusions}
-
-% \printbibliography
-\newpage
+% \bibliographystyle{IEEEtranN}
+\printbibliography
 \end{document}
 
 
