@@ -43,6 +43,7 @@ stages:
     deps:
       - main.aux
       - bibliography.bib
+      - remove-unused-citations.py
     outs:
       - new_bibliography.bib
   replace_bib:

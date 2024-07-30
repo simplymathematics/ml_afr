@@ -295,6 +295,10 @@ stages:
       hash: md5
       md5: 5de78e9735de9342673159b601b7f99e
       size: 23761
+    - path: remove-unused-citations.py
+      hash: md5
+      md5: 927290ac3e417fb12efe93114b14f9d1
+      size: 1341
     outs:
     - path: new_bibliography.bib
       hash: md5
