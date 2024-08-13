@@ -144,10 +144,10 @@ With an estimate for the expected survival time, the cost-normalised failure rat
 	\label{eq:cost}
 \end{equation}
 If $\bar{C} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
-The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. 
+The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic.
 The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
 We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable.
-Therefore, it be immediately discarded as \textit{broken}. 
+Therefore, it be immediately discarded as \textit{broken}.
 
 % Also, by treating $\varepsilon$ as a covariate in ${S_\theta}$, these costs can be computed directly from a single survival model, using $t_{\mathrm{attack}}=t_{\mathrm{predict}}$ and $\varepsilon \rightarrow 0$.
 
