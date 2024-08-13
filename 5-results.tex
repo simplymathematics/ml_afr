@@ -1,7 +1,7 @@
 \section{Results and Discussion}
 
 
-Through tens of thousands experiments across many signal-processing techniques (\textit{i.e.}, defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts --- regardless of configuration. Also, that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFR models are a powerful tool for comparing model architectures and examining the effects of covariates. In the section below, we display and discuss the results for the CIFAR100, CIFAR10, and MNIST datasets for all attacks and defences.
+Through tens of thousands experiments across many signal-processing techniques (\textit{i.e.}, defences), random states, learning rates, model architectures, and attack configurations, we show that model defences generally fail to outperform the undefended model in either the benign or adversarial contexts --- regardless of configuration. Also, that the adversarial failure rate gains of larger ResNet configurations are driven by response time rather than true robustness; that these gains are dwarfed by the increase in training time; and that AFT models are a powerful tool for comparing model architectures and examining the effects of covariates. In the section below, we display and discuss the results for the CIFAR100, CIFAR10, and MNIST datasets for all attacks and defences.
 
 \subsection{Benign and Adversarial Accuracy}
 Figure~\ref{fig:accuracies} depicts the benign and adversarial accuracies across the various attacks and defences. We can clearly see that no defence consistently outperforms the undefended (control) model in either the benign (top) or adversarial context (middle). We also see that for all defences, we can find at least one configuration with arbitrarily high accuracy, though finding it might involve an expensive hyperparameter search as evidenced by the large variance (see top plot of Figure~\ref{fig:accuracies}). Likewise, the adversarial accuracy benefits greatly from model tuning, but that attacks are still effective on roughly 75\% of samples in the best case for most attacks (see middle plot of Figure~\ref{fig:accuracies}). Despite varying methods and computational costs, the attacks seem to be more or less equally effective with respect to adversarial accuracy (see bottom plot of Figure~\ref{fig:accuracies}).
@@ -25,7 +25,7 @@ Figure~\ref{fig:accuracies} depicts the benign and adversarial accuracies across
 \label{fig:accuracies}
 \end{figure}
 
-\subsection{AFR Models}
+\subsection{AFT Models}
 
 \begin{table*}[!ht]
 \centering
@@ -33,11 +33,11 @@ Figure~\ref{fig:accuracies} depicts the benign and adversarial accuracies across
 \toprule
  & AIC & BIC & Concordance & Test Concordance & ICI & Test ICI & E50 & Test E50 \\
 \midrule
-Cox & -- & -- & 0.92 & 0.92 & 0.06 & 0.26 & 0.04 & 0.08 \\
-Gamma & 1.03e+05 & 1.03e+05 & 0.51 & 0.52 & 0.29 & 0.12 & 0.25 & 0.15 \\
+Cox & -- & -- & 0.92 & 0.92 & 0.06 & 0.27 & 0.04 & 0.09 \\
+Gamma & -- & -- & 0.51 & 0.52 & 0.29 & -- & 0.24 & -- \\
 Weibull & 9.05e+04 & 9.05e+04 & 0.92 & 0.92 & 0.02 & 0.02 & 0 & 0.01 \\
-Exponential & 7.93e+04 & 7.93e+04 & 0.86 & 0.86 & 0.04 & 0.03 & 0 & 0.02 \\
-Log Logistic & 9.79e+04 & 9.79e+04 & 0.92 & 0.92 & 0.05 & 0.08 & 0.01 & 0.01 \\
+Exponential & 7.93e+04 & 7.93e+04 & 0.86 & 0.86 & 0.04 & 0.03 & 0.01 & 0.01 \\
+Log Logistic & 9.79e+04 & 9.79e+04 & 0.92 & 0.92 & 0.07 & 0.08 & 0.01 & 0.01 \\
 Log Normal & 1.14e+05 & 1.14e+05 & 0.91 & 0.91 & 0.15 & 0.26 & 0.08 & 0.19 \\
 \bottomrule
 \end{tabular}
@@ -73,7 +73,7 @@ Table~\ref{tab:afr_summary} contains the performance of each of these models on 
 		\centering
 		\includegraphics[width=.30\textwidth,trim={20pt 20pt 20pt 20pt},clip]{plots/cox_qq.pdf}
 	\end{subfigure}
-	\caption{These quantile-quantile plots demonstrate the efficacy of various AFR models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFR model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). The time for each model was chosen to depict the best fit of the curve when $ [ 0 \geq t \leq 10 ] $ seconds.
+	\caption{These quantile-quantile plots demonstrate the efficacy of various AFT models. The first axis is the observed quantile of a sample and the second axis represents the theoretical quantile according to the chosen AFT model. The dashed black line represents a perfect fit. To verify each model, we reserved 80\% of the data to be the training set (blue) and 20\% to be the test set (red). The time for each model was chosen to depict the best fit of the curve when $ [ 0 \geq t \leq 10 ] $ seconds.
  % The absence of one of the lines means that the \texttt{lifelines} fitter failed to converge for that subset.
  }
 	\label{fig:afr_models}
