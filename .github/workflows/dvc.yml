@@ -13,5 +13,6 @@ jobs:
       run: |
         git clone https://github.com/simplymathematics/deckard.git
         cd deckard && python3 -m pip install .
+        python3 -m pip install pre-commit
     - name: dvc repro
       run: dvc repro
