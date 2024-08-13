@@ -178,15 +178,15 @@ stages:
       size: 6958
     - path: plots/
       hash: md5
-      md5: 99048226041c0d65c0e20015f28243a0.dir
-      size: 1417597
-      nfiles: 41
+      md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
+      size: 1204454
+      nfiles: 36
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 54fd66ce0206e4c3126b66d9f6a78493
-      size: 14145225
+      md5: e07f3736aa4c437b679c2166b5cd9b08
+      size: 14163343
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -401,3 +401,5 @@ stages:
       hash: md5
       md5: 2619d7416e5a62d0c613f4ab28aa5a76
       size: 1217
+  generate_plots:
+    cmd: cd generate_plots && dvc repro && cd ..

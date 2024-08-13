@@ -678,9 +678,3 @@ stages:
       size: 38452
   copy_results:
     cmd: mkdir -p ~/ml_afr/plots &&  cp -r plots/* ~/ml_afr/plots/
-    deps:
-    - path: plots/
-      hash: md5
-      md5: 512c052afcaf9635f4ac3a772d6ca61a.dir
-      size: 1204796
-      nfiles: 37
