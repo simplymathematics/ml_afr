@@ -363,7 +363,7 @@ stages:
       md5: 61f7020ecb7b15a652cad2823b690dc4
       size: 2598
   pre-commmit:
-    cmd: pre-commit run --all-files
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1
     deps:
     - path: .pre-commit-config.yaml
       hash: md5

@@ -1,30 +1,3 @@
-# repos:
-#   - repo: https://github.com/jonasbb/pre-commit-latex-hooks
-#     rev: v1.4.0
-#     hooks:
-#       - id: consistent-spelling
-#         args:
-#             [
-#               "--emph=et al.",
-#               "--emph=a priori",
-#               "--emph=a posteriori",
-#               "--emph=e.g.",
-#               "--emph=i.e.",
-#               "--emph=etc.",
-#             ]
-#       - id: no-space-in-cite
-#       - id: ensure-labels-for-sections
-#       - id: no-space-in-cite
-#       - id: tilde-cite
-#       - id: unique-labels
-#   - repo: https://github.com/pre-commit/pre-commit-hooks
-#     rev: v3.3.0
-#     hooks:
-#       - id: check-merge-conflict
-#       - id: check-yaml
-#       - id: trailing-whitespace
-#         files: ".*\\.(?:tex|py)$"
-
 repos:
   - repo: https://github.com/jonasbb/pre-commit-latex-hooks
     rev: v1.4.0
@@ -54,7 +27,6 @@ repos:
               "6-conclusions.tex",
             ]
       - id: csquotes
-      - id: ensure-labels-for-sections
       - id: no-space-in-cite
       - id: tilde-cite
       - id: unique-labels
