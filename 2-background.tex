@@ -78,7 +78,7 @@ Assume that the cost of training a model, $C_{\mathrm{train}}$, is a function of
     C_{\mathrm{train}} := C_{h} \cdot T_{\mathrm{train}} = C_h \cdot t_{\mathrm{train}} \cdot N_{\mathrm{train}},
     \label{eq:naive_cost}
 \end{equation}
-where $C_h$ is the cost per time unit of a particular piece of hardware. Hence, the cost is assumed to scale linearly with per-sample training time and sample size, $N_{\mathrm{train}}$. 
+where $C_h$ is the cost per time unit of a particular piece of hardware. Hence, the cost is assumed to scale linearly with per-sample training time and sample size, $N_{\mathrm{train}}$.
 Analogously, $t_{\mathrm{predict}}$ is used elsewhere in this text to refer to the prediction time for a set of samples, divided by the number of samples. Assuming the attacker and model builder are using similar hardware then the cost to an attacker, $C_{\mathrm{attack}}$, is
 \[
     C_{\mathrm{attack}} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{\mathrm{attack}} \cdot N_{\mathrm{attack}},
