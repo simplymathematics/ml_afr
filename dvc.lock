@@ -178,15 +178,15 @@ stages:
       size: 6958
     - path: plots/
       hash: md5
-      md5: 20edfbfee75f4f46fff3d0c3727f2f9e.dir
-      size: 1301436
-      nfiles: 42
+      md5: aca03b7d44246bca540b2138351c5ef5.dir
+      size: 1417597
+      nfiles: 41
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 6ba8d2fda51989cfc6462f2ee02ec161
-      size: 34143520
+      md5: 80ae1b7dfab0850eaad4e3bdd1a5a26b
+      size: 14162916
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -212,8 +212,8 @@ stages:
       size: 9987
     - path: 5-results.tex
       hash: md5
-      md5: 034731f2c469754335e52913476987cf
-      size: 10406
+      md5: c999a82f764815bba51fe7cb5a79d9d4
+      size: 10407
     - path: 6-conclusions.tex
       hash: md5
       md5: 2d918b3acc651ad98d855375120402a2
@@ -233,7 +233,7 @@ stages:
       size: 23763
     - path: main.log
       hash: md5
-      md5: f6bfbeab4357c0ff0a7c8cf291567c51
+      md5: 1fe9e54c6ecb39be4d1fba498e77831c
       size: 60301
     - path: main.out
       hash: md5
@@ -241,8 +241,8 @@ stages:
       size: 4698
     - path: main.pdf
       hash: md5
-      md5: 232583febdd30c7c830c1d7778075c91
-      size: 541352
+      md5: befffccb1cec8e674e3f1e0707665089
+      size: 542056
     - path: main.run.xml
       hash: md5
       md5: 2d22ad067e0890475f0a21e186e23136
@@ -367,8 +367,8 @@ stages:
     deps:
     - path: .pre-commit-config.yaml
       hash: md5
-      md5: dcd5d6f2c8ed77099100bbfd96e5c909
-      size: 2216
+      md5: 67431ff9d6964d15fb322c840b6ab8fe
+      size: 1414
     - path: 0-abstract.tex
       hash: md5
       md5: 04f793df45964622106e4fced993abef
@@ -391,8 +391,8 @@ stages:
       size: 9987
     - path: 5-results.tex
       hash: md5
-      md5: 034731f2c469754335e52913476987cf
-      size: 10406
+      md5: c999a82f764815bba51fe7cb5a79d9d4
+      size: 10407
     - path: 6-conclusions.tex
       hash: md5
       md5: 2d918b3acc651ad98d855375120402a2
