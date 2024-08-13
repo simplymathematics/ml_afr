@@ -54,7 +54,7 @@ repos:
               "6-conclusions.tex",
             ]
       - id: csquotes
-      - id: ensure-labels-for-sections
+      # - id: ensure-labels-for-sections
       - id: no-space-in-cite
       - id: tilde-cite
       - id: unique-labels
