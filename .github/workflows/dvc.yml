@@ -4,8 +4,9 @@ jobs:
   reproduce:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - run: dvc repro
+    - name: Install dependencies
+      run: |
+        git clone https://github.com/simplymathematics/deckard.git
+        cd deckard && python3 -m pip install .
+    - name: dvc repro
+      run: dvc repro
