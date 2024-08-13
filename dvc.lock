@@ -178,15 +178,15 @@ stages:
       size: 6958
     - path: plots/
       hash: md5
-      md5: c234c3527312d52125e53440d502732d.dir
-      size: 1307298
-      nfiles: 41
+      md5: 20edfbfee75f4f46fff3d0c3727f2f9e.dir
+      size: 1301436
+      nfiles: 42
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 7ce313e9c75c09c6d14d40136b8838ce
-      size: 106394
+      md5: 6ba8d2fda51989cfc6462f2ee02ec161
+      size: 34143520
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -200,28 +200,28 @@ stages:
       size: 6318
     - path: 2-background.tex
       hash: md5
-      md5: fce435bfe64521b647ca49e1c8acab8f
-      size: 8980
+      md5: ab1833f8ce9fd9d53acb17dd855a1a4f
+      size: 8978
     - path: 3-afr.tex
       hash: md5
-      md5: eb58f4f7d47efa75a871ba5cc68f232f
-      size: 16422
+      md5: a31e5d14f1984a81a460587f3a3723ae
+      size: 12998
     - path: 4-methods.tex
       hash: md5
-      md5: 51c98a2773de497aac1c395e2491e32b
-      size: 9985
+      md5: 0718e35a1700914b2b1f34a83e8ce08c
+      size: 9987
     - path: 5-results.tex
       hash: md5
-      md5: 44d59d460051eb4ef541c505c893f0e7
-      size: 10429
+      md5: 034731f2c469754335e52913476987cf
+      size: 10406
     - path: 6-conclusions.tex
       hash: md5
-      md5: 5e52257617096be7247a6c9a63b2e737
-      size: 5089
+      md5: 2d918b3acc651ad98d855375120402a2
+      size: 5097
     - path: main.tex
       hash: md5
-      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
-      size: 1606
+      md5: 0bf8d44d63874972642201753d1bebbe
+      size: 1425
     outs:
     - path: main-blx.bib
       hash: md5
@@ -229,20 +229,20 @@ stages:
       size: 342
     - path: main.aux
       hash: md5
-      md5: 164aa09f02d0f34a801e26b34dc6fd10
-      size: 23762
+      md5: dd1f866cbc5979d65623983ef6616058
+      size: 23763
     - path: main.log
       hash: md5
-      md5: fce5b1c62cfcb3d88f9820bd9a6a259a
-      size: 63223
+      md5: f6bfbeab4357c0ff0a7c8cf291567c51
+      size: 60301
     - path: main.out
       hash: md5
-      md5: 336943489b1b4629c41ebe3dcc90963a
+      md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
     - path: main.pdf
       hash: md5
-      md5: c0013423cc9e0ef8c4b6dbb89a52ff02
-      size: 549814
+      md5: 232583febdd30c7c830c1d7778075c91
+      size: 541352
     - path: main.run.xml
       hash: md5
       md5: 2d22ad067e0890475f0a21e186e23136
@@ -289,12 +289,12 @@ stages:
     deps:
     - path: bibliography.bib
       hash: md5
-      md5: da181c0ccc91a95acc3060e33681f9d3
-      size: 62310
+      md5: ce55a68219d8e236df385d74ddb6d5e8
+      size: 63533
     - path: main.aux
       hash: md5
-      md5: 164aa09f02d0f34a801e26b34dc6fd10
-      size: 23762
+      md5: dd1f866cbc5979d65623983ef6616058
+      size: 23763
     - path: remove-unused-citations.py
       hash: md5
       md5: 927290ac3e417fb12efe93114b14f9d1
@@ -302,37 +302,37 @@ stages:
     outs:
     - path: new_bibliography.bib
       hash: md5
-      md5: da181c0ccc91a95acc3060e33681f9d3
-      size: 62310
+      md5: ce55a68219d8e236df385d74ddb6d5e8
+      size: 63533
   replace_bib:
     cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
       new_main.tex
     deps:
     - path: main.tex
       hash: md5
-      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
-      size: 1606
+      md5: 0bf8d44d63874972642201753d1bebbe
+      size: 1425
     - path: new_bibliography.bib
       hash: md5
-      md5: da181c0ccc91a95acc3060e33681f9d3
-      size: 62310
+      md5: ce55a68219d8e236df385d74ddb6d5e8
+      size: 63533
     outs:
     - path: new_main.tex
       hash: md5
-      md5: c612bedaa1577a2b87b73bdf7dc6bfa0
-      size: 1610
+      md5: f557fa33bf4a6ef35957e4ebfee70d31
+      size: 1429
   big_run:
     cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
       && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
     deps:
     - path: new_bibliography.bib
       hash: md5
-      md5: da181c0ccc91a95acc3060e33681f9d3
-      size: 62310
+      md5: ce55a68219d8e236df385d74ddb6d5e8
+      size: 63533
     - path: new_main.tex
       hash: md5
-      md5: c612bedaa1577a2b87b73bdf7dc6bfa0
-      size: 1610
+      md5: f557fa33bf4a6ef35957e4ebfee70d31
+      size: 1429
     outs:
     - path: new_main-blx.bib
       hash: md5
@@ -340,24 +340,24 @@ stages:
       size: 342
     - path: new_main.aux
       hash: md5
-      md5: 43634fd9a1ab334042af71663ebc58db
-      size: 31342
+      md5: 444a2e97768beed5781125ea89c62c9c
+      size: 31345
     - path: new_main.bbl
       hash: md5
-      md5: 86e6dd17e2e832df52df8a6380189f34
-      size: 67311
+      md5: 6436153bc81a8fc8ed156373c68c038c
+      size: 68150
     - path: new_main.log
       hash: md5
-      md5: 753086acb39c335d45939e9915743ec9
-      size: 44419
+      md5: 0ff6664e0476cdfd464b9e1aad90706b
+      size: 41349
     - path: new_main.out
       hash: md5
-      md5: 336943489b1b4629c41ebe3dcc90963a
+      md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
     - path: new_main.pdf
       hash: md5
-      md5: 1fc1c87ff8298bee9ade1b0e3278128f
-      size: 571492
+      md5: 5bef6d4b0ac387f5d84f9905ff444cfc
+      size: 564795
     - path: new_main.run.xml
       hash: md5
       md5: 61f7020ecb7b15a652cad2823b690dc4
@@ -379,25 +379,25 @@ stages:
       size: 6318
     - path: 2-background.tex
       hash: md5
-      md5: fce435bfe64521b647ca49e1c8acab8f
-      size: 8980
+      md5: ab1833f8ce9fd9d53acb17dd855a1a4f
+      size: 8978
     - path: 3-afr.tex
       hash: md5
-      md5: eb58f4f7d47efa75a871ba5cc68f232f
-      size: 16422
+      md5: a31e5d14f1984a81a460587f3a3723ae
+      size: 12998
     - path: 4-methods.tex
       hash: md5
-      md5: 51c98a2773de497aac1c395e2491e32b
-      size: 9985
+      md5: 0718e35a1700914b2b1f34a83e8ce08c
+      size: 9987
     - path: 5-results.tex
       hash: md5
-      md5: 44d59d460051eb4ef541c505c893f0e7
-      size: 10429
+      md5: 034731f2c469754335e52913476987cf
+      size: 10406
     - path: 6-conclusions.tex
       hash: md5
-      md5: 5e52257617096be7247a6c9a63b2e737
-      size: 5089
+      md5: 2d918b3acc651ad98d855375120402a2
+      size: 5097
     - path: main.tex
       hash: md5
-      md5: 1a966cc66bb0ceef39c6b4c6ab7ded9b
-      size: 1606
+      md5: 0bf8d44d63874972642201753d1bebbe
+      size: 1425
