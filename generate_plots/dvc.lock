@@ -261,108 +261,108 @@ stages:
     outs:
     - path: plots/aft_comparison.csv
       hash: md5
-      md5: 2384a3d0ffdc0d836c058596e21ad265
-      size: 355
+      md5: 9ec385116a0ce33256c1932bdbc86a46
+      size: 366
     - path: plots/aft_comparison.tex
       hash: md5
-      md5: 70610a52bc367ea5fa958fd6a0816190
-      size: 635
+      md5: fa4530c4e89821b6ba8db2b5624dc4c4
+      size: 640
     - path: plots/cox_aft.pdf
       hash: md5
-      md5: 14e4874f7e2f46b3e88f132664d5d146
-      size: 30776
+      md5: 33ba72c3e72cd8fb12c6ae0a3a419182
+      size: 31098
     - path: plots/cox_aft_dummies.pdf
       hash: md5
-      md5: 1265baf56c88ded0e8c6c409aebc63e5
-      size: 29294
+      md5: 46e2fa7ceaf7223b89f29b64e019f82c
+      size: 29292
     - path: plots/cox_qq.pdf
       hash: md5
-      md5: 50a6727406c851fea32db8cef3a831a5
-      size: 19030
+      md5: 1c1e5334cf515786ee6602f565969710
+      size: 19010
     - path: plots/cox_summary.csv
       hash: md5
-      md5: 8427feb6db5608b84c5ab86c205bca1e
-      size: 4657
+      md5: 8d6e750685711e93e6befe928869f1f7
+      size: 4703
     - path: plots/exponential_aft.pdf
       hash: md5
-      md5: 48c4c4b027c267faa9318e3b4a112fd8
-      size: 33415
+      md5: 54a8c6152b71645c902bbca9bf9976db
+      size: 33400
     - path: plots/exponential_aft_dummies.pdf
       hash: md5
-      md5: 9f1ea6fddc6e574ed64c55da0e3ed5db
-      size: 32905
+      md5: c5e42e9fae4a96ef83fd61248c87f54b
+      size: 32147
     - path: plots/exponential_qq.pdf
       hash: md5
-      md5: 2f0f38ee3f7cc505a2c0cdc83371cf30
-      size: 21508
+      md5: dbd06a4a6b788e37eddb3359b8ac57f0
+      size: 21580
     - path: plots/exponential_summary.csv
       hash: md5
-      md5: 14768a8388bcd81b721227300ae7156b
-      size: 9474
+      md5: e51adb0c08877e39d478d4aa5c4625f7
+      size: 6842
     - path: plots/gamma_aft.pdf
       hash: md5
-      md5: 0674224dc62bf51474581e042d26c53c
-      size: 29644
+      md5: 85c2adb260e64e6c023215967d186a50
+      size: 29648
     - path: plots/gamma_aft_dummies.pdf
       hash: md5
-      md5: 4b9d5d8c6ef8370ccb154bba30b45e61
-      size: 35929
+      md5: c94e4d05130e10f7e684f8b0237f7c2c
+      size: 35945
     - path: plots/gamma_qq.pdf
       hash: md5
-      md5: 41f4ee52d050194fecb73f4e66f0beb9
-      size: 20979
+      md5: df3d054fff381b045a97da2a14fe738a
+      size: 20904
     - path: plots/gamma_summary.csv
       hash: md5
-      md5: a670612cf086216fd1152b1dd7c021b2
-      size: 14381
+      md5: af65c6b56cb6252c7fd2569068e59117
+      size: 14646
     - path: plots/log_logistic_aft.pdf
       hash: md5
-      md5: 5b60754dee4e558a1a9f7311488a6f43
-      size: 32393
+      md5: f1087e52eae33cd490084fcfd04858de
+      size: 32396
     - path: plots/log_logistic_aft_dummies.pdf
       hash: md5
-      md5: c5a51e9876992e5f600654cf85b89b5f
-      size: 32184
+      md5: a0cd1f6822553edbeeca4fce41197089
+      size: 32187
     - path: plots/log_logistic_qq.pdf
       hash: md5
-      md5: 655fa0e1521960b7379a425c245fadac
-      size: 19098
+      md5: 893438b03e9b85ec1947f574d23fd075
+      size: 19062
     - path: plots/log_logistic_summary.csv
       hash: md5
-      md5: b95d04b64494e633a1dd517d64e80062
-      size: 5169
+      md5: ae75911feb1d2d83dbc0a9c5e125420f
+      size: 5183
     - path: plots/log_normal_aft.pdf
       hash: md5
-      md5: 477954e92ceb3702b28ad5bd189667bd
-      size: 32585
+      md5: c065d8bad74d7a94006b9acde01eb39f
+      size: 32568
     - path: plots/log_normal_aft_dummies.pdf
       hash: md5
-      md5: d58c031c5faa50dc8c968d2e208b4246
-      size: 32553
+      md5: 96637dc3dbf6c4249cc2ca754d3fe8f1
+      size: 32559
     - path: plots/log_normal_qq.pdf
       hash: md5
-      md5: fa16066bed6f3bca992fd2e7ee669cad
-      size: 21843
+      md5: 75b432225930be858d93e7282b5f8427
+      size: 21726
     - path: plots/log_normal_summary.csv
       hash: md5
-      md5: a561244a8c8be8746fef1ef3ac4b9e72
-      size: 5105
+      md5: d48ff310a60a8ad40313cf3b69ab5e58
+      size: 5149
     - path: plots/weibull_aft.pdf
       hash: md5
-      md5: f0d18b7429b7437115380886f2688d4a
-      size: 31955
+      md5: 9519bdbdf8f7c7ea11085de3c0cf13d9
+      size: 32594
     - path: plots/weibull_aft_dummies.pdf
       hash: md5
-      md5: bc75225ee43839e3bf5c64bd679de557
-      size: 31769
+      md5: 4cc01d2e750288fe0b80e64f7fda798c
+      size: 31752
     - path: plots/weibull_qq.pdf
       hash: md5
-      md5: 800c0a2766acca415d5d3dc5c5d14cfe
-      size: 19027
+      md5: 1fb2e82f8b9610e882ec4152e1b7f2fc
+      size: 18990
     - path: plots/weibull_summary.csv
       hash: md5
-      md5: 3cc4af472a21e5b43ee4a0f013e2988f
-      size: 5160
+      md5: 8ee7e7d66bcf24eb8424460826ab7421
+      size: 5217
   predict_survival_time:
     cmd: python predict_with_best.py  --data data/merged.csv  --config_file afr.yaml  --model
       weibull  --target adv_failures  --duration_col adv_fit_time  --output data/merged_afr.csv
@@ -377,8 +377,8 @@ stages:
       size: 11799827
     - path: plots/aft_comparison.tex
       hash: md5
-      md5: 70610a52bc367ea5fa958fd6a0816190
-      size: 635
+      md5: fa4530c4e89821b6ba8db2b5624dc4c4
+      size: 640
     - path: predict_with_best.py
       hash: md5
       md5: 53a2d376e0acbbd4ddc6d70edc800869
@@ -638,49 +638,49 @@ stages:
     outs:
     - path: plots/adv_accuracy_vs_attack_type.pdf
       hash: md5
-      md5: f3c2e2734a90e9bf2f60ef11bacbed7e
+      md5: 5da2f1ec3de6445af70ee1761bf746f2
       size: 36004
     - path: plots/adv_accuracy_vs_defence_type.pdf
       hash: md5
-      md5: 7bdcc7b4f530880875e33ca743537f86
+      md5: d8c623fada1e236ac5198b4314ea6bee
       size: 30891
     - path: plots/adv_failure_rate_vs_train_time.pdf
       hash: md5
-      md5: 1265306f87f8c26830c036243ad5854a
+      md5: 2c2cbcf0c72d72c3c9d7ec410aef5b82
       size: 391083
     - path: plots/atk_param_vs_accuracy.pdf
       hash: md5
-      md5: 39004abb45ce030ce150b42e843ae5f7
+      md5: a02e5c0aa92278af3ddecd303ab3f8b1
       size: 20460
     - path: plots/ben_accuracy_vs_defence_type.pdf
       hash: md5
-      md5: 7d987577a15770c2f3504dcb7de3d8da
+      md5: 4e3a8692b432eacbd1dd83cb3073491f
       size: 31571
     - path: plots/def_param_vs_accuracy.pdf
       hash: md5
-      md5: c47c41eefb7f9e287fd71a27dcc6baa3
+      md5: a351ed197558db2cfc91eb8eb3d5e3fb
       size: 18830
     - path: plots/def_param_vs_adv_accuracy.pdf
       hash: md5
-      md5: cd6f9a09bd36ff08d482d5555bbbcea1
+      md5: 3c72be9976b1f5ccb96a89f33791f963
       size: 18406
     - path: plots/def_param_vs_adv_failure_rate.pdf
       hash: md5
-      md5: cb5f4c730e6c569f945bd031e9c17dd1
+      md5: ab0ed7a236611539347ae38a7ea07d10
       size: 21120
     - path: plots/trash_score_vs_attack_type.pdf
       hash: md5
-      md5: 6f95c24cfbd72ebb9ab948a9a413193a
+      md5: a8230d6d9ea4219bd0a397847e22d2c9
       size: 45774
     - path: plots/trash_score_vs_defence_type.pdf
       hash: md5
-      md5: 8d4098a9dfc452eff2d1347ae7d7e902
+      md5: 2b3f708819c2f02d62c72942cde67c40
       size: 38452
   copy_results:
     cmd: mkdir -p ~/ml_afr/plots &&  cp -r plots/* ~/ml_afr/plots/
     deps:
     - path: plots/
       hash: md5
-      md5: 46ee9f8acff3a37507c5b4f3f1742eff.dir
-      size: 1204736
+      md5: 1c4637fd1c4d389632d5f489aad9b75b.dir
+      size: 1202537
       nfiles: 37
