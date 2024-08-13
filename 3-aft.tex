@@ -27,12 +27,12 @@ where $\theta_i$ is the $i$-th model parameter and $x_i$ is the measurement of t
 Additionally, unlike the accelerated failure time models discussed below, the coefficients in the Cox model, $\theta$, are interdependent (they are said to be \textit{adjusted} for each other) and, as such, their interpretation is not straightforward~\cite{collett2023modelling}.
 
 \subsection{Accelerated Failure Time Models}
-While Cox models assume that there is a multiplicative factor on the baseline hazard function, $h_0$, due to effect of a covariate, accelerated failure time (AFT) models instead assume that the effect of a covariate is to accelerate or decelerate the time in a baseline survival function, $S_0(t)$.
+While Cox models assume that there is a multiplicative effect on the baseline hazard function, $h_0$, due to effect of a covariate, accelerated failure time (AFT) models instead assume that the effect of a covariate is to accelerate or decelerate the time in a baseline survival function, $S_0(t)$.
 Accelerated failure time models have the form
 \begin{equation} \label{eq:def_aft_model}
 	S_\theta(t) = S_0 \left( \frac{t}{\phi_\theta(x)} \right),
 \end{equation}
-where $\phi_\theta$ is an \textit{acceleration factor} that depends on the covariates, and typically $\phi_\theta(x) =  \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$. The $S_0$  is the baseline survival function, and $\theta_i$ is the $i$-th acceleration factor associated with the value of the corresponding covariate, $x_i$. Common choices for parametric AFT models are listed below. Unlike the proportional hazard model discussed above, the coefficients of AFT models have a straightforward interpretation where a value of $N$ represents an $N$-fold increase in failure risk~\cite{collett2023modelling} and a negative value indicates a corresponding decrease in failure risk.
+where $\phi_\theta$ is an \textit{acceleration factor} that depends on the covariates, and typically $\phi_\theta(x) =  \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$. The $S_0$  is the baseline survival function, and $\theta_i$ is the $i$-th acceleration factor associated with the value of the corresponding covariate, $x_i$. Common choices for parametric AFT models are listed below. Unlike the proportional hazard model discussed above, the coefficients of AFT models have a straightforward interpretation where a value of $\Phi$ represents an $\Phi$-fold increase in failure risk~\cite{collett2023modelling} and a negative value indicates a corresponding decrease in failure risk.
 
 
 \subsubsection{Exponential}
@@ -133,18 +133,21 @@ where $\Gamma_{\theta}$ is the incomplete Gamma function, $\lambda > 0$ is a sca
 \label{metrics}
 
 To compare the efficacy of different parametric AFT models, we use the Akaike information criterion (AIC) and the Bayesian information criterion (BIC)~\cite{stoica2004model,taddy2019business}, where the preferred model will be the one with the smallest value. We provide the
-concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{kleinbaum1996survival}, 0.5 reflects random chance. We also include graphical calibration curves (see Figure~\ref{fig:aft_models}), that depict the relationship between the fitted model (second axis) and a model fit to the data using cubic splines (first axis) as proposed by Austin \textit{et al.}~\cite{ici}. We also measured the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI) as well as the error between these curves at the 50\textsuperscript{th} percentile (E50). Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
+concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{kleinbaum1996survival} and 0.5 reflects random chance. We also include graphical calibration curves (see Figure~\ref{fig:aft_models}), that depict the relationship between the fitted model (second axis) and a model fit to the data using cubic splines (first axis) as proposed by Austin \textit{et al.}~\cite{ici}. We also measured the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI) as well as the error between these curves at the 50\textsuperscript{th} percentile (E50). Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
 
 \section{Failure Rates and Cost Normalisation}
 \label{cost_normalization}
 
-With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in both benign and adversarial terms can be expressed as,
+With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in adversarial terms can be expressed as,
 \begin{equation}
 	\bar{C}_{\mathrm{adv.}}=\frac{t_{\mathrm{train}}}{\mathbb{E}_{\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
 If $\bar{C} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
-We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable and can therefore be immediately discarded. The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. Their ratio allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
+The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. 
+The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
+We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable.
+Therefore, it be immediately discarded as \textit{broken}. 
 
 % Also, by treating $\varepsilon$ as a covariate in ${S_\theta}$, these costs can be computed directly from a single survival model, using $t_{\mathrm{attack}}=t_{\mathrm{predict}}$ and $\varepsilon \rightarrow 0$.
 

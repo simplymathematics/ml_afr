@@ -1,22 +1,18 @@
 \section{Background}
-
 Much work has gone into explaining the dangers of adversarial attacks on ML pipelines~\cite{carlini_towards_2017,croce_reliable_2020,pixelattack,fgm,biggio_evasion_2013}, though studies on adversarial robustness have generally been limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, optimistic~\cite{meyers,ma2020imbalanced}. Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments~\cite{vehicle_formal}, or methods that are too computationally expensive to be useful for model selection~\cite{formal_adversarial}.
 However, the present work formalises methods to model the effect of attacks and defences on a given ML model and reveals a simple cost-to-performance metric to quickly discard ineffective strategies.
 
-
 \subsection{Adversarial Attacks}
-
-In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behavior of a model. The presented work focuses on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{aft_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service~\cite{santos2021universal}. In all sections below, metrics were collected on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben} and \textit{adv} are used throughout, respectively.
+In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behaviour of a model. The presented work focuses on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{aft_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service~\cite{santos2021universal}. In all sections below, metrics were collected on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben} and \textit{adv} are used throughout, respectively.
 The strength of an attack is often measured in terms of a perturbation distance~\cite{croce_reliable_2020,chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon\geq0$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
 \begin{equation}
     \varepsilon := \| x' - x \| \leq \varepsilon^*,
     \label{eq:perturbation_distance}
 \end{equation}
-where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon^*$ the maximum allowed perturbation ofthe original input. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different criteria, see Section~\ref{attacks}.
+where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). We denote by $\varepsilon^*$ the maximum allowed perturbation of the original input. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. For more information on different criteria, see Section~\ref{attacks}.
 
 
 \subsubsection{Accuracy and Failure Rate}
-
 The accuracy refers to the percentage or proportion of examples that are correctly classified. A lower accuracy indicates a higher rate of misclassifications or incorrect predictions. The accuracy, $\mathrm{Acc}$, is defined as
 \begin{equation}
     \mathrm{Acc} := 1 - \frac{\mathrm{False~Classifications}}{N},
@@ -52,23 +48,6 @@ The probability density of observing a failure at time, $t$, is~\cite{kleinbaum1
     \label{eq:pdf}
 \end{equation*}
 In practice, the $h(t), S(t)$, and/or $f(t)$ can be determined whenever one of them is known~\cite{kleinbaum1996survival}.
-
-
-
-
-
-% If we assume the probability of failure and time-to-failure is uniform across the samples\footnote{We don't use this assumption elsewhere --- this is only mentioned to develop an intuition about the relationship between test set accuracy, the language of survival analysis, and the adversarial/benign distinction.} for a particular set of covariates, we can estimate the probability of failure on the unperturbed test set,
-% \begin{equation}
-%     f_{ben}(t; \theta) \approx \frac{1 - Acc_{ben}}{t_{predict}} \cdot t,
-%     \label{eq:ben_failure_rate}
-% \end{equation}
-% where $t_{predict}$ indicates the inference time per sample. As we can plainly see, at $t=t_{predict}$, this reduces to one minus the test-set \textit{benign accuracy}. However, this is, at best, an optimistic lower bound to the the real-world failure rate~\cite{meyers,croce_reliable_2020}. To get a realistic picture of the worst-case scenario, we can look at $f$ in the presence of adversarial noise,
-% \begin{equation}
-%     f_{adv}(t; \theta) \approx \frac{ 1 - Acc_{adv}}{t_{attack}} \cdot t,
-%     \label{eq:adv_failure_rate}
-% \end{equation}
-% where $t_{attack}$ refers to the attack generation time per sample. Hence, at $t=t_{attack}$ this reduces to one minus the \textit{adversarial accuracy}.
-
 
 \subsection{Cost}
 \label{cost}
