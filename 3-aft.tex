@@ -1,5 +1,5 @@
 \section{Survival Analysis for ML}
-\label{afr_models}
+\label{aft_models}
 
 Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML\@. However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,croce_reliable_2020,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
 In this work, we leverage evasion attacks to examine the parameterised time-to-failure -- or survival time -- denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
@@ -109,7 +109,7 @@ and scale parameter $\sigma > 0$.  The baseline survival function is
 \[ %
     S_0(t) = {\left(1 + \exp\left( \frac{\log t - \mu}{\sigma} \right)\right)} ^{-1}.
 \]
-Let $\mu=0$; then, with
+Let $\mu=0$. Then, with
 \[
     \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
 \]
@@ -133,27 +133,18 @@ where $\Gamma_{\theta}$ is the incomplete Gamma function, $\lambda > 0$ is a sca
 \label{metrics}
 
 To compare the efficacy of different parametric AFT models, we use the Akaike information criterion (AIC) and the Bayesian information criterion (BIC)~\cite{stoica2004model,taddy2019business}, where the preferred model will be the one with the smallest value. We provide the
-concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{kleinbaum1996survival}, 0.5 reflects random chance. We also include graphical calibration curves (see Figure~\ref{fig:afr_models}), that depict the relationship between the fitted model (second axis) and a model fit to the data using cubic splines (first axis) as proposed by Austin \textit{et al.}~\cite{ici}. We also measured the mean difference between the predicted and observed failure probabilities, \textit{i.e.}, the integrated calibration index (ICI), and the median value of these differences, \textit{i.e.} the error at the 50th percentile (the E50). Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
-
-
-
-% PLEASE DON'T CHANGE ANYTHING SUBSTANTIAL ABOVE THIS LINE.
-
-
+concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{kleinbaum1996survival}, 0.5 reflects random chance. We also include graphical calibration curves (see Figure~\ref{fig:aft_models}), that depict the relationship between the fitted model (second axis) and a model fit to the data using cubic splines (first axis) as proposed by Austin \textit{et al.}~\cite{ici}. We also measured the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI) as well as the error between these curves at the 50\textsuperscript{th} percentile (E50). Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
 
 \section{Failure Rates and Cost Normalisation}
 \label{cost_normalization}
 
 With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in both benign and adversarial terms can be expressed as,
-% the cases $\varepsilon=0$ and $\varepsilon > 0$ can be considered separately, and
-% \bar{C}_{\mathrm{ben.}} = \frac{t_{\mathrm{train}}}{\mathbb{E}_{S_\theta}[T \,|\, \varepsilon = 0] }
-	\text{~~and~~}
 \begin{equation}
 	\bar{C}_{\mathrm{adv.}}=\frac{t_{\mathrm{train}}}{\mathbb{E}_{\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
-If $\bar{C} \gg 1$ (in either case) then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
-We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable and can therefore be immediately discarded. The numerator can be thought as the approximate training time per sample, or \textbf{t}raining \textbf{r}ate, and the denominator is the expected \textbf{s}urvival \textbf{h}euristic. Their ratio allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
+If $\bar{C} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
+We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable and can therefore be immediately discarded. The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. Their ratio allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
 
 % Also, by treating $\varepsilon$ as a covariate in ${S_\theta}$, these costs can be computed directly from a single survival model, using $t_{\mathrm{attack}}=t_{\mathrm{predict}}$ and $\varepsilon \rightarrow 0$.
 

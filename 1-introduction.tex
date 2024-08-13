@@ -2,7 +2,7 @@
 
 Machine Learning (ML) has become widely popular for solving complex prediction problems across many disciplines, such as medical imaging~\cite{ai_medical_imaging}, computer security~\cite{ai_security}, law enforcement~\cite{ai_prison}, aviation~\cite{ai_aviation}, and logistics~\cite{ai_luggage}. Despite this, adversarial attacks exploit ML models by introducing subtle modifications to data which leads to misclassification or otherwise erroneous outputs~\cite{chakraborty_adversarial_2018}. To ensure the robustness of ML models against adversaries has become a critical concern~\cite{adversarialpatch,carlini_towards_2017,croce_reliable_2020,hopskipjump,art2018,meyers}.
 
-The purpose of this work was to evaluate if survival analysis would be a viable tool to predict the success of a particular set of model hyper-parameters. In addition, we explored the relationship between computational cost and prediction accuracy in both benign and adversarial contexts.  By using samples crafted specifically to be challenging and applying survival models (see Section~\ref{afr_models}) we provide a framework to predict the expected failure time across the adversarial space. Using survival models, we demonstrate that larger machine learning models, while offering marginal gains over smaller models, do so at the expense of training times that far outpace the expected survival time and that it is simply not feasible to defend against certain attacks using the examined models and defences.
+The purpose of this work was to evaluate if survival analysis would be a viable tool to predict the success of a particular set of model hyper-parameters. In addition, we explored the relationship between computational cost and prediction accuracy in both benign and adversarial contexts.  By using samples crafted specifically to be challenging and applying survival models (see Section~\ref{aft_models}) we provide a framework to predict the expected failure time across the adversarial space. Using survival models, we demonstrate that larger machine learning models, while offering marginal gains over smaller models, do so at the expense of training times that far outpace the expected survival time and that it is simply not feasible to defend against certain attacks using the examined models and defences.
 
 
 
@@ -14,8 +14,6 @@ Much work has gone into mitigating adversarial attacks, for example by adding no
 
 To reach safety-critical standards that are routine in other industries~\cite{iso26262,IEC61508,IEC62034}, the machine learning field must move beyond the limited test/train split paradigm that would require many, many billions of test samples for every change of a model to meet industry standards~\cite{meyers}.
 
-% The paper is organised as follows: Section~\ref{cost} discusses failure rates and cost in the context of deep neural networks. Second, Section~\ref{afr_models} demonstrates how to model the failure rate as a function of time using accelerated methods. Third, Section~\ref{cost_normalization} extends this time-dependent concept of `broken' algorithms from cryptography to machine learning. Section~\ref{attacks} highlights the tested attacks, Section~\ref{defences} highlights the tested mitigation techniques, and Section~\ref{models} highlights the different model architectures tested.
-
 
 \subsection{Contributions}
 
@@ -23,6 +21,6 @@ The contributions of this work are:
 \begin{itemize}
 	\item Survival analysis models for analyzing ML models under adversarial perturbations with substantial empirical evidence that survival analysis is both effective and dataset-agnostic, allowing for the expected failure rate to be predicted more precisely and accurately than with either adversarial or benign accuracy alone.
 	\item Survival analysis models to measure model robustness across a wide variety of signal pre-processing techniques, exploring the relationships between latency, accuracy, and model depth.
-	\item A novel metric: The \textit{Training Rate And Survival Heuristic For Inference and Robustness Evaluation} (TRASHFIRE) to evaluate whether or not a model is robust to adversarial attacks in a time- and compute-constrained context.
+	\item A novel metric: The \textit{training rate and survival heuristic } (TRASH) \textit{for inference and robustness evaluation} (FIRE) to evaluate whether or not a model is robust to adversarial attacks in a time- and compute-constrained context.
 	\item Substantial empirical evidence that larger neural networks increase training and prediction time while adding little-to-no benefit in the presence of an adversary.
 \end{itemize}
