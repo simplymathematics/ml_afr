@@ -7,14 +7,14 @@ stages:
       md5: 04f793df45964622106e4fced993abef
       size: 1954
     - path: 1-introduction.tex
-      md5: 74cfd715e1a7320f62ceba035af31017
-      size: 5715
+      md5: c06659d58341e9a1393018b62c8cce3d
+      size: 5714
     - path: 2-background.tex
       md5: 11a6d5c35065c130da2ad93b5e210cc2
       size: 7856
     - path: 3-aft.tex
-      md5: 1515d125e1ba000ca218fac2e47cb570
-      size: 12677
+      md5: 1e79340323abb803eb1d8aff465d04bb
+      size: 12675
     - path: 4-methods.tex
       md5: c32ec288fe1609ea8fab6955b3ae1f7b
       size: 10109
@@ -35,13 +35,13 @@ stages:
       md5: 650e102df9c16a6bffcba1e4b42cbcf3
       size: 24962
     - path: main.log
-      md5: 2cad8da8d706539035e656ac01f957df
+      md5: 08f57e5b7955e78ce08b8b52b5242fbb
       size: 58348
     - path: main.out
       md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
     - path: main.pdf
-      md5: c3e4da1f6718e2c26360648564a2257a
+      md5: 65f0eccc94b36d8aca43ca55122b5754
       size: 533176
     - path: main.run.xml
       md5: 2d22ad067e0890475f0a21e186e23136
@@ -126,3 +126,33 @@ stages:
         (TRASHFIRE).zip
       md5: 641ba9c7d51d639059372a3f93ca228d
       size: 8030598
+  pre-commmit:
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1
+    deps:
+    - path: .pre-commit-config.yaml
+      md5: cac5e29a25010f135d7538fd6d966311
+      size: 1414
+    - path: 0-abstract.tex
+      md5: 04f793df45964622106e4fced993abef
+      size: 1954
+    - path: 1-introduction.tex
+      md5: c06659d58341e9a1393018b62c8cce3d
+      size: 5714
+    - path: 2-background.tex
+      md5: 11a6d5c35065c130da2ad93b5e210cc2
+      size: 7856
+    - path: 3-aft.tex
+      md5: 1e79340323abb803eb1d8aff465d04bb
+      size: 12675
+    - path: 4-methods.tex
+      md5: c32ec288fe1609ea8fab6955b3ae1f7b
+      size: 10109
+    - path: 5-results.tex
+      md5: ae2a3345157baf9a1b4d3a667ee626cf
+      size: 10619
+    - path: 6-conclusions.tex
+      md5: f2f0c5930174d20625b31c46f5ac07b4
+      size: 5126
+    - path: main.tex
+      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
+      size: 1227
