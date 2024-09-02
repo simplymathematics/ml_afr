@@ -1,11 +1,8 @@
 stages:
-  generate_plots:
-    cmd: cd generate_plots && dvc repro && cd ..
   pre-commmit:
     cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1 # Suppresses warnings 8 (dash length), 24 (\labels inside floats), and 1 (trailing whitespace following and command)
     deps:
       - .pre-commit-config.yaml
-      - main.tex
       - 0-abstract.tex
       - 1-introduction.tex
       - 2-background.tex
@@ -13,6 +10,8 @@ stages:
       - 4-methods.tex
       - 5-results.tex
       - 6-conclusions.tex
+      - generate_plots/
+      - plots/
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -30,39 +29,24 @@ stages:
       - main.log
       - main.out
       - main.run.xml
-      - main.pdf
-  remove_unused_citations:
-    cmd: python remove-unused-citations.py bibliography.bib <( checkcites main.aux )>| new_bibliography.bib 
-    deps:
-      - main.aux
-      - bibliography.bib
-      - remove-unused-citations.py
-    outs:
-      - new_bibliography.bib
-  replace_bib:
-    cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g' new_main.tex
-    deps:
-      - new_bibliography.bib
-      - main.tex
-    outs:
-      - new_main.tex
   big_run:
-    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
+    cmd: pdflatex main.tex && bibtex main && pdflatex  main.tex && pdflatex  main.tex 
     deps:
-      - new_main.tex
-      - new_bibliography.bib
+      - main.tex
+      - bibliography.bib
+      - main-blx.bib
+      - main.aux
+      - main.log
+      - main.out
+      - main.run.xml
     outs:
-      - new_main.pdf
-      - new_main-blx.bib
-      - new_main.aux
-      - new_main.log
-      - new_main.out
-      - new_main.run.xml
-      - new_main.bbl
+      - main.bbl
+      - main.pdf
   arxiv:
-    cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)"
+    cmd: python arxiv.py --directories plots --extensions py yaml lock log csv --title "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)" --delete_these_dirs generate_plots data --delete_these_files ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
     deps:
       - arxiv.py
       - plots/
+      - main.pdf
     outs:
       - "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE).zip"

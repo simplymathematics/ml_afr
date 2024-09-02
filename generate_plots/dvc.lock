@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   copy_results:
-    cmd: mkdir -p ~/ml_afr/plots &&  cp -r plots/* ~/ml_afr/plots/
+    cmd: mkdir -p ~/ml_afr/plots && mv plots/*.pdf ../plots/ && mv plots/*.csv ../plots/
+      && mv plots/*.tex ../plots/
   afr:
     cmd: python -m deckard.layers.afr  --data_file data/merged.csv  --target adv_failures
       --duration_col adv_fit_time  --config_file afr.yaml --plots_folder plots/
@@ -190,10 +191,6 @@ stages:
       hash: md5
       md5: e5b486a192929c7a3db550717ed85a5b
       size: 366
-    - path: plots/aft_comparison.tex
-      hash: md5
-      md5: 36516111838ae7583624bf4495463521
-      size: 640
     - path: plots/cox_aft.pdf
       hash: md5
       md5: e4a20e4a2bee8a16731c93c12d50ab3d

@@ -60,6 +60,17 @@ def delete_files_with_extension(extension):
         logger.info(f'{filename} not in use - deleting.')
         os.remove(filename)
 
+def delete_these_directories(directories):
+    logger.info('Deleting these directories:', directories)
+    for dir in directories:
+        shutil.rmtree(dir)
+        
+def delete_these_files(files = []):
+    logger.info('Deleting these files:', files)
+    if files is None:
+        files = []
+    for file in files:
+        os.remove(file)
 
 def delete_image_directories(directories):
     logger.info('Deleting image directories')
@@ -106,6 +117,7 @@ def flatten_directories(directories):
                 logger.info(filename + ' is a directory.')
 
 
+
 def replace_contents(directories, tex_files):
     logger.info('Replacing contents')
     tex_files = []
@@ -129,6 +141,8 @@ def main(args):
     logfile = Path(args.logfile).as_posix()
     enc = args.enc
     tex_files = args.tex_files
+    delete_these = args.delete_these_dirs
+    delete_files = args.delete_these_files
     old_directory = os.getcwd()
     tmp_directory = tempfile.mkdtemp()
     logger.info('Temporary directory: ' + tmp_directory)
@@ -143,6 +157,8 @@ def main(args):
     if args.extensions:
         for extension in args.extensions:
             delete_files_with_extension(extension)
+    delete_these_directories(delete_these)
+    delete_these_files(delete_files)
     delete_image_directories(directories)
     os.chdir(old_directory)
     zip_tmp_directory(args.title, tmp_directory)
@@ -159,6 +175,8 @@ if __name__ == '__main__':
     parser.add_argument('--enc', help='Encoding to use.', default='Latin-1')
     parser.add_argument('--tex_files', help='Tex files to replace image directory in.', default='*.tex')
     parser.add_argument('--verbosity', help='Logging verbosity level.', default='INFO')
+    parser.add_argument('--delete_these_dirs', help='delete these directories', nargs="+")
+    parser.add_argument('--delete_these_files', help='delete these directories', nargs="+" )
     parser.add_argument('--log_file', help='Log file to use.', default='arxiv.log')
     args = parser.parse_args()
     logger.setLevel(args.verbosity)

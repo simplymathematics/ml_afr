@@ -47,7 +47,7 @@ stages:
     metrics:
       - plots/aft_comparison.csv
     outs:
-      - plots/aft_comparison.tex
+      # - plots/aft_comparison.tex
       - plots/weibull_summary.csv
       - plots/cox_summary.csv
       - plots/log_logistic_summary.csv
@@ -66,7 +66,7 @@ stages:
     deps:
       - data/merged.csv
       - afr.yaml
-      - plots/aft_comparison.tex
+      # - plots/aft_comparison.tex
       - predict_with_best.py
     outs:
       - data/merged_afr.csv
@@ -95,4 +95,4 @@ stages:
         - covariates
         - weibull
   copy_results:
-      cmd: mkdir -p ~/ml_afr/plots &&  cp -r plots/* ~/ml_afr/plots/
+      cmd: mkdir -p ~/ml_afr/plots && mv plots/*.pdf ../plots/ && mv plots/*.csv ../plots/ && mv plots/*.tex ../plots/

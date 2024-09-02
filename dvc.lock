@@ -32,17 +32,16 @@ stages:
       md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
       size: 342
     - path: main.aux
-      md5: 650e102df9c16a6bffcba1e4b42cbcf3
-      size: 24962
+      hash: md5
+      md5: 98cfc99633ad530c7191e5c444940c17
+      size: 32506
     - path: main.log
-      md5: 08f57e5b7955e78ce08b8b52b5242fbb
-      size: 58348
+      hash: md5
+      md5: ae4542a612a96ebd6f3290911c0399f7
+      size: 44684
     - path: main.out
       md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
-    - path: main.pdf
-      md5: 65f0eccc94b36d8aca43ca55122b5754
-      size: 533176
     - path: main.run.xml
       md5: 2d22ad067e0890475f0a21e186e23136
       size: 2558
@@ -90,17 +89,30 @@ stages:
     - path: 6-conclusions.tex
       md5: f2f0c5930174d20625b31c46f5ac07b4
       size: 5126
-    - path: main.tex
-      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
-      size: 1227
+    - path: generate_plots/
+      hash: md5
+      md5: 13caf405c3bbbfb99860d566c536dfa1.dir
+      size: 31788590
+      nfiles: 47
+    - path: plots/
+      hash: md5
+      md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
+      size: 1204454
+      nfiles: 36
   arxiv:
-    cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title
+    cmd: python arxiv.py --directories plots --extensions py yaml lock log csv --title
       "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
-      (TRASHFIRE)"
+      (TRASHFIRE)" --delete_these_dirs generate_plots data --delete_these_files ".dvcignore"
+      "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
     deps:
     - path: arxiv.py
-      md5: f5bb6d08229986ad1aef6393da99720d
-      size: 6958
+      hash: md5
+      md5: db4571f4da17bea8a89d965a5fc29cb3
+      size: 7647
+    - path: main.pdf
+      hash: md5
+      md5: 3372cda4f37cca45aa1aa4aa5a884d1d
+      size: 553728
     - path: plots/
       hash: md5
       md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
@@ -110,8 +122,8 @@ stages:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: e07f3736aa4c437b679c2166b5cd9b08
-      size: 14163343
+      md5: 880813f2ca0b61cad38d0d4f662596da
+      size: 972108
   replace_bib:
     cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
       new_main.tex
@@ -129,43 +141,42 @@ stages:
   generate_plots:
     cmd: cd generate_plots && dvc repro && cd ..
   big_run:
-    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
-      && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
+    cmd: pdflatex main.tex && bibtex main && pdflatex  main.tex && pdflatex  main.tex
     deps:
-    - path: new_bibliography.bib
+    - path: bibliography.bib
       hash: md5
       md5: c0c3d6a261b08978933c91e2f072a4fb
       size: 63506
-    - path: new_main.tex
-      hash: md5
-      md5: 7e5afc58b37603ad9988d2b342d19748
-      size: 1231
-    outs:
-    - path: new_main-blx.bib
+    - path: main-blx.bib
       hash: md5
       md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
       size: 342
-    - path: new_main.aux
+    - path: main.aux
       hash: md5
-      md5: f63c78f2137148f9a55fd2395930ccb2
-      size: 32540
-    - path: new_main.bbl
+      md5: 1eb11e31a588846fbd0073fd2ca728d2
+      size: 32532
+    - path: main.log
       hash: md5
-      md5: b511e039fa4daa447436ba79f70e8a5e
-      size: 68168
-    - path: new_main.log
-      hash: md5
-      md5: d90bd3bd7dc51afa32a242d804cf591c
-      size: 38864
-    - path: new_main.out
+      md5: a0161338d5114a7056a149337c64e8ad
+      size: 38804
+    - path: main.out
       hash: md5
       md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
-    - path: new_main.pdf
+    - path: main.run.xml
       hash: md5
-      md5: 7204e5868a379087de5903f72deab04e
+      md5: 1056460de672bb6595b4747057946212
+      size: 2558
+    - path: main.tex
+      hash: md5
+      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
+      size: 1227
+    outs:
+    - path: main.bbl
+      hash: md5
+      md5: b511e039fa4daa447436ba79f70e8a5e
+      size: 68168
+    - path: main.pdf
+      hash: md5
+      md5: 3372cda4f37cca45aa1aa4aa5a884d1d
       size: 553728
-    - path: new_main.run.xml
-      hash: md5
-      md5: 61f7020ecb7b15a652cad2823b690dc4
-      size: 2598
