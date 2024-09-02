@@ -1,173 +1,114 @@
 schema: '2.0'
 stages:
-  prepare_images@cifar100:
-    cmd: python flatten.py --directories cifar100
+  first_run:
+    cmd: pdflatex  main.tex
     deps:
-    - path: cifar100/
-      md5: db24398d5c6ceb7b5f9f3096873d861b.dir
-      size: 2122108
-      nfiles: 15
-    - path: flatten.py
-      md5: d203bc3a88a44cda3b794373cb379b25
-      size: 2761
+    - path: 0-abstract.tex
+      md5: 04f793df45964622106e4fced993abef
+      size: 1954
+    - path: 1-introduction.tex
+      md5: 74cfd715e1a7320f62ceba035af31017
+      size: 5715
+    - path: 2-background.tex
+      md5: 11a6d5c35065c130da2ad93b5e210cc2
+      size: 7856
+    - path: 3-aft.tex
+      md5: 1515d125e1ba000ca218fac2e47cb570
+      size: 12677
+    - path: 4-methods.tex
+      md5: c32ec288fe1609ea8fab6955b3ae1f7b
+      size: 10109
+    - path: 5-results.tex
+      md5: ae2a3345157baf9a1b4d3a667ee626cf
+      size: 10619
+    - path: 6-conclusions.tex
+      md5: f2f0c5930174d20625b31c46f5ac07b4
+      size: 5126
+    - path: main.tex
+      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
+      size: 1227
     outs:
-    - path: cifar100_adv_accuracy_vs_attack_type.eps
-      md5: 84ae160447ea8cd7a872a982c3837584
-      size: 109746
-    - path: cifar100_adv_accuracy_vs_defence_type.eps
-      md5: 169b34edcb168e2f4211adf87b3d42a4
-      size: 106548
-    - path: cifar100_adv_failure_rate_vs_train_time.eps
-      md5: 7765a2b879024f4fb1f3cdb570245e1e
-      size: 1119464
-    - path: cifar100_adv_failures_per_train_time_vs_attack_type.eps
-      md5: 74902bab65c6ce8dd989a45e625cf1d6
-      size: 133752
-    - path: cifar100_adv_failures_per_train_time_vs_defence_type.eps
-      md5: 20fd22282e92660fb6107bf188fb3a84
-      size: 121862
-    - path: cifar100_aft_comparison.tex
-      md5: e3d53b838dd94b98800609ed0c9c5e11
-      size: 606
-    - path: cifar100_atk_param_vs_accuracy.eps
-      md5: 73631441b3a77a334c42f560e72fc292
-      size: 39663
-    - path: cifar100_ben_accuracy_vs_defence_type.eps
-      md5: 855f2ecd30b8a10b2e9e822640607f37
-      size: 113268
-    - path: cifar100_ben_failures_per_train_time_vs_defence_type.eps
-      md5: 5dfd57f90bd338c0572a64551e1f335a
-      size: 118866
-    - path: cifar100_def_param_vs_accuracy.eps
-      md5: 764051dc8f8a0b3c6a575331c88ad16b
-      size: 38049
-    - path: cifar100_def_param_vs_adv_failure_rate.eps
-      md5: 0922c6158a32388cc3862bfb27c079e3
-      size: 36997
-    - path: cifar100_log_logistic_aft.eps
-      md5: 34accbd27057bb8b16e1e3718606defd
-      size: 46636
-    - path: cifar100_log_normal_aft.eps
-      md5: ec35034e57bd31921afa05a92cab9ea5
-      size: 47394
-    - path: cifar100_log_normal_layers_partial_effect.eps
-      md5: 10290e8299562af43b0a6a8a018de2eb
-      size: 44746
-    - path: cifar100_weibull_aft.eps
-      md5: 29e366d68d0399782e0e57307d068923
-      size: 44511
-  prepare_images@cifar:
-    cmd: python flatten.py --directories cifar
+    - path: main-blx.bib
+      md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
+      size: 342
+    - path: main.aux
+      md5: 650e102df9c16a6bffcba1e4b42cbcf3
+      size: 24962
+    - path: main.log
+      md5: 2cad8da8d706539035e656ac01f957df
+      size: 58348
+    - path: main.out
+      md5: b84a5d8e707eff7228408123f5b93bfd
+      size: 4698
+    - path: main.pdf
+      md5: c3e4da1f6718e2c26360648564a2257a
+      size: 533176
+    - path: main.run.xml
+      md5: 2d22ad067e0890475f0a21e186e23136
+      size: 2558
+  remove_unused_citations:
+    cmd: python remove-unused-citations.py bibliography.bib <( checkcites main.aux
+      )>| new_bibliography.bib
     deps:
-    - path: cifar/
-      md5: 81162598277558bb2a8294e9a85bee50.dir
-      size: 1408806
-      nfiles: 15
-    - path: flatten.py
-      md5: d203bc3a88a44cda3b794373cb379b25
-      size: 2761
+    - path: bibliography.bib
+      md5: c0c3d6a261b08978933c91e2f072a4fb
+      size: 63506
+    - path: main.aux
+      md5: 650e102df9c16a6bffcba1e4b42cbcf3
+      size: 24962
+    - path: remove-unused-citations.py
+      md5: 927290ac3e417fb12efe93114b14f9d1
+      size: 1341
     outs:
-    - path: cifar_adv_accuracy_vs_attack_type.eps
-      md5: 431ebcf1cc479efa45e5c62c588561d6
-      size: 106575
-    - path: cifar_adv_accuracy_vs_defence_type.eps
-      md5: 38ce13bff5e61190e16510c27ed461fc
-      size: 98548
-    - path: cifar_adv_failure_rate_vs_train_time.eps
-      md5: 3bba94e6de8929e3c69f646a308fbeea
-      size: 507471
-    - path: cifar_adv_failures_per_train_time_vs_attack_type.eps
-      md5: a8081610bed13d152fb9fa16c0ce0667
-      size: 117314
-    - path: cifar_adv_failures_per_train_time_vs_defence_type.eps
-      md5: 3298a2b26bbf3c729a8ebacb0be3a190
-      size: 99649
-    - path: cifar_aft_comparison.tex
-      md5: 569cc492fdd774c0a0af506af6724696
-      size: 600
-    - path: cifar_atk_param_vs_accuracy.eps
-      md5: 8aad83470b03ad67c6da20118c3db8a7
-      size: 37519
-    - path: cifar_ben_accuracy_vs_defence_type.eps
-      md5: 7aebdfba87139e9eeb5aa2db360769b7
-      size: 83244
-    - path: cifar_ben_failures_per_train_time_vs_defence_type.eps
-      md5: 0ebab1801507e829505743aca2f0382f
-      size: 96490
-    - path: cifar_def_param_vs_accuracy.eps
-      md5: dbdf3817907a801c76c9609f03604158
-      size: 37876
-    - path: cifar_def_param_vs_adv_failure_rate.eps
-      md5: 90329883d47233ed28a238e4b7fd0d46
-      size: 39890
-    - path: cifar_log_logistic_aft.eps
-      md5: 4b86aff4f085c05963e16f7083ed9d88
-      size: 46602
-    - path: cifar_log_normal_aft.eps
-      md5: fd0feb4a9f3fae154044354568441086
-      size: 47357
-    - path: cifar_log_normal_layers_partial_effect.eps
-      md5: d07f8960404fb5e58cef9d9d478225af
-      size: 43910
-    - path: cifar_weibull_aft.eps
-      md5: 784605f2ecdb2a8a24c6c8ad6e84b60a
-      size: 45761
-  prepare_images@mnist:
-    cmd: python flatten.py --directories mnist
+    - path: new_bibliography.bib
+      md5: c0c3d6a261b08978933c91e2f072a4fb
+      size: 63506
+  replace_bib:
+    cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
+      new_main.tex
     deps:
-    - path: flatten.py
-      md5: d203bc3a88a44cda3b794373cb379b25
-      size: 2761
-    - path: mnist/
-      md5: 870d669ff1855ee247fe09cea10e6e29.dir
-      size: 1779456
-      nfiles: 15
+    - path: main.tex
+      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
+      size: 1227
+    - path: new_bibliography.bib
+      md5: c0c3d6a261b08978933c91e2f072a4fb
+      size: 63506
     outs:
-    - path: mnist_adv_accuracy_vs_attack_type.eps
-      md5: 9ff93eaf038b28213e06d2ea38f3e1c9
-      size: 113600
-    - path: mnist_adv_accuracy_vs_defence_type.eps
-      md5: 9a6efbb1b3a2e56bede2f3ba86d139c8
-      size: 105721
-    - path: mnist_adv_failure_rate_vs_train_time.eps
-      md5: 48ce0007c4753735bd8e473893979e2f
-      size: 798746
-    - path: mnist_adv_failures_per_train_time_vs_attack_type.eps
-      md5: ea1ca56a74c43f0a5085bcff31c4fab7
-      size: 123494
-    - path: mnist_adv_failures_per_train_time_vs_defence_type.eps
-      md5: 90541490880cd0cd91f2c56493d42140
-      size: 116302
-    - path: mnist_aft_comparison.tex
-      md5: 0034975eb38ed6deb1b6f325f714571f
-      size: 600
-    - path: mnist_atk_param_vs_accuracy.eps
-      md5: 9d705bb761229f7d0a793c8cbe98c2ce
-      size: 37595
-    - path: mnist_ben_accuracy_vs_defence_type.eps
-      md5: 77e57d983fac16bf0ebc603571cb8198
-      size: 101387
-    - path: mnist_ben_failures_per_train_time_vs_defence_type.eps
-      md5: 8283265b875a97ded978bc453c330c54
-      size: 116879
-    - path: mnist_def_param_vs_accuracy.eps
-      md5: 99366d86bd200d2cb06d68a57143509f
-      size: 38918
-    - path: mnist_def_param_vs_adv_failure_rate.eps
-      md5: 3ef4570eef03a5b0da4a5a9388feb941
-      size: 40619
-    - path: mnist_log_logistic_aft.eps
-      md5: 9330a8f658e0f6e7c64bbf44c9df21a2
-      size: 46346
-    - path: mnist_log_normal_aft.eps
-      md5: a34130b884bcd593fe4922fac9258433
-      size: 48850
-    - path: mnist_log_normal_layers_partial_effect.eps
-      md5: d0c8f3f9d7229bdcf196b23c585720e2
-      size: 44637
-    - path: mnist_weibull_aft.eps
-      md5: 90018d131799658a4f736789c22c7b8f
-      size: 45762
+    - path: new_main.tex
+      md5: 7e5afc58b37603ad9988d2b342d19748
+      size: 1231
+  big_run:
+    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
+      && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
+    deps:
+    - path: new_bibliography.bib
+      md5: c0c3d6a261b08978933c91e2f072a4fb
+      size: 63506
+    - path: new_main.tex
+      md5: 7e5afc58b37603ad9988d2b342d19748
+      size: 1231
+    outs:
+    - path: new_main-blx.bib
+      md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
+      size: 342
+    - path: new_main.aux
+      md5: f63c78f2137148f9a55fd2395930ccb2
+      size: 32540
+    - path: new_main.bbl
+      md5: b511e039fa4daa447436ba79f70e8a5e
+      size: 68168
+    - path: new_main.log
+      md5: 13ae0d6bca9d7b50adb3164fb6f7d262
+      size: 38864
+    - path: new_main.out
+      md5: b84a5d8e707eff7228408123f5b93bfd
+      size: 4698
+    - path: new_main.pdf
+      md5: 9edbdc1a9f21a7719dbb2b7263e5f6a0
+      size: 553728
+    - path: new_main.run.xml
+      md5: 61f7020ecb7b15a652cad2823b690dc4
+      size: 2598
   arxiv:
     cmd: python arxiv.py --directories plots --extensions pdf py yaml csv --title
       "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
@@ -177,229 +118,11 @@ stages:
       md5: f5bb6d08229986ad1aef6393da99720d
       size: 6958
     - path: plots/
-      hash: md5
-      md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
-      size: 1204454
+      md5: 39e8e8ba896e61564d1d792328777a8f.dir
+      size: 1204455
       nfiles: 36
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
-      hash: md5
-      md5: e07f3736aa4c437b679c2166b5cd9b08
-      size: 14163343
-  first_run:
-    cmd: pdflatex  main.tex
-    deps:
-    - path: 0-abstract.tex
-      hash: md5
-      md5: 04f793df45964622106e4fced993abef
-      size: 1954
-    - path: 1-introduction.tex
-      hash: md5
-      md5: f1fe090a94a9fca51481c117961a23cb
-      size: 5739
-    - path: 2-background.tex
-      hash: md5
-      md5: e9e3b0be0959b80ce1030e443c700033
-      size: 9143
-    - path: 3-aft.tex
-      hash: md5
-      md5: e49d18816370ac9057e0009d1e2f4457
-      size: 12659
-    - path: 4-methods.tex
-      hash: md5
-      md5: b273b6d94459d27f62a5639bdd17e524
-      size: 9950
-    - path: 5-results.tex
-      hash: md5
-      md5: eead395c6e9fc4a4b61b79215249b243
-      size: 10436
-    - path: 6-conclusions.tex
-      hash: md5
-      md5: 3d66402da8bff7cc068a708f172adbb8
-      size: 5133
-    - path: main.tex
-      hash: md5
-      md5: 2619d7416e5a62d0c613f4ab28aa5a76
-      size: 1217
-    outs:
-    - path: main-blx.bib
-      hash: md5
-      md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
-      size: 342
-    - path: main.aux
-      hash: md5
-      md5: 5d002a2545af75cd7f31e07f49cafae4
-      size: 23830
-    - path: main.log
-      hash: md5
-      md5: a12c02f122832c3e5bff3c5e67b6dd2c
-      size: 58009
-    - path: main.out
-      hash: md5
-      md5: b84a5d8e707eff7228408123f5b93bfd
-      size: 4698
-    - path: main.pdf
-      hash: md5
-      md5: ab14884946314451990e4df48b7d39c8
-      size: 535841
-    - path: main.run.xml
-      hash: md5
-      md5: 2d22ad067e0890475f0a21e186e23136
-      size: 2558
-  bibtex:
-    cmd: bibtex main
-    deps:
-    - path: bibliography.bib
-      hash: md5
-      md5: da181c0ccc91a95acc3060e33681f9d3
-      size: 62310
-    - path: main-blx.bib
-      hash: md5
-      md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
-      size: 342
-    - path: main.aux
-      hash: md5
-      md5: 84dfbeb551d9873cd443d807f5d3af55
-      size: 31308
-    - path: main.log
-      hash: md5
-      md5: 5631654bf204bd79cfcff83c3dc5aab7
-      size: 50137
-    - path: main.out
-      hash: md5
-      md5: 336943489b1b4629c41ebe3dcc90963a
-      size: 4698
-    - path: main.pdf
-      hash: md5
-      md5: 9eb494d7df4ef32f0c8aaa1159e56fde
-      size: 567938
-    - path: main.run.xml
-      hash: md5
-      md5: 2d22ad067e0890475f0a21e186e23136
-      size: 2558
-    outs:
-    - path: main.bbl
-      hash: md5
-      md5: 86e6dd17e2e832df52df8a6380189f34
-      size: 67311
-  remove_unused_citations:
-    cmd: python remove-unused-citations.py bibliography.bib <( checkcites main.aux
-      )>| new_bibliography.bib
-    deps:
-    - path: bibliography.bib
-      hash: md5
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-    - path: main.aux
-      hash: md5
-      md5: 5d002a2545af75cd7f31e07f49cafae4
-      size: 23830
-    - path: remove-unused-citations.py
-      hash: md5
-      md5: 927290ac3e417fb12efe93114b14f9d1
-      size: 1341
-    outs:
-    - path: new_bibliography.bib
-      hash: md5
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-  replace_bib:
-    cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
-      new_main.tex
-    deps:
-    - path: main.tex
-      hash: md5
-      md5: 2619d7416e5a62d0c613f4ab28aa5a76
-      size: 1217
-    - path: new_bibliography.bib
-      hash: md5
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-    outs:
-    - path: new_main.tex
-      hash: md5
-      md5: 0fa1f85694fcddeb9ec089c9d1cb16f4
-      size: 1221
-  big_run:
-    cmd: pdflatex new_main.tex && bibtex new_main && pdflatex  new_main.tex && pdflatex  new_main.tex
-      && rm -rf main.pdf main-blx.bib main.aux main.log main.out main.run.xml main.bbl
-    deps:
-    - path: new_bibliography.bib
-      hash: md5
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-    - path: new_main.tex
-      hash: md5
-      md5: 0fa1f85694fcddeb9ec089c9d1cb16f4
-      size: 1221
-    outs:
-    - path: new_main-blx.bib
-      hash: md5
-      md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
-      size: 342
-    - path: new_main.aux
-      hash: md5
-      md5: 607c25e74b49cc47f2139e82f8694ae2
-      size: 31408
-    - path: new_main.bbl
-      hash: md5
-      md5: b511e039fa4daa447436ba79f70e8a5e
-      size: 68168
-    - path: new_main.log
-      hash: md5
-      md5: f4e3f9d9a5cac831dc87573ce90575d8
-      size: 38648
-    - path: new_main.out
-      hash: md5
-      md5: b84a5d8e707eff7228408123f5b93bfd
-      size: 4698
-    - path: new_main.pdf
-      hash: md5
-      md5: 18d865c9a3bc913a2dd54c4bf2b97c7d
-      size: 557732
-    - path: new_main.run.xml
-      hash: md5
-      md5: 61f7020ecb7b15a652cad2823b690dc4
-      size: 2598
-  pre-commmit:
-    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1
-    deps:
-    - path: .pre-commit-config.yaml
-      hash: md5
-      md5: cac5e29a25010f135d7538fd6d966311
-      size: 1414
-    - path: 0-abstract.tex
-      hash: md5
-      md5: 04f793df45964622106e4fced993abef
-      size: 1954
-    - path: 1-introduction.tex
-      hash: md5
-      md5: f1fe090a94a9fca51481c117961a23cb
-      size: 5739
-    - path: 2-background.tex
-      hash: md5
-      md5: e9e3b0be0959b80ce1030e443c700033
-      size: 9143
-    - path: 3-aft.tex
-      hash: md5
-      md5: e49d18816370ac9057e0009d1e2f4457
-      size: 12659
-    - path: 4-methods.tex
-      hash: md5
-      md5: b273b6d94459d27f62a5639bdd17e524
-      size: 9950
-    - path: 5-results.tex
-      hash: md5
-      md5: eead395c6e9fc4a4b61b79215249b243
-      size: 10436
-    - path: 6-conclusions.tex
-      hash: md5
-      md5: 3d66402da8bff7cc068a708f172adbb8
-      size: 5133
-    - path: main.tex
-      hash: md5
-      md5: 2619d7416e5a62d0c613f4ab28aa5a76
-      size: 1217
-  generate_plots:
-    cmd: cd generate_plots && dvc repro && cd ..
+      md5: 641ba9c7d51d639059372a3f93ca228d
+      size: 8030598
