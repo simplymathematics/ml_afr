@@ -61,12 +61,12 @@ def delete_files_with_extension(extension):
         os.remove(filename)
 
 def delete_these_directories(directories):
-    logger.info('Deleting these directories:', directories)
+    logger.info(f'Deleting these directories: {directories}')
     for dir in directories:
         shutil.rmtree(dir)
-        
+
 def delete_these_files(files = []):
-    logger.info('Deleting these files:', files)
+    logger.info(f'Deleting these files:{files}')
     if files is None:
         files = []
     for file in files:
@@ -76,22 +76,22 @@ def delete_image_directories(directories):
     logger.info('Deleting image directories')
     for directory in directories:
         if Path(directory).exists():
-            logger.info('Removing ' + directory + ' directory.')
+            logger.info(f'Removing {directory} directory.')
             shutil.rmtree(directory)
 
 
 def zip_tmp_directory(title, tmp_directory):
-    logger.info('Zipping temporary directory: ' + tmp_directory)
+    logger.info(f'Zipping temporary directory: {tmp_directory}')
     shutil.make_archive(f"{title}", 'zip', tmp_directory)
 
 
 def delete_tmp_directory_final(tmp_directory):
-    logger.info('Deleting temporary directory: ' + tmp_directory)
+    logger.info(f'Deleting temporary directory: {tmp_directory}')
     shutil.rmtree(tmp_directory)
 
 
 def delete_tmp_directory(tmp_directory):
-    logger.info('Deleting temporary directory: ' + tmp_directory)
+    logger.info(f"Deleting temporary directory: {tmp_directory}")
     if Path(tmp_directory).exists():
         shutil.rmtree(tmp_directory)
     else:
@@ -102,10 +102,7 @@ def flatten_directories(directories):
     logger.info('Flattening directories')
     for directory in directories:
         if not Path(directory).exists():
-            logger.info(directory + ' does not exist.')
-            logger.info('Current working directory: ' + os.getcwd())
-            logger.info('Contents of current working directory: ' + str(os.listdir()))
-            input('Press enter to continue.')
+            logger.error(directory + ' does not exist.')
             exit()
         else:
             logger.info('Flattening ' + directory + ' directory.')
@@ -121,14 +118,17 @@ def flatten_directories(directories):
 def replace_contents(directories, tex_files):
     logger.info('Replacing contents')
     tex_files = []
-    for dir in directories:
+    print(f"Tex files: {tex_files}")
+    for dir in '.':
         tex_files.extend(Path(dir).glob(args.tex_files))
+    # Resolve the paths
+    tex_files = [str(tex_file.as_posix()) for tex_file in tex_files]
     for tex_file in tex_files:
         logger.info('Replacing image directory in ' + str(tex_file) + '.')
         with open(tex_file, 'r+') as f:
             content = f.read()
             for directory in directories:
-                logger.info('Replacing ' + directory + ' with ' + directory + '_')
+                logger.info(f"Replacing {directory}/ with {directory}_")
                 content = content.replace(directory + '/', directory + '_')
             f.seek(0)
             f.write(content)
@@ -144,7 +144,7 @@ def main(args):
     delete_these = args.delete_these_dirs
     delete_files = args.delete_these_files
     old_directory = os.getcwd()
-    tmp_directory = tempfile.mkdtemp()
+    tmp_directory = args.temporary_directory if args.temporary_directory else tempfile.mkdtemp()
     logger.info('Temporary directory: ' + tmp_directory)
     create_tmp_directory(tmp_directory)
     copy_files_to_tmp_directory(tmp_directory)
@@ -162,7 +162,8 @@ def main(args):
     delete_image_directories(directories)
     os.chdir(old_directory)
     zip_tmp_directory(args.title, tmp_directory)
-    delete_tmp_directory_final(tmp_directory)
+    if tmp_directory is None:
+        delete_tmp_directory_final(tmp_directory)
     assert Path(f"{args.title}.zip").exists(), "Zip file does not exist."
 
 
@@ -178,6 +179,7 @@ if __name__ == '__main__':
     parser.add_argument('--delete_these_dirs', help='delete these directories', nargs="+")
     parser.add_argument('--delete_these_files', help='delete these directories', nargs="+" )
     parser.add_argument('--log_file', help='Log file to use.', default='arxiv.log')
+    parser.add_argument("--temporary_directory", help="Temporary directory to use.", default=None)
     args = parser.parse_args()
     logger.setLevel(args.verbosity)
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')

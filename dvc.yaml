@@ -1,4 +1,5 @@
 stages:
+
   pre-commmit:
     cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1 # Suppresses warnings 8 (dash length), 24 (\labels inside floats), and 1 (trailing whitespace following and command)
     deps:
@@ -43,7 +44,13 @@ stages:
       - main.bbl
       - main.pdf
   arxiv:
-    cmd: python arxiv.py --directories plots --extensions py yaml lock log csv --title "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)" --delete_these_dirs generate_plots data --delete_these_files ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
+    cmd: >-
+      python arxiv.py 
+      --title "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)" 
+      --directories plots 
+      --delete_these_dirs generate_plots data tmp
+      --extensions py yaml lock log csv 
+      --delete_these_files ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
     deps:
       - arxiv.py
       - plots/
