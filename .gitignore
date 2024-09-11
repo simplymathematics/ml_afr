@@ -25,3 +25,4 @@ texput.log
 arxiv.log
 generate_plots/deckard.log
 *.ipynb
+/tmp

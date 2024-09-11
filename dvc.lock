@@ -91,39 +91,40 @@ stages:
       size: 5126
     - path: generate_plots/
       hash: md5
-      md5: 13caf405c3bbbfb99860d566c536dfa1.dir
-      size: 31788590
+      md5: 4c9f9363a73036fd4be8002c63e20d0f.dir
+      size: 31794787
       nfiles: 47
     - path: plots/
       hash: md5
-      md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
-      size: 1204454
+      md5: 6b843a6de54d2bb6f52250a184b2247d.dir
+      size: 1200764
       nfiles: 36
   arxiv:
-    cmd: python arxiv.py --directories plots --extensions py yaml lock log csv --title
-      "A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
-      (TRASHFIRE)" --delete_these_dirs generate_plots data --delete_these_files ".dvcignore"
-      "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
+    cmd: python arxiv.py  --title "A Training Rate and Survival Heuristic for Inference
+      and Robustness Evaluation (TRASHFIRE)"  --directories plots  --delete_these_dirs
+      generate_plots data tmp --extensions py yaml lock log csv  --delete_these_files
+      ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib"
+      "main.pdf"
     deps:
     - path: arxiv.py
       hash: md5
-      md5: db4571f4da17bea8a89d965a5fc29cb3
-      size: 7647
+      md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
+      size: 7739
     - path: main.pdf
       hash: md5
-      md5: 3372cda4f37cca45aa1aa4aa5a884d1d
-      size: 553728
+      md5: 27c9c2e37cd438371163c06a50571a64
+      size: 553761
     - path: plots/
       hash: md5
-      md5: 8d5df2c5fa64d8a08c9ec6fac2613ff0.dir
-      size: 1204454
+      md5: 6b843a6de54d2bb6f52250a184b2247d.dir
+      size: 1200764
       nfiles: 36
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 880813f2ca0b61cad38d0d4f662596da
-      size: 972108
+      md5: 9976806682348710e6d686d836b17ddf
+      size: 971339
   replace_bib:
     cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
       new_main.tex
@@ -157,8 +158,8 @@ stages:
       size: 32532
     - path: main.log
       hash: md5
-      md5: a0161338d5114a7056a149337c64e8ad
-      size: 38804
+      md5: ca79930cf4ffebdb48055ae6272b456f
+      size: 38805
     - path: main.out
       hash: md5
       md5: b84a5d8e707eff7228408123f5b93bfd
@@ -178,5 +179,5 @@ stages:
       size: 68168
     - path: main.pdf
       hash: md5
-      md5: 3372cda4f37cca45aa1aa4aa5a884d1d
-      size: 553728
+      md5: 27c9c2e37cd438371163c06a50571a64
+      size: 553761
