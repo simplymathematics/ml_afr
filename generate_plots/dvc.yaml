@@ -95,4 +95,4 @@ stages:
         - covariates
         - weibull
   copy_results:
-      cmd: mkdir -p ~/ml_afr/plots && cp plots/*.pdf ../plots/ && cp plots/*.csv ../plots/ && cp plots/*.tex ../plots/
+      cmd: mkdir -p ~/ml_afr/plots && cp plots/*.pdf ../plots/ && cp plots/*.csv ../data/ && cp plots/*.tex ../plots/

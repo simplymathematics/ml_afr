@@ -37,8 +37,8 @@ stages:
       size: 5126
     - path: generate_plots/
       hash: md5
-      md5: d68fce2cd77bc4abc937a8d9ef907da9.dir
-      size: 31814474
+      md5: f2127c4e2c08315b771e9c49cddef2e3.dir
+      size: 31822566
       nfiles: 48
     - path: plots/
       hash: md5
@@ -91,7 +91,7 @@ stages:
       size: 32506
     - path: main.log
       hash: md5
-      md5: bf2f4c96e27f381e422bc0186dd1b103
+      md5: c71fd79b35a2f2051d258c00f331d171
       size: 44686
     - path: main.out
       hash: md5
@@ -106,8 +106,8 @@ stages:
     deps:
     - path: bibliography.bib
       hash: md5
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
+      md5: de40aec17548f37d81ed422d7c131ce9
+      size: 63508
     - path: main-blx.bib
       hash: md5
       md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
@@ -118,7 +118,7 @@ stages:
       size: 32532
     - path: main.log
       hash: md5
-      md5: fb8c67ce11fac2ea581b82282fb34db3
+      md5: c8131c63a3ab3082e567a2354718eac4
       size: 38806
     - path: main.out
       hash: md5
@@ -139,7 +139,7 @@ stages:
       size: 68168
     - path: main.pdf
       hash: md5
-      md5: b93eee93f1d0e00c30134d820f4f88ef
+      md5: c3d53f028f6faaa594d7a326cfe6c5c5
       size: 553775
   arxiv:
     cmd: python arxiv.py  --title "A Training Rate and Survival Heuristic for Inference
@@ -154,7 +154,7 @@ stages:
       size: 7739
     - path: main.pdf
       hash: md5
-      md5: b93eee93f1d0e00c30134d820f4f88ef
+      md5: c3d53f028f6faaa594d7a326cfe6c5c5
       size: 553775
     - path: plots/
       hash: md5
@@ -165,5 +165,5 @@ stages:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
       hash: md5
-      md5: 4289af472f63e80fcd6095e7f4775b49
-      size: 971396
+      md5: 9b4f87bc0ac1b58d1c54831d503abee1
+      size: 971403
