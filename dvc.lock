@@ -1,34 +1,88 @@
 schema: '2.0'
 stages:
+  pre-commmit:
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1
+    deps:
+    - path: .pre-commit-config.yaml
+      hash: md5
+      md5: cac5e29a25010f135d7538fd6d966311
+      size: 1414
+    - path: 0-abstract.tex
+      hash: md5
+      md5: 04f793df45964622106e4fced993abef
+      size: 1954
+    - path: 1-introduction.tex
+      hash: md5
+      md5: c06659d58341e9a1393018b62c8cce3d
+      size: 5714
+    - path: 2-background.tex
+      hash: md5
+      md5: 11a6d5c35065c130da2ad93b5e210cc2
+      size: 7856
+    - path: 3-aft.tex
+      hash: md5
+      md5: 1e79340323abb803eb1d8aff465d04bb
+      size: 12675
+    - path: 4-methods.tex
+      hash: md5
+      md5: c32ec288fe1609ea8fab6955b3ae1f7b
+      size: 10109
+    - path: 5-results.tex
+      hash: md5
+      md5: ae2a3345157baf9a1b4d3a667ee626cf
+      size: 10619
+    - path: 6-conclusions.tex
+      hash: md5
+      md5: f2f0c5930174d20625b31c46f5ac07b4
+      size: 5126
+    - path: generate_plots/
+      hash: md5
+      md5: d68fce2cd77bc4abc937a8d9ef907da9.dir
+      size: 31814474
+      nfiles: 48
+    - path: plots/
+      hash: md5
+      md5: 0ac9112c317f547f4a5b7441a77f3459.dir
+      size: 1200740
+      nfiles: 36
   first_run:
     cmd: pdflatex  main.tex
     deps:
     - path: 0-abstract.tex
+      hash: md5
       md5: 04f793df45964622106e4fced993abef
       size: 1954
     - path: 1-introduction.tex
+      hash: md5
       md5: c06659d58341e9a1393018b62c8cce3d
       size: 5714
     - path: 2-background.tex
+      hash: md5
       md5: 11a6d5c35065c130da2ad93b5e210cc2
       size: 7856
     - path: 3-aft.tex
+      hash: md5
       md5: 1e79340323abb803eb1d8aff465d04bb
       size: 12675
     - path: 4-methods.tex
+      hash: md5
       md5: c32ec288fe1609ea8fab6955b3ae1f7b
       size: 10109
     - path: 5-results.tex
+      hash: md5
       md5: ae2a3345157baf9a1b4d3a667ee626cf
       size: 10619
     - path: 6-conclusions.tex
+      hash: md5
       md5: f2f0c5930174d20625b31c46f5ac07b4
       size: 5126
     - path: main.tex
+      hash: md5
       md5: 764e44a6d2cc6e5a437d078f3d29c9b4
       size: 1227
     outs:
     - path: main-blx.bib
+      hash: md5
       md5: 5ba7332ec7ecc2dc9c6b1bd96e3d9aad
       size: 342
     - path: main.aux
@@ -37,110 +91,16 @@ stages:
       size: 32506
     - path: main.log
       hash: md5
-      md5: ae4542a612a96ebd6f3290911c0399f7
-      size: 44684
+      md5: bf2f4c96e27f381e422bc0186dd1b103
+      size: 44686
     - path: main.out
+      hash: md5
       md5: b84a5d8e707eff7228408123f5b93bfd
       size: 4698
     - path: main.run.xml
+      hash: md5
       md5: 2d22ad067e0890475f0a21e186e23136
       size: 2558
-  remove_unused_citations:
-    cmd: python remove-unused-citations.py bibliography.bib <( checkcites main.aux
-      )>| new_bibliography.bib
-    deps:
-    - path: bibliography.bib
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-    - path: main.aux
-      md5: 650e102df9c16a6bffcba1e4b42cbcf3
-      size: 24962
-    - path: remove-unused-citations.py
-      md5: 927290ac3e417fb12efe93114b14f9d1
-      size: 1341
-    outs:
-    - path: new_bibliography.bib
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-  pre-commmit:
-    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1
-    deps:
-    - path: .pre-commit-config.yaml
-      md5: cac5e29a25010f135d7538fd6d966311
-      size: 1414
-    - path: 0-abstract.tex
-      md5: 04f793df45964622106e4fced993abef
-      size: 1954
-    - path: 1-introduction.tex
-      md5: c06659d58341e9a1393018b62c8cce3d
-      size: 5714
-    - path: 2-background.tex
-      md5: 11a6d5c35065c130da2ad93b5e210cc2
-      size: 7856
-    - path: 3-aft.tex
-      md5: 1e79340323abb803eb1d8aff465d04bb
-      size: 12675
-    - path: 4-methods.tex
-      md5: c32ec288fe1609ea8fab6955b3ae1f7b
-      size: 10109
-    - path: 5-results.tex
-      md5: ae2a3345157baf9a1b4d3a667ee626cf
-      size: 10619
-    - path: 6-conclusions.tex
-      md5: f2f0c5930174d20625b31c46f5ac07b4
-      size: 5126
-    - path: generate_plots/
-      hash: md5
-      md5: 4c9f9363a73036fd4be8002c63e20d0f.dir
-      size: 31794787
-      nfiles: 47
-    - path: plots/
-      hash: md5
-      md5: 6b843a6de54d2bb6f52250a184b2247d.dir
-      size: 1200764
-      nfiles: 36
-  arxiv:
-    cmd: python arxiv.py  --title "A Training Rate and Survival Heuristic for Inference
-      and Robustness Evaluation (TRASHFIRE)"  --directories plots  --delete_these_dirs
-      generate_plots data tmp --extensions py yaml lock log csv  --delete_these_files
-      ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib"
-      "main.pdf"
-    deps:
-    - path: arxiv.py
-      hash: md5
-      md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
-      size: 7739
-    - path: main.pdf
-      hash: md5
-      md5: 27c9c2e37cd438371163c06a50571a64
-      size: 553761
-    - path: plots/
-      hash: md5
-      md5: 6b843a6de54d2bb6f52250a184b2247d.dir
-      size: 1200764
-      nfiles: 36
-    outs:
-    - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
-        (TRASHFIRE).zip
-      hash: md5
-      md5: 9976806682348710e6d686d836b17ddf
-      size: 971339
-  replace_bib:
-    cmd: cp main.tex new_main.tex &&  sed -i 's/bibliography.bib/new_bibliography.bib/g'
-      new_main.tex
-    deps:
-    - path: main.tex
-      md5: 764e44a6d2cc6e5a437d078f3d29c9b4
-      size: 1227
-    - path: new_bibliography.bib
-      md5: c0c3d6a261b08978933c91e2f072a4fb
-      size: 63506
-    outs:
-    - path: new_main.tex
-      md5: 7e5afc58b37603ad9988d2b342d19748
-      size: 1231
-  generate_plots:
-    cmd: cd generate_plots && dvc repro && cd ..
   big_run:
     cmd: pdflatex main.tex && bibtex main && pdflatex  main.tex && pdflatex  main.tex
     deps:
@@ -158,8 +118,8 @@ stages:
       size: 32532
     - path: main.log
       hash: md5
-      md5: ca79930cf4ffebdb48055ae6272b456f
-      size: 38805
+      md5: fb8c67ce11fac2ea581b82282fb34db3
+      size: 38806
     - path: main.out
       hash: md5
       md5: b84a5d8e707eff7228408123f5b93bfd
@@ -179,5 +139,31 @@ stages:
       size: 68168
     - path: main.pdf
       hash: md5
-      md5: 27c9c2e37cd438371163c06a50571a64
-      size: 553761
+      md5: b93eee93f1d0e00c30134d820f4f88ef
+      size: 553775
+  arxiv:
+    cmd: python arxiv.py  --title "A Training Rate and Survival Heuristic for Inference
+      and Robustness Evaluation (TRASHFIRE)"  --directories plots  --delete_these_dirs
+      generate_plots data tmp --extensions py yaml lock log csv  --delete_these_files
+      ".dvcignore" "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib"
+      "main.pdf"
+    deps:
+    - path: arxiv.py
+      hash: md5
+      md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
+      size: 7739
+    - path: main.pdf
+      hash: md5
+      md5: b93eee93f1d0e00c30134d820f4f88ef
+      size: 553775
+    - path: plots/
+      hash: md5
+      md5: 0ac9112c317f547f4a5b7441a77f3459.dir
+      size: 1200740
+      nfiles: 36
+    outs:
+    - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
+        (TRASHFIRE).zip
+      hash: md5
+      md5: 4289af472f63e80fcd6095e7f4775b49
+      size: 971396
