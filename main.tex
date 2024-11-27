@@ -1,4 +1,24 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[a4paper, times, 10pt,twocolumn]{article}
+\usepackage[top=4.9cm,bottom=3.7cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{ICMLC}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+%option
+%\newtheorem{definition}{Definition}
+%\newtheorem{example}{Example}
+%\renewcommand{\tablename}{TABLE}
+%\renewcommand{\figurename}{FIGURE}
+\usepackage[margin=8pt,font=footnotesize,labelfont=bf,labelsep=period
+]{caption}
+
+%balance package is an option
+%\usepackage{balance}
+%\balance
+%-------------------------------------------------------------------------
+
+
 
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
@@ -14,20 +34,25 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \usepackage{balance}
 
+
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+\pagestyle{empty}
+
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\minimise}{\textrm{minimise}}
 \DeclareMathOperator*{\maximise}{\textrm{maximise}}
 
 \begin{document}
-\title{A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE)}
-\author[1]{Charles Meyers}
-\author[2]{Mohammad Reza Saleh Sedghpour}
-\author[1]{Tommy L\"{o}fstedt}
-\author[1]{Erik Elmroth}
-\affil[1]{Department of Computing Science, Ume{\aa} University, {Ume\aa}, Sweden}
-\affil[2]{Elastisys AB}
-% \author[1]{ }
+\title{A TRAINING RATE AND SURVIVAL HEURISTIC FOR INFERENCE AND ROBUSTNESS EVALUATION (TRASHFIRE)}
+\author{\bf{\normalsize{CHARLES MEYERS${^1}$, MOHAMMAD REZA SALEH SEDGHPOUR${^{2,1}}$, TOMMY L\"{O}FSTEDT${^1}$, ERIK ELMROTH${^{1,2}}$}}\\ 
+\\
+\normalsize{$^1$Department of Computing Science, Ume{\aa} University, {Ume\aa}, Sweden}\\
+\normalsize{$^2$Elastisys AB} \\
+\normalsize{E-MAIL: cmeyers@cs.umu.se, msaleh@cs.umu.se, tommy@cs.umu.se, elmroth@cs.umu.se}\\
+\\}
+
 
 \maketitle
 \input{0-abstract}
@@ -37,6 +62,10 @@
 \input{4-methods}
 \input{5-results}
 \input{6-conclusions}
+\section*{Acknowledgements}
+Financial support has been provided in part by the Knut and Alice Wallenberg Foundation grant number 2019.0352 and by the eSSENCE Programme under the Swedish Government's Strategic Research Initiative.
+This material is based upon work supported by the Google Cloud Research Credits program with the award 42030cd8-057f-4365-aed8-1b1afa30c3ee.
+
 \printbibliography
 \end{document}
 
