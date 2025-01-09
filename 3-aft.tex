@@ -1,8 +1,10 @@
 \section{Survival Analysis for ML}
 \label{aft_models}
 
-Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_aviation,ai_luggage,ai_security,ai_prison}, but there is very little published research in the context of ML\@. However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,croce_reliable_2020,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
-In this work, we leverage evasion attacks to examine the parameterised time-to-failure -- or survival time -- denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
+Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_luggage}, but there is very little published research in the context of ML\@. 
+However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection. 
+In this work, we leverage evasion attacks to examine the parameterised time-to-failure---or survival time---denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. 
+All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
 \[
 	S_{\theta}(t) := \exp\big\{-H_{\theta}(t)\big\} := 1 - F_{\theta}(t) := 1 - \int_0^t f_\theta(u) du,
 \]
@@ -10,12 +12,12 @@ and the expected survival time is thus
 \[
 	\mathbb{E}_{S_\theta}[T] =  \int_{0}^{t^*} S_{\theta}(u) du \approx t_{\mathrm{attack}},
 \]
-where $t_{\mathrm{attack}}$ is an estimate of the time it takes for the average attacker to induce a failure subject to the condition in Equation~\ref{eq:perturbation_distance} and $t^*$ is the latest observed time (regardless of failure or success). The parameters, $\theta$, are estimated from model evaluation data such that: $h_{\theta}(t=t_{attack}) \approx 1 - \mathrm{Acc}_{\mathrm{adv}}$.
+where $t_{\mathrm{attack}}$ is an estimate of the time it takes for the average attacker to induce a failure subject to the condition in Equation~\ref{eq:perturbation_distance} and $t^*$ is the latest observed time (regardless of failure or success). 
+The parameters, $\theta$, are estimated from model evaluation data such that: $h_{\theta}(t=t_{attack}) \approx 1 - \mathrm{Acc}_{\mathrm{adv}}$.
 
-Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or automobiles)~\cite{liu2013development,lawless1995methods}. These models allow us to examine the effect of the specified covariates on the failure rate of the classifier. For manufacturing, this is done by simulating normal wear and tear on a particular component (\textit{e.g.}, a motor or aircraft sensor)~\cite{liu2013development} by exposing the component to vibration, temperatures, or impacts. For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of things like age, gender, and/or treatment on the expected survival time of a patient.
-Likewise, survival analysis can be used to estimate the time until a successful adversarial attack of an ML pipeline or component using metrics that are routinely collected as part of normal model training procedures. The covariates, for example, might be things like perturbation distance, model depth, number of training epochs, a signal processing technique, \textit{etc.}
-
-These survival analysis models can broadly be separated into two categories: proportional hazard models and accelerated failure time models, each of which is outlined in the subsections below. Furthermore, by parameterizing the performance by time, it is possible to do a cost-value analysis, as outlined in Section~\ref{cost_normalization}.
+Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or auto-mobiles)~\cite{liu2013development,lawless1995methods}. These models allow us to examine the effect of the specified covariates on the failure rate of the classifier. 
+These survival analysis models can broadly be separated into two categories: proportional hazard models and accelerated failure time models, each of which is outlined in the subsections below. 
+Furthermore, by parameterizing the performance by time, it is possible to do a cost-value analysis, as outlined in Section~\ref{cost_normalization}.
 
 
 \subsection{The Cox Proportional Hazard Model}
@@ -27,127 +29,125 @@ where $\theta_i$ is the $i$-th model parameter and $x_i$ is the measurement of t
 Additionally, unlike the accelerated failure time models discussed below, the coefficients in the Cox model, $\theta$, are interdependent (they are said to be \textit{adjusted} for each other) and, as such, their interpretation is not straightforward~\cite{collett2023modelling}.
 
 \subsection{Accelerated Failure Time Models}
-While Cox models assume that there is a multiplicative effect on the baseline hazard function, $h_0$, due to effect of a covariate, accelerated failure time (AFT) models instead assume that the effect of a covariate is to accelerate or decelerate the time in a baseline survival function, $S_0(t)$.
+While Cox models assume that there is a multiplicative effect on the baseline hazard function, $h_0$, due to the effect of a covariate, accelerated failure time (AFT) models instead assume that the effect of a covariate is to accelerate or decelerate the time in a baseline survival function, $S_0(t)$.
 Accelerated failure time models have the form
 \begin{equation} \label{eq:def_aft_model}
-	S_\theta(t) = S_0 \left( \frac{t}{\phi_\theta(x)} \right),
+	S_\theta(t) = S_0 \left( \frac{t}{\phi_\theta(x)} \right).
 \end{equation}
-where $\phi_\theta$ is an \textit{acceleration factor} that depends on the covariates, and typically $\phi_\theta(x) =  \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$. The $S_0$  is the baseline survival function, and $\theta_i$ is the $i$-th acceleration factor associated with the value of the corresponding covariate, $x_i$. Common choices for parametric AFT models are listed below. Unlike the proportional hazard model discussed above, the coefficients of AFT models have a straightforward interpretation where a value of $\Phi$ represents an $\Phi$-fold increase in failure risk~\cite{collett2023modelling} and a negative value indicates a corresponding decrease in failure risk.
+Unlike the proportional hazard model discussed above, the coefficients of AFT models have a straightforward interpretation where a value of $\theta$ represents an $\theta$-fold increase in failure risk~\cite{collett2023modelling} and a negative value indicates a corresponding decrease in failure risk.
+\cm{The survival function is commonly derived using \textit{e.g.},
+the exponential, Weibull, log-normal, log-logistic, or generalised gamma distributions~\cite{collett2023modelling}---each of which was tested in this work.}
 
-
-\subsubsection{Exponential}
-The simplest AFT model of the hazard function is one that assumes a constant value over time,
-\[
-    h(t) = \lambda,
-\]
-where $\lambda$ is the false classification rate and $t$ is time. The survival time for the exponential model can be expressed as in Equation~\ref{eq:def_aft_model} when $\phi_\theta(x) = \exp \left( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p \right) $ and
-\[
-    S_0(t) = \exp(-\lambda t),
-\]
-and if we divide $t$ by $\phi_\theta$ (letting $\phi_\theta$ consume $\lambda$), we obtain Equation~\ref{eq:def_aft_model}.
-
-
-
-
-
-\subsubsection{Weibull}
-% Translating from 5.12.1 in Collett 2023
-% Theirs --> ours
-% gamma --> sigma
-% lambda --> lambda
-Weibull models are flexible AFT models that assume the survival times, $T$, follow a Weibull distribution, as
-\[  % Collett pg. 198, line 7
-    T \sim \mathcal{W}(\lambda, \sigma),
-\]
-where $\lambda$ and $\sigma$ are scale and shape parameters of the Weibull distribution, respectively. In the Weibull AFT model, the baseline survival function is
-\[ %2 Equations after 5.66 Collett
-    S_0(t) = \exp( {-(\lambda t)}^{\frac{1}{\sigma}}).
-\]
-Let
-\[
-    \phi_\theta(x) = \exp( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p ).
-\]
-Then, the parameterised survival function can be expressed as
-\[ % Equation after 5.66 Collett
-    S_\theta(t) = \exp{ \left({- (\phi_\theta(x) t)}^{\frac{1}{\sigma}} \right)},
-\]
-letting $\phi_\theta$ consume $\lambda$.
+% \subsubsection{Exponential}
+% The simplest AFT model of the hazard function is one that assumes a constant value over time,
+% \[
+%     h(t) = \lambda,
+% \]
+% where $\lambda$ is the false classification rate and $t$ is time. The survival time for the exponential model can be expressed as in Equation~\ref{eq:def_aft_model} when $\phi_\theta(x) = \exp \left( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p \right) $ and
+% \[
+%     S_0(t) = \exp(-\lambda t),
+% \]
+% and if we divide $t$ by $\phi_\theta$ (letting $\phi_\theta$ consume $\lambda$), we obtain Equation~\ref{eq:def_aft_model}.
 
 
 
-\subsubsection{Log-Normal}
-The Log-Normal AFT model assumes that the logarithm of the survival time follows a normal distribution. This model can capture scenarios where the hazard function is not monotonic over time. The logarithm of the survival time $T$ is
-\[ % From Tommy's comment, Collet's notation
-   \log T \sim \mathcal{N}(\mu, \sigma^2),
-\]
-with mean $\mu$ and variance $\sigma^2$.
-The baseline survival function is
-\[ % First Eq. in 5.12.3
-    S_0(t) = 1 - \Phi\left( \frac{\log t - \mu}{\sigma} \right),
-\]
-where $\Phi$ is the cumulative distribution function of the standard normal distribution.
-% Phi defined under 5.10
-Let $\mu=0$ then with
-\[ % https://www.stata.com/manuals13/ststreg.pdf page 6
-    \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
-\]
-we obtain that
-\[ % Equation 5.73 in Collett 2023
-    S_{\theta}(t) = 1 - \Phi \left( \frac{\log t  -  \log(\phi_\theta(x))}{\sigma}\right).
-\]
-
-% DO NOT CHANGE ANYTHING ABOVE THIS LINE
-
-\subsubsection{Log-Logistic}
-The Log-Logistic AFT model assumes that the logarithm of the survival time follows a logistic distribution. This model is useful for capturing scenarios where the hazard function first increases and then decreases over time. The survival time $T$ is expressed as
-\[ % From Tommy's comment, Collet's notation
-    \log T \sim \mathcal{L}(\mu, \sigma),
-\]
-where $\mathcal{L}$ is a standard logistic density with mean $\mu$
-% $\phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$
-and scale parameter $\sigma > 0$.  The baseline survival function is
-\[ %
-    S_0(t) = {\left(1 + \exp\left( \frac{\log t - \mu}{\sigma} \right)\right)} ^{-1}.
-\]
-Let $\mu=0$. Then, with
-\[
-    \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
-\]
-the parameterised survival function for the Log-Logistic AFT model can be expressed as
-\[ % Equation after 5.70 in Collett
-    S_{\theta}(t) = {\left( 1 + \exp \left( \frac{\log t - \log(\phi_\theta(x))}{\sigma}\right) \right)}^{-1}.
-\]
 
 
-\subsubsection{Generalised Gamma}
-The Generalised Gamma AFT model is a flexible model that encompasses several other models as special cases, including the Exponential, Weibull, and Log-Normal models.
-With $\phi_{\theta}(x) = \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p$, the parameterised survival function can be written as
-\[
-    S_{\theta}(t) = 1 - \Gamma_{\theta}\left(\rho, {\left(\lambda \frac{t}{\phi_\theta(x)}\right)}^\beta\right),
-\]
-where $\Gamma_{\theta}$ is the incomplete Gamma function, $\lambda > 0$ is a scale parameter, and $\rho>0$ and $\beta > 0$ are shape parameters.
+% \subsubsection{Weibull}
+% Weibull models are flexible AFT models that assume the survival times, $T$, follow a Weibull distribution, as
+% \[  % Collett pg. 198, line 7
+%     T \sim \mathcal{W}(\lambda, \sigma),
+% \]
+% where $\lambda$ and $\sigma$ are scale and shape parameters of the Weibull distribution, respectively. In the Weibull AFT model, the baseline survival function is
+% \[ %2 Equations after 5.66 Collett
+%     S_0(t) = \exp( {-(\lambda t)}^{\frac{1}{\sigma}}).
+% \]
+% Let
+% \[
+%     \phi_\theta(x) = \exp( \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p ).
+% \]
+% Then, the parameterised survival function can be expressed as
+% \[ % Equation after 5.66 Collett
+%     S_\theta(t) = \exp{ \left({- (\phi_\theta(x) t)}^{\frac{1}{\sigma}} \right)},
+% \]
+% letting $\phi_\theta$ consume $\lambda$.
+
+
+
+% \subsubsection{Log-Normal}
+% The Log-Normal AFT model assumes that the logarithm of the survival time follows a normal distribution. This model can capture scenarios where the hazard function is not monotonic over time. The logarithm of the survival time $T$ is
+% \[ % From Tommy's comment, Collet's notation
+%    \log T \sim \mathcal{N}(\mu, \sigma^2),
+% \]
+% with mean $\mu$ and variance $\sigma^2$.
+% The baseline survival function is
+% \[ % First Eq. in 5.12.3
+%     S_0(t) = 1 - \Phi\left( \frac{\log t - \mu}{\sigma} \right),
+% \]
+% where $\Phi$ is the cumulative distribution function of the standard normal distribution.
+% % Phi defined under 5.10
+% Let $\mu=0$ then with
+% \[ % https://www.stata.com/manuals13/ststreg.pdf page 6
+%     \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
+% \]
+% we obtain that
+% \[ % Equation 5.73 in Collett 2023
+%     S_{\theta}(t) = 1 - \Phi \left( \frac{\log t  -  \log(\phi_\theta(x))}{\sigma}\right).
+% \]
+
+
+% \subsubsection{Log-Logistic}
+% The Log-Logistic AFT model assumes that the logarithm of the survival time follows a logistic distribution. This model is useful for capturing scenarios where the hazard function first increases and then decreases over time. The survival time $T$ is expressed as
+% \[ % From Tommy's comment, Collet's notation
+%     \log T \sim \mathcal{L}(\mu, \sigma),
+% \]
+% where $\mathcal{L}$ is a standard logistic density with mean $\mu$
+% % $\phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p)$
+% and scale parameter $\sigma > 0$.  The baseline survival function is
+% \[ %
+%     S_0(t) = {\left(1 + \exp\left( \frac{\log t - \mu}{\sigma} \right)\right)} ^{-1}.
+% \]
+% Let $\mu=0$. Then, with
+% \[
+%     \phi_\theta(x) = \exp(\theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p),
+% \]
+% the parameterised survival function for the Log-Logistic AFT model can be expressed as
+% \[ % Equation after 5.70 in Collett
+%     S_{\theta}(t) = {\left( 1 + \exp \left( \frac{\log t - \log(\phi_\theta(x))}{\sigma}\right) \right)}^{-1}.
+% \]
+
+
+% \subsubsection{Generalised Gamma}
+% The Generalised Gamma AFT model is a flexible model that encompasses several other models as special cases, including the Exponential, Weibull, and Log-Normal models.
+% With $\phi_{\theta}(x) = \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_p x_p$, the parameterised survival function can be written as
+% \[
+%     S_{\theta}(t) = 1 - \Gamma_{\theta}\left(\rho, {\left(\lambda \frac{t}{\phi_\theta(x)}\right)}^\beta\right),
+% \]
+% where $\Gamma_{\theta}$ is the incomplete Gamma function, $\lambda > 0$ is a scale parameter, and $\rho>0$ and $\beta > 0$ are shape parameters.
 
 
 
 \subsection{Survival Model Validation}
 \label{metrics}
 
-To compare the efficacy of different parametric AFT models, we use the Akaike information criterion (AIC) and the Bayesian information criterion (BIC)~\cite{stoica2004model,taddy2019business}, where the preferred model will be the one with the smallest value. We provide the
-concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{kleinbaum1996survival} and 0.5 reflects random chance. We also include graphical calibration curves (see Figure~\ref{fig:aft_models}), that depict the relationship between the fitted model (second axis) and a model fit to the data using cubic splines (first axis) as proposed by Austin \textit{et al.}~\cite{ici}. We also measured the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI) as well as the error between these curves at the 50\textsuperscript{th} percentile (E50). Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
+To compare the efficacy of different parametric AFT models, we use the Akaike information criterion (AIC) and the Bayesian information criterion (BIC)~\cite{stoica2004model}, where the preferred model will be the one with the smallest value. We provide the
+concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{uno2011c} and 0.5 reflects random chance. 
+We also include two measures of error between the fitted model (predictions) and a model fit to the data using a cubic spline (observations) as proposed by Austin \textit{et al.}~\cite{ici}. 
+The first such measure of error is the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI).
+The second metric is the error between these curves at the 50\textsuperscript{th} percentile (E50)~\cite{ici}. 
+Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
 
 \section{Failure Rates and Cost Normalisation}
 \label{cost_normalization}
 
-With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in adversarial terms can be expressed as,
+With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. 
+Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in adversarial terms can be expressed as,
 \begin{equation}
 	\bar{C}_{\mathrm{adv.}}=\frac{t_{\mathrm{train}}}{\mathbb{E}_{\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
-If $\bar{C} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
-The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic.
-The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
-We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable.
-Therefore, it be immediately discarded as \textit{broken}.
-
-% Also, by treating $\varepsilon$ as a covariate in ${S_\theta}$, these costs can be computed directly from a single survival model, using $t_{\mathrm{attack}}=t_{\mathrm{predict}}$ and $\varepsilon \rightarrow 0$.
+If $\bar{C}_{\mathrm{adv.}} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it. 
+The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. 
+The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates. 
+We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable. 
 

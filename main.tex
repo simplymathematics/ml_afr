@@ -7,11 +7,14 @@
 \usepackage{latexsym}
 %option
 %\newtheorem{definition}{Definition}
-%\newtheorem{example}{Example}
+%\newtheorem{\}{Example}
 %\renewcommand{\tablename}{TABLE}
 %\renewcommand{\figurename}{FIGURE}
 \usepackage[margin=8pt,font=footnotesize,labelfont=bf,labelsep=period
 ]{caption}
+\usepackage{xcolor}
+\newcommand{\cm}[1]{\textit{{\color{blue}#1}}}
+
 
 %balance package is an option
 %\usepackage{balance}
@@ -27,7 +30,7 @@
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage{subfigure}
-\usepackage[maxcitenames=3,natbib=true,firstinits=true,backend=bibtex,doi=false,url=false]{biblatex}
+\usepackage[maxcitenames=1,natbib=true,giveninits=true,backend=bibtex,doi=false,url=false]{biblatex}
 \addbibresource{bibliography.bib}
 \usepackage{booktabs}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -39,10 +42,6 @@
 \pdfpageheight=\paperheight
 \pagestyle{empty}
 
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\argmax}{arg\,max}
-\DeclareMathOperator*{\minimise}{\textrm{minimise}}
-\DeclareMathOperator*{\maximise}{\textrm{maximise}}
 
 \begin{document}
 \title{A TRAINING RATE AND SURVIVAL HEURISTIC FOR INFERENCE AND ROBUSTNESS EVALUATION (TRASHFIRE)}
@@ -54,8 +53,15 @@
 \\}
 
 
-\maketitle
+\maketitle \thispagestyle{empty}
 \input{0-abstract}
+%-------------------------------------------------------------------------
+\begin{keywords}
+   {Machine Learning; Computer Vision; Neural Networks; Adversarial AI; Trustworthy AI}
+\end{keywords}
+
+%-------------------------------------------------------------------------
+
 \input{1-introduction}
 \input{2-background}
 \input{3-aft}
