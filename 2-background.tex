@@ -1,42 +1,42 @@
 \section{Background}
-Much work has gone into explaining the dangers of adversarial attacks on ML pipelines~\cite{carlini_towards_2017,pixelattack,fgm,biggio_evasion_2013}, though studies on adversarial robustness have generally been limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, optimistic~\cite{meyers}. 
-Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments~\cite{vehicle_formal}, or methods that are too computationally expensive to be useful for model selection~\cite{formal_adversarial}. 
+Much work has gone into explaining the dangers of adversarial attacks on ML pipelines~\cite{carlini_towards_2017,pixelattack,fgm,biggio_evasion_2013}, though studies on adversarial robustness have generally been limited to ad-hoc and posterior evaluations against limited sets of attack and defence parameters, leading to results that are, at best, optimistic~\cite{meyers}.
+Previous work on neural network verification have relied on expensive integration tests~\cite{vehicle_testing_review}, elaborate simulation environments~\cite{vehicle_formal}, or methods that are too computationally expensive to be useful for model selection~\cite{formal_adversarial}.
 However, the present work formalises methods to model the effect of attacks and defences on a given ML model and reveals a simple cost-to-performance metric to quickly discard ineffective strategies.
 
 \subsection{Adversarial Attacks}
-In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behaviour of a model. 
-The presented work focused on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{aft_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service~\cite{santos2021universal}. 
+In the context of ML, an adversarial attack refers to deliberate and malicious attempts to manipulate the behaviour of a model.
+The presented work focused on \textit{evasion attacks} that attempt to induce misclassifications at run-time~\cite{carlini_towards_2017,biggio_evasion_2013}, but note that the proposed methodology (Section~\ref{aft_models}) and cost analysis (Section~\ref{cost_normalization}) extends to other types of attacks, such as database poisoning~\cite{biggio_poisoning_2013,saha2020hidden}, model inversion~\cite{choquette2021label,li2021membership}, data stealing~\cite{orekondy2019knockoff}, or denial of service~\cite{santos2021universal}.
 In all sections below, metrics were collected on the benign (unperturbed) data and adversarial (perturbed) data. The abbreviations \textit{ben} and \textit{adv} are used throughout, respectively.
 The strength of an attack is often measured in terms of a perturbation distance~\cite{chakraborty_adversarial_2018,pixelattack}. The perturbation distance, denoted by $\varepsilon\geq0$, quantifies the magnitude of the perturbation applied to a sample, $x$, when generating a new adversarial sample, $x'$. The definition is,
 \begin{equation}
     \varepsilon := \| x' - x \| \leq \varepsilon^*,
     \label{eq:perturbation_distance}
 \end{equation}
-where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm). 
-We denote by $\varepsilon^*$ the maximum allowed perturbation of the original input. For example, this might be one bit, one pixel, or one byte, depending on the test conditions. 
+where $\| \cdot \|$ denotes a norm or pseudo-norm (\textit{e.g.}, the Euclidean $\ell_2$ norm or the $\ell_0$ pseudo-norm).
+We denote by $\varepsilon^*$ the maximum allowed perturbation of the original input. For example, this might be one bit, one pixel, or one byte, depending on the test conditions.
 For more information on different criteria, see Section~\ref{attacks}.
 
 
 \subsubsection{Accuracy and Failure Rate}
-The accuracy refers to the percentage or proportion of examples that are correctly classified. 
-A lower accuracy indicates a higher rate of misclassifications or incorrect predictions. 
+The accuracy refers to the percentage or proportion of examples that are correctly classified.
+A lower accuracy indicates a higher rate of misclassifications or incorrect predictions.
 The accuracy, $\mathrm{Acc}$, is defined as
 \begin{equation}
     \mathrm{Acc} := 1 - \frac{\mathrm{False~Classifications}}{N},
     \label{eq:acc}
 \end{equation}
-where $N$ is the total number of samples. 
-The accuracy on a given test set, presumed to be drawn from the same distribution as the training set, is called the \textit{benign accuracy}, $\mathrm{Acc}_{\mathrm{ben}}$. 
-The \textit{adversarial accuracy}, $\mathrm{Acc}_{\mathrm{adv}}$, is a measure of correct classifications in the presence of noise intended to be adversarial. 
-However, accuracy is known to vary according to the model hyper-parameters~\cite{shalev2014understanding} and various run-time considerations. 
-% things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring}, the number of classes~\cite{dohmatob_generalized_2019}, or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}. 
-% Many of these factors can also influence an attack's run time. 
+where $N$ is the total number of samples.
+The accuracy on a given test set, presumed to be drawn from the same distribution as the training set, is called the \textit{benign accuracy}, $\mathrm{Acc}_{\mathrm{ben}}$.
+The \textit{adversarial accuracy}, $\mathrm{Acc}_{\mathrm{adv}}$, is a measure of correct classifications in the presence of noise intended to be adversarial.
+However, accuracy is known to vary according to the model hyper-parameters~\cite{shalev2014understanding} and various run-time considerations.
+% things like model complexity~\cite{vgg,resnet}, data resolution~\cite{feature_squeezing}, the number of samples~\cite{vapnik1994measuring}, the number of classes~\cite{dohmatob_generalized_2019}, or the amount of noise in the data~\cite{gauss_aug,gauss_out,dohmatob_generalized_2019}.
+% Many of these factors can also influence an attack's run time.
 Therefore, it is useful to think in terms of \textit{failure rate}, as
 \begin{equation}
     \mathrm{Failure~Rate} := \frac{\mathrm{False~Classifications}}{\Delta t} ,
     \label{eq:failure_rate}
 \end{equation}
-where $\Delta t$ is a time interval. 
+where $\Delta t$ is a time interval.
 By parameterizing the measure of misclassification by time, it is possible to model the chance of failure as a function of various attributes and parameters of a model.
 
 Let $h$ be a function that describes the rate of failure at time $t$.
@@ -45,7 +45,7 @@ This is a way to express the failure rate in terms of a \textit{hazard function}
     h(t) := \lim_{ \Delta t \rightarrow 0} \frac{P(t \leq T < t + \Delta t \,|\, T \geq t)}{\Delta t},
     \label{eq:failure_rate_h}
 \end{equation}
-where  $P$ is a probability and $T$ is the time until a false classification occurs, also referred to as \textit{survival time}~\cite{kleinbaum1996survival}. 
+where  $P$ is a probability and $T$ is the time until a false classification occurs, also referred to as \textit{survival time}~\cite{kleinbaum1996survival}.
 To be able to compare the computational efficacy of different model and attack configurations, we modelled the probability of not observing a failure before a given time, $t$, using the \textit{cumulative hazard function},
 \begin{equation}
      H(t) := \int_0^{t} h(\tau) \,d\tau.
@@ -64,9 +64,9 @@ The probability density of observing a failure at time, $t$, is~\cite{kleinbaum1
 \end{equation*}
 In practice, the $h(t), S(t)$, and/or $f(t)$ can be determined whenever one of them is known~\cite{kleinbaum1996survival}.
 
-Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or auto-mobiles)~\cite{liu2013development,lawless1995methods}. 
-These models allow us to examine the effect of the specified covariates on the failure rate of the classifier. 
-For manufacturing, this is done by simulating normal wear and tear on a particular  hardware component (\textit{e.g.}, a motor or aircraft sensor)~\cite{liu2013development} by exposing the component to vibration, temperatures, or impacts. 
+Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or auto-mobiles)~\cite{liu2013development,lawless1995methods}.
+These models allow us to examine the effect of the specified covariates on the failure rate of the classifier.
+For manufacturing, this is done by simulating normal wear and tear on a particular  hardware component (\textit{e.g.}, a motor or aircraft sensor)~\cite{liu2013development} by exposing the component to vibration, temperatures, or impacts.
 For the study of diseases in humans, these models are often build on demographic data and used to examine the effect of things like age, gender, and/or treatment on the expected survival time of a patient.
 Likewise, survival analysis can be used to estimate the time until a successful adversarial attack of an ML pipeline or component using metrics that are routinely collected as part of normal model training procedures. The covariates, for example, might be things like perturbation distance, model depth, number of training epochs, a signal processing technique, \textit{etc.}
 
@@ -78,10 +78,10 @@ Assume that the cost of training a model, $C_{\mathrm{train}}$, is a function of
     C_{\mathrm{train}} := C_{h} \cdot T_{\mathrm{train}} = C_h \cdot t_{\mathrm{train}} \cdot N_{\mathrm{train}},
     \label{eq:naive_cost}
 \end{equation}
-where $C_h$ is the cost per time unit of a particular piece of hardware. 
-Hence, the cost is assumed to scale linearly with per-sample training time and sample size, $N_{\mathrm{train}}$. 
-Analogously, $t_{\mathrm{predict}}$ is used elsewhere in this text to refer to the prediction time for a set of samples, divided by the number of samples. 
-Assuming the attacker and model builder are using similar hardware, then the cost to an attacker, $C_{\mathrm{attack}}$, is $C_{\mathrm{attack}} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{\mathrm{attack}} \cdot N_{\mathrm{attack}},$ where $ N_{\mathrm{attack}} $ is the number of attacked samples. Furthermore, a fast attack will be lower-bounded by the model inference time, $ t_{\mathrm{predict}} $, which is generally much smaller than the training time, $ t_{\mathrm{train}} $. Of course, the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{\mathrm{train}}$) is larger than the cost of finding a counterexample ($\propto t_{\mathrm{attack}}$) within the bounds outlined in Equation~\ref{eq:perturbation_distance}. 
+where $C_h$ is the cost per time unit of a particular piece of hardware.
+Hence, the cost is assumed to scale linearly with per-sample training time and sample size, $N_{\mathrm{train}}$.
+Analogously, $t_{\mathrm{predict}}$ is used elsewhere in this text to refer to the prediction time for a set of samples, divided by the number of samples.
+Assuming the attacker and model builder are using similar hardware, then the cost to an attacker, $C_{\mathrm{attack}}$, is $C_{\mathrm{attack}} := C_{h} \cdot T_{\mathrm{attack}} = C_h \cdot t_{\mathrm{attack}} \cdot N_{\mathrm{attack}},$ where $ N_{\mathrm{attack}} $ is the number of attacked samples. Furthermore, a fast attack will be lower-bounded by the model inference time, $ t_{\mathrm{predict}} $, which is generally much smaller than the training time, $ t_{\mathrm{train}} $. Of course, the long-term costs of deploying a model will be related to the inference cost, but a model is clearly broken if the cost of improving a model ($\propto t_{\mathrm{train}}$) is larger than the cost of finding a counterexample ($\propto t_{\mathrm{attack}}$) within the bounds outlined in Equation~\ref{eq:perturbation_distance}.
 The training cost per sample does not consider how well the model performs, and a good model is one that both generalises and is reasonably cheap to train.
-Therefore, a cost-normalised failure rate metric is introduced in Equation~\ref{eq:cost} in Section~\ref{cost_normalization}. Before comparing this cost to the failure rate, the attack time per sample---or the expected survival time---must be estimated. 
+Therefore, a cost-normalised failure rate metric is introduced in Equation~\ref{eq:cost} in Section~\ref{cost_normalization}. Before comparing this cost to the failure rate, the attack time per sample---or the expected survival time---must be estimated.
 For that, survival models can be used.

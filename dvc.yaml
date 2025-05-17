@@ -1,7 +1,7 @@
 stages:
 
   pre-commmit:
-    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1 # Suppresses warnings 8 (dash length), 24 (\labels inside floats), and 1 (trailing whitespace following and command)
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1  && touch pre_commit.flag # Suppresses warnings 8 (dash length), 24 (\labels inside floats), and 1 (trailing whitespace following and command)
     deps:
       - .pre-commit-config.yaml
       - 0-abstract.tex
@@ -13,6 +13,8 @@ stages:
       - 6-conclusions.tex
       - generate_plots/
       - plots/
+    outs:
+      - pre_commit.flag
   first_run:
     cmd: pdflatex  main.tex
     deps:
@@ -24,6 +26,7 @@ stages:
       - 4-methods.tex
       - 5-results.tex
       - 6-conclusions.tex
+      - pre_commit.flag
     outs:
       - main.aux
       - main-blx.bib

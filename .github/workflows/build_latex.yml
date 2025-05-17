@@ -4,17 +4,30 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      
       - name: Set up Git repository
         uses: actions/checkout@v1
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@master
         with:
           root_file: main.tex
-        continue-on-error: true
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: PDF
+          name: main.pdf
           path: main.pdf
-        continue-on-error: true
+          overwrite: true      
+      - name: Create www directory and html file
+        run: |
+          mkdir -p www
+          echo '<html><body><iframe src="main.pdf" width="100%" height="100%"></iframe></body></html>' > www/index.html
+      - name: Copy to www
+        run: cp main.pdf www/main.pdf
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./www
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          full_commit_message: ${{ github.event.head_commit.message }}

@@ -1,9 +1,9 @@
 \section{Survival Analysis for ML}
 \label{aft_models}
 
-Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_luggage}, but there is very little published research in the context of ML\@. 
-However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection. 
-In this work, we leverage evasion attacks to examine the parameterised time-to-failure---or survival time---denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}. 
+Failure time analysis has been widely explored in other fields~\cite{aft_models}, from medicine to industrial quality control~\cite{ai_medical_imaging,ai_industry,ai_luggage}, but there is very little published research in the context of ML\@.
+However, as noted by many researchers~\cite{madry2017towards,carlini_towards_2017,meyers}, these models are fragile to attackers that intend to subvert the model, steal the database, or evade detection.
+In this work, we leverage evasion attacks to examine the parameterised time-to-failure---or survival time---denoted $S_{\theta}(t)$, where $\theta$ is a set of parameters that describe the joint effect of the covariates on the survival time, usually found through maximum likelihood estimation on observed survival data~\cite{collett2023modelling}.
 All survival models can be expressed in terms of this parameterised survival function, $S_\theta(t)$, hazard function, $H_\theta(t)$, and lifetime probability distribution, $F_{\theta}(t)$, such that
 \[
 	S_{\theta}(t) := \exp\big\{-H_{\theta}(t)\big\} := 1 - F_{\theta}(t) := 1 - \int_0^t f_\theta(u) du,
@@ -12,11 +12,11 @@ and the expected survival time is thus
 \[
 	\mathbb{E}_{S_\theta}[T] =  \int_{0}^{t^*} S_{\theta}(u) du \approx t_{\mathrm{attack}},
 \]
-where $t_{\mathrm{attack}}$ is an estimate of the time it takes for the average attacker to induce a failure subject to the condition in Equation~\ref{eq:perturbation_distance} and $t^*$ is the latest observed time (regardless of failure or success). 
+where $t_{\mathrm{attack}}$ is an estimate of the time it takes for the average attacker to induce a failure subject to the condition in Equation~\ref{eq:perturbation_distance} and $t^*$ is the latest observed time (regardless of failure or success).
 The parameters, $\theta$, are estimated from model evaluation data such that: $h_{\theta}(t=t_{attack}) \approx 1 - \mathrm{Acc}_{\mathrm{adv}}$.
 
-Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or auto-mobiles)~\cite{liu2013development,lawless1995methods}. These models allow us to examine the effect of the specified covariates on the failure rate of the classifier. 
-These survival analysis models can broadly be separated into two categories: proportional hazard models and accelerated failure time models, each of which is outlined in the subsections below. 
+Survival analysis models have been widely used to investigate the likelihood of failures across fields where safety is a primary concern (\textit{e.g.}, in medicine, aviation, or auto-mobiles)~\cite{liu2013development,lawless1995methods}. These models allow us to examine the effect of the specified covariates on the failure rate of the classifier.
+These survival analysis models can broadly be separated into two categories: proportional hazard models and accelerated failure time models, each of which is outlined in the subsections below.
 Furthermore, by parameterizing the performance by time, it is possible to do a cost-value analysis, as outlined in Section~\ref{cost_normalization}.
 
 
@@ -131,23 +131,23 @@ the exponential, Weibull, log-normal, log-logistic, or generalised gamma distrib
 \label{metrics}
 
 To compare the efficacy of different parametric AFT models, we use the Akaike information criterion (AIC) and the Bayesian information criterion (BIC)~\cite{stoica2004model}, where the preferred model will be the one with the smallest value. We provide the
-concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{uno2011c} and 0.5 reflects random chance. 
-We also include two measures of error between the fitted model (predictions) and a model fit to the data using a cubic spline (observations) as proposed by Austin \textit{et al.}~\cite{ici}. 
+concordance score, which gives a value between $0$ and $1$ that quantifies the degree to which the survival time is explained by the model, where a $1$ reflects a perfect explanation~\cite{uno2011c} and 0.5 reflects random chance.
+We also include two measures of error between the fitted model (predictions) and a model fit to the data using a cubic spline (observations) as proposed by Austin \textit{et al.}~\cite{ici}.
 The first such measure of error is the mean difference between the predicted and observed failure probabilities,  called the integrated calibration index (ICI).
-The second metric is the error between these curves at the 50\textsuperscript{th} percentile (E50)~\cite{ici}. 
+The second metric is the error between these curves at the 50\textsuperscript{th} percentile (E50)~\cite{ici}.
 Except for AIC and BIC, we have provided these metrics for both the training and test sets, the latter of which was 20\% of the total number of samples.
 
 \section{Failure Rates and Cost Normalisation}
 \label{cost_normalization}
 
-With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified. 
+With an estimate for the expected survival time, the cost-normalised failure rate, or training time to attack time ratio, can be quantified.
 Under the assumption that the cost scales linearly with $t_{\mathrm{train}}$ (as in Equation~\ref{eq:naive_cost}), one can divide this cost by the expected survival time to get a rough estimate of the relative costs for the model builder ($C_{\mathrm{train}} \propto t_{\mathrm{train}}$) and the attacker ($C_{\mathrm{adv.}} \propto t_{\mathrm{attack}} \approx \mathbb{E}_{S_\theta}[T]$). Recalling the definition of $\varepsilon$ in Equation~\ref{eq:perturbation_distance}, the cost of failure in adversarial terms can be expressed as,
 \begin{equation}
 	\bar{C}_{\mathrm{adv.}}=\frac{t_{\mathrm{train}}}{\mathbb{E}_{\theta}[T \,|\, 0 < \varepsilon \leq \varepsilon^*]}.
 	\label{eq:cost}
 \end{equation}
-If $\bar{C}_{\mathrm{adv.}} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it. 
-The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic. 
-The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates. 
-We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable. 
+If $\bar{C}_{\mathrm{adv.}} \gg 1$  then the model is \textit{broken} since it is cheaper to attack the model than it is to train it.
+The numerator can be thought as the approximate training time per sample, or training rate, and the denominator is the expected survival heuristic.
+The ratio of these allows one to quantify the comparative cost of the model builder and the attacker and the coefficients of the survival model provide a way to estimate the effects of the covariates.
+We call this metric the TRASH score since it quickly indicates whether more training is likely to improve the adversarial robustness and any score $ > 1$ indicates that a given model is, in fact, irredeemable.
 

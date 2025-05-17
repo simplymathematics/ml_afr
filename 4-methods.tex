@@ -1,10 +1,10 @@
 \section{Methodology}
 \label{methods}
-Below we outline the experiments performed and the hyper-parameter configurations of the models, attacks, and defences across the various model architectures, model defences, and attacks. 
-All experiments were conducted on Ubuntu 18.04 in a virtual machine running in a shared-host environment with one NVIDIA V100 GPU using Python 3.8.8. 
-All configurations were tested in a grid search using \texttt{hydra}~\cite{hydra} to manage the parameters, \texttt{dvc}~\cite{dvc} to ensure reproducibility, and \texttt{optuna}~\cite{optuna} to manage the scheduling. 
-For each attack and model configuration, the metrics outlined in Equations~\ref{eq:acc}--\ref{eq:cost} were collected, as well as the inference time, training time, and attack generation time. 
-A grid search was conducted over datasets, models, defences, and attacks across ten permutations of the data. For visualisation, the $f_{\mathrm{ben.}}$ and $f_{\mathrm{adv.}}$ were approximated for each attack and defence combination using Equation~\ref{eq:failure_rate}, and $\bar{C}$ was approximated in the adversarial case as per Equation~\ref{eq:cost}. 
+Below we outline the experiments performed and the hyper-parameter configurations of the models, attacks, and defences across the various model architectures, model defences, and attacks.
+All experiments were conducted on Ubuntu 18.04 in a virtual machine running in a shared-host environment with one NVIDIA V100 GPU using Python 3.8.8.
+All configurations were tested in a grid search using \texttt{hydra}~\cite{hydra} to manage the parameters, \texttt{dvc}~\cite{dvc} to ensure reproducibility, and \texttt{optuna}~\cite{optuna} to manage the scheduling.
+For each attack and model configuration, the metrics outlined in Equations~\ref{eq:acc}--\ref{eq:cost} were collected, as well as the inference time, training time, and attack generation time.
+A grid search was conducted over datasets, models, defences, and attacks across ten permutations of the data. For visualisation, the $f_{\mathrm{ben.}}$ and $f_{\mathrm{adv.}}$ were approximated for each attack and defence combination using Equation~\ref{eq:failure_rate}, and $\bar{C}$ was approximated in the adversarial case as per Equation~\ref{eq:cost}.
 Additionally, we provide links to the source code repository\footnote{\href{https://github.com/simplymathematics/deckard/tree/main/examples/pytorch}{Our Source Code}}, as well as the source for this document and archived data\footnote{\href{https://github.com/simplymathematics/ml_afr}{ \LaTeX~source and data for this document.}}
 
 
@@ -12,47 +12,47 @@ Additionally, we provide links to the source code repository\footnote{\href{http
 \subsection{Dataset}
 \label{dataset}
 
-Experiments were performed on both the CIFAR100, CIFAR10~\cite{cifar}, and MNIST~\cite{mnist} datasets. 
-The adversarial and benign accuracies were measured together with the attack generation time and the prediction time. 
-Equations~\ref{eq:failure_rate} and~\ref{eq:cost} were used to calculate the adversarial failure rate and the cost. For accuracy, see Equation~\ref{eq:acc}. 
-For training, 80\% of the samples were used for all datasets. Of the remaining 20\%, one-hundred class-balanced samples were selected to evaluate each attack. 
-In addition, all data were shuffled to provide ten training and test sets for each hyper-parameter combination. 
-Then, the data were centred and scaled (using statistics computed from the training set to avoid data leakage). 
+Experiments were performed on both the CIFAR100, CIFAR10~\cite{cifar}, and MNIST~\cite{mnist} datasets.
+The adversarial and benign accuracies were measured together with the attack generation time and the prediction time.
+Equations~\ref{eq:failure_rate} and~\ref{eq:cost} were used to calculate the adversarial failure rate and the cost. For accuracy, see Equation~\ref{eq:acc}.
+For training, 80\% of the samples were used for all datasets. Of the remaining 20\%, one-hundred class-balanced samples were selected to evaluate each attack.
+In addition, all data were shuffled to provide ten training and test sets for each hyper-parameter combination.
+Then, the data were centred and scaled (using statistics computed from the training set to avoid data leakage).
 This provides a straight forward interpretation of $\varepsilon$, where $\varepsilon = 1$ implies one standard-deviation of noise.
 
 
 \subsection{Tested Models}
 \label{models}
 
-The Residual Neural Network (ResNet)~\cite{resnet} is a popular classification model\footnote{More than 180 thousand citations: \href{https://scholar.google.com/scholar?cites=9281510746729853742}{ResNet citations on Google Scholar.}} because of its ability to train neural networks with many layers efficiently by using \textit{residual connections}. 
-The residual connections allow models to have hundreds of layers rather than tens of layers~\cite{resnet,vgg}. 
-Despite the prevalence of the reference architecture, several modifications have been proposed that trade off, for instance, robustness and computational cost by varying the number of convolutional layers in the model. 
-We tested the \textit{ResNet-18}, \textit{-34}, \textit{-51}, \textit{-101}, and \textit{-152} reference architectures, that get their names from their respective number of layers. 
+The Residual Neural Network (ResNet)~\cite{resnet} is a popular classification model\footnote{More than 180 thousand citations: \href{https://scholar.google.com/scholar?cites=9281510746729853742}{ResNet citations on Google Scholar.}} because of its ability to train neural networks with many layers efficiently by using \textit{residual connections}.
+The residual connections allow models to have hundreds of layers rather than tens of layers~\cite{resnet,vgg}.
+Despite the prevalence of the reference architecture, several modifications have been proposed that trade off, for instance, robustness and computational cost by varying the number of convolutional layers in the model.
+We tested the \textit{ResNet-18}, \textit{-34}, \textit{-51}, \textit{-101}, and \textit{-152} reference architectures, that get their names from their respective number of layers.
 We used the the \texttt{pytorch} framework and the Stochastic Gradient Descent minimiser with a momentum parameter of 0.9 and learning rates $\in \{10, 1, 0.1, 0.01, 0.001, 0.0001, .00001, 0.000001\}$ for epochs $\in \{ 10, 20, 30, 50, 100\}$.
 
 \subsection{Tested Defences}
 \label{defences}
 
-In order to simulate various conditions affecting the model's efficacy, we have also tested several defences that modify the model's inputs or predictions in an attempt to reduce its susceptibility to adversarial perturbations. 
+In order to simulate various conditions affecting the model's efficacy, we have also tested several defences that modify the model's inputs or predictions in an attempt to reduce its susceptibility to adversarial perturbations.
 Just like with the attacks, we used the Adversarial Robustness Toolbox~\cite{art2018} for their convenient implementations. The evaluated defences follow.
 
 
-\textit{Gauss-in} ($\ell_2$): The `Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples. 
-Here, we set this proportion to 50\%, allowing to simulate the effect of noise on the resulting model~\cite{gauss_aug}. 
+\textit{Gauss-in} ($\ell_2$): The `Gaussian Augmentation' defence adds Gaussian noise to some proportion of the training samples.
+Here, we set this proportion to 50\%, allowing to simulate the effect of noise on the resulting model~\cite{gauss_aug}.
 Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
 
 
-\textit{Conf} ($\ell_{\infty}$): The `High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain. 
-This allows to simulate the effects of rejecting `adversarial' or otherwise `confusing' queries~\cite{high_conf} that fall outside the given confidence range by ignoring ambiguous results without penalty. 
+\textit{Conf} ($\ell_{\infty}$): The `High Confidence Thresholding' defence only returns a classification when the specified confidence threshold is reached, resulting in a failed query if a classification is less certain.
+This allows to simulate the effects of rejecting `adversarial' or otherwise `confusing' queries~\cite{high_conf} that fall outside the given confidence range by ignoring ambiguous results without penalty.
 Confidence levels in $\{.1, .5, .9, .99, .999\}$ were tested.
 
 
-\textit{Gauss-out} ($\ell_2$): The `Gaussian Noise' defence, rather than adding noise to the input data, adds noise during inference~\cite{gauss_out}, allowing to reduce precision to grey- and black-box attacks without going through costly training iterations. 
+\textit{Gauss-out} ($\ell_2$): The `Gaussian Noise' defence, rather than adding noise to the input data, adds noise during inference~\cite{gauss_out}, allowing to reduce precision to grey- and black-box attacks without going through costly training iterations.
 Noise levels in $\{.001, .01, .1, .3, .5, 1\}$ were tested.
 
 
-\textit{FSQ}: The `Feature Squeezing' defence changes the bit-depth of the input data to minimise the noise induced by floating-point operations. 
-It was included here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\cite{feature_squeezing}. 
+\textit{FSQ}: The `Feature Squeezing' defence changes the bit-depth of the input data to minimise the noise induced by floating-point operations.
+It was included here to simulate the effects of various GPU or CPU architectures, which may also vary in bit-depth~\cite{feature_squeezing}.
 Bit-depths in $\{2, 4, 8, 16, 32, 64\}$ were tested.
 
 
@@ -60,44 +60,44 @@ Bit-depths in $\{2, 4, 8, 16, 32, 64\}$ were tested.
 \subsection{Tested Attacks}
 \label{attacks}
 
-Several attacks using the Adversarial Robustness Toolbox~\cite{art2018} were evaluated in order to simulate attacks that vary in information and run-time requirements across distance metrics. 
-Other researchers have noted the importance of testing against multiple types of attacks~\cite{carlini_towards_2017}. 
-For the purposes here, \textit{attack strength} refers to the degree to which an input is modified by an attacker, as described in Section~\ref{eq:perturbation_distance}. 
-Below is a brief description of the attacks that were evaluated. 
-One or more norms or pseudo-norms were used in each attack, as given in the parentheses next to the attack name. 
+Several attacks using the Adversarial Robustness Toolbox~\cite{art2018} were evaluated in order to simulate attacks that vary in information and run-time requirements across distance metrics.
+Other researchers have noted the importance of testing against multiple types of attacks~\cite{carlini_towards_2017}.
+For the purposes here, \textit{attack strength} refers to the degree to which an input is modified by an attacker, as described in Section~\ref{eq:perturbation_distance}.
+Below is a brief description of the attacks that were evaluated.
+One or more norms or pseudo-norms were used in each attack, as given in the parentheses next to the attack name.
 
 
-\textit{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): The `Fast Gradient Method' quickly generates a noisy sample, with no feasibility conditions beyond a specified step size and number of iterations~\cite{fgm}. 
+\textit{FGM} ($\ell_1, \ell_2, \ell_{\infty}$): The `Fast Gradient Method' quickly generates a noisy sample, with no feasibility conditions beyond a specified step size and number of iterations~\cite{fgm}.
 It generates adversarial samples by using the model gradient and taking a step of length $\varepsilon$ in the direction that maximises the loss with $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
 
-\textit{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$): The `Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\cite{madry2017towards}. 
+\textit{PGD}  ($\ell_1, \ell_2, \ell_{\infty}$): The `Projected Gradient Method' extends the FGM attack to include a projection on the $\varepsilon$-sphere, ensuring that generated samples do not fall outside of the feasible space~\cite{madry2017towards}.
 This method is iterative, and was restricted here to ten such iterations. The imposed feasibility conditions on the FGM attack were in $\varepsilon \in \{.001,.01,.03,.1,.2,.3,.5,.8,1\}$.
 
 
-\textit{Deep} ($\ell_2$): the `Deepfool Attack'~\cite{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient by approximating the $n$ most likely class gradients where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\cite{deepfool}. 
+\textit{Deep} ($\ell_2$): the `Deepfool Attack'~\cite{deepfool} finds the minimal separating hyperplane between two classes and then adds a specified amount of perturbation to ensure it crosses the boundary by using an approximation of the model gradient by approximating the $n$ most likely class gradients where $n \in \{1,3,5,10\}$, speeding up computation by ignoring unlikely classes~\cite{deepfool}.
 This method is iterative and was restricted here to ten such iterations.
 
-\textit{Pixel} ($\ell_{0})$: the `PixelAttack' uses a well-known multi-objective search algorithm~\cite{pixelattack}, but tries to maximise false confidence while minimising the number of perturbed pixels. 
+\textit{Pixel} ($\ell_{0})$: the `PixelAttack' uses a well-known multi-objective search algorithm~\cite{pixelattack}, but tries to maximise false confidence while minimising the number of perturbed pixels.
 This method is iterative and was restricted here to ten such iterations. For $\varepsilon$, we tested $\{
 1,4,16,64,256
 \}$ pixels.
 
-\textit{Thresh} ($\ell_{\infty})$: the `Threshold' attack also uses the same multi-objective search algorithm as Pixel to optimise the attack, but tries to maximise false confidence using a penalty term on the loss function while minimising the $\ell_2$ perturbation distance. 
+\textit{Thresh} ($\ell_{\infty})$: the `Threshold' attack also uses the same multi-objective search algorithm as Pixel to optimise the attack, but tries to maximise false confidence using a penalty term on the loss function while minimising the $\ell_2$ perturbation distance.
 This method is iterative and was restricted here to ten such iterations. We tested penalty terms corresponding to $\{ 1,4,16,64,256\}$
 
 
 
 
 
-\textit{HSJ} ($\ell_2$, \textit{queries}): the `HopSkipJump' attack, in contrast to the attacks above, does not need access to model gradients nor soft class labels, instead relying on an offline approximation of the gradient using the model's decision boundaries. 
-In this case, the strength is denoted by the number of queries necessary to find an adversarial counterexample~\cite{hopskipjump}. 
+\textit{HSJ} ($\ell_2$, \textit{queries}): the `HopSkipJump' attack, in contrast to the attacks above, does not need access to model gradients nor soft class labels, instead relying on an offline approximation of the gradient using the model's decision boundaries.
+In this case, the strength is denoted by the number of queries necessary to find an adversarial counterexample~\cite{hopskipjump}.
 This method is iterative and was restricted here to ten such iterations.
 
 \subsection{Survival Models}
-The exponential, Weibull, log-normal, log-logistic, and generalised gamma  AFT models were tested as well as the Cox proportional hazards model using the \texttt{lifelines}~\cite{lifelines} package in Python. 
+The exponential, Weibull, log-normal, log-logistic, and generalised gamma  AFT models were tested as well as the Cox proportional hazards model using the \texttt{lifelines}~\cite{lifelines} package in Python.
 For each attack, the attack-specific distance metric (or pseudo-metric) outlined in Section~\ref{attacks} was identified.
-To compare the effect of this measure against other attacks, the values were min-max scaled so that all values fell on the interval $[0,1]$. The same scaling was done for the defences. 
-Because this strength parameter isn't directly comparable across attacks or defences, a dummy variable was introduced for each attack and defence, allowing an estimate of their effect relative to the baseline hazard. 
-The number of epochs and the number of layers were tracked for the models, as well as the training and inference times. 
-The metrics outlined in Section~\ref{metrics} were used for choosing the best-fit AFT model, as is best practice~\cite{aft_models}. 
+To compare the effect of this measure against other attacks, the values were min-max scaled so that all values fell on the interval $[0,1]$. The same scaling was done for the defences.
+Because this strength parameter isn't directly comparable across attacks or defences, a dummy variable was introduced for each attack and defence, allowing an estimate of their effect relative to the baseline hazard.
+The number of epochs and the number of layers were tracked for the models, as well as the training and inference times.
+The metrics outlined in Section~\ref{metrics} were used for choosing the best-fit AFT model, as is best practice~\cite{aft_models}.
