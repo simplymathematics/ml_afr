@@ -102,7 +102,7 @@ stages:
       size: 26600
       isexec: true
     - path: main.log
-      md5: db7d9200c09b7ec343b2a1f2a1e47da8
+      md5: a647f09c7fe7d046e1341cb6ab2de846
       size: 36376
       isexec: true
     - path: main.out
@@ -122,7 +122,7 @@ stages:
       size: 60615
       isexec: true
     - path: main.pdf
-      md5: 8d4145ddd1943cfd012410e94abeddbf
+      md5: 3cbc49401ba05b48676171201e245380
       size: 379386
       isexec: true
   arxiv:
@@ -135,7 +135,7 @@ stages:
       md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
       size: 7739
     - path: main.pdf
-      md5: 8d4145ddd1943cfd012410e94abeddbf
+      md5: 3cbc49401ba05b48676171201e245380
       size: 379386
     - path: plots/
       md5: 06cffcf18452e4b7ebd922e81e7ec0e1.dir
@@ -144,6 +144,6 @@ stages:
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
-      md5: f19054199adb35e14747e93692df02dd
-      size: 975262
+      md5: 46bac98aae768a4ad468744d4731ee6b
+      size: 975410
       isexec: true

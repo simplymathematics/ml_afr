@@ -8,16 +8,6 @@ __pycache__/
 /main.out
 /main.run.xml
 /main.bbl
-/new_bibliography.bib
-/new_main.tex
-/new_main.pdf
-new_main-blx.bib
-new_main.bbl
-new_main.aux
-new_main.blg
-new_main.log
-new_main.out
-new_main.run.xml
 main.blg
 arxiv.log
 /A Training Rate and Survival Heuristic for Inference and Robustness Evaluation (TRASHFIRE).zip
@@ -26,3 +16,4 @@ arxiv.log
 generate_plots/deckard.log
 *.ipynb
 /tmp
+*.flag
