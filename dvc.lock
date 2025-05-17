@@ -1,0 +1,149 @@
+schema: '2.0'
+stages:
+  pre-commmit:
+    cmd: pre-commit run --all-files  && chktex -q -V main.tex -n 24 -n 8 -n 1 -n 13
+      && touch pre_commit.flag
+    deps:
+    - path: .pre-commit-config.yaml
+      md5: cac5e29a25010f135d7538fd6d966311
+      size: 1414
+    - path: 0-abstract.tex
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    - path: 1-introduction.tex
+      md5: 7d65a7660341ac419630ea0c038213f7
+      size: 5502
+    - path: 2-background.tex
+      md5: 923478d7e5fc50e9c1685015dd36a4af
+      size: 9076
+    - path: 3-aft.tex
+      md5: 887418c2b684e90bbc110540b0196cad
+      size: 11326
+    - path: 4-methods.tex
+      md5: 875f2219ddcfaaf4c2246780c8d86117
+      size: 9748
+    - path: 5-results.tex
+      md5: a5267fb536bbad979341bfc12d3588a6
+      size: 10600
+    - path: 6-conclusions.tex
+      md5: 00e79c4d71364bf41707c7acfdb57f5b
+      size: 4718
+    - path: generate_plots/
+      md5: 2220957dff2a590745754d11edb145fd.dir
+      size: 15653
+      nfiles: 5
+    - path: plots/
+      md5: 06cffcf18452e4b7ebd922e81e7ec0e1.dir
+      size: 1203774
+      nfiles: 36
+    outs:
+    - path: pre_commit.flag
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+      isexec: true
+  first_run:
+    cmd: pdflatex  main.tex
+    deps:
+    - path: 0-abstract.tex
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    - path: 1-introduction.tex
+      md5: 7d65a7660341ac419630ea0c038213f7
+      size: 5502
+    - path: 2-background.tex
+      md5: 923478d7e5fc50e9c1685015dd36a4af
+      size: 9076
+    - path: 3-aft.tex
+      md5: 887418c2b684e90bbc110540b0196cad
+      size: 11326
+    - path: 4-methods.tex
+      md5: 875f2219ddcfaaf4c2246780c8d86117
+      size: 9748
+    - path: 5-results.tex
+      md5: a5267fb536bbad979341bfc12d3588a6
+      size: 10600
+    - path: 6-conclusions.tex
+      md5: 00e79c4d71364bf41707c7acfdb57f5b
+      size: 4718
+    - path: main.tex
+      md5: cc86740c4446559555c787cc0c947463
+      size: 4460
+    - path: pre_commit.flag
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    outs:
+    - path: main-blx.bib
+      md5: 1b36965fe210dcc789547e78654dc94c
+      size: 340
+    - path: main.aux
+      md5: 63612458044ba86354e05bb2537107f6
+      size: 19966
+    - path: main.log
+      md5: 4dc203ea9a327c86fcb0dbb607f69534
+      size: 53914
+    - path: main.out
+      md5: a62dfd007126831a3e4075882fb5ff7c
+      size: 3429
+    - path: main.run.xml
+      md5: 2d22ad067e0890475f0a21e186e23136
+      size: 2558
+  big_run:
+    cmd: pdflatex main.tex && bibtex main && pdflatex  main.tex && pdflatex  main.tex
+    deps:
+    - path: bibliography.bib
+      md5: b63027baf016a8f509f119ac0f9899c2
+      size: 63353
+    - path: main-blx.bib
+      md5: 1b36965fe210dcc789547e78654dc94c
+      size: 340
+      isexec: true
+    - path: main.aux
+      md5: 1a7c6a7fd52c1a11183e53567e39a059
+      size: 26600
+      isexec: true
+    - path: main.log
+      md5: db7d9200c09b7ec343b2a1f2a1e47da8
+      size: 36376
+      isexec: true
+    - path: main.out
+      md5: a62dfd007126831a3e4075882fb5ff7c
+      size: 3429
+      isexec: true
+    - path: main.run.xml
+      md5: 1056460de672bb6595b4747057946212
+      size: 2558
+      isexec: true
+    - path: main.tex
+      md5: cc86740c4446559555c787cc0c947463
+      size: 4460
+    outs:
+    - path: main.bbl
+      md5: fbf37d8ef905e6929652745d4c275dd7
+      size: 60615
+      isexec: true
+    - path: main.pdf
+      md5: 8d4145ddd1943cfd012410e94abeddbf
+      size: 379386
+      isexec: true
+  arxiv:
+    cmd: python arxiv.py  --title "A Training Rate and Survival Heuristic for Inference
+      and Robustness Evaluation (TRASHFIRE)"  --directories plots  --delete_these_dirs
+      generate_plots  --extensions py yaml lock log csv  --delete_these_files ".dvcignore"
+      "main.aux" "main.blg" "main.out" "main.run.xml" "main-blx.bib" "main.pdf"
+    deps:
+    - path: arxiv.py
+      md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
+      size: 7739
+    - path: main.pdf
+      md5: 8d4145ddd1943cfd012410e94abeddbf
+      size: 379386
+    - path: plots/
+      md5: 06cffcf18452e4b7ebd922e81e7ec0e1.dir
+      size: 1203774
+      nfiles: 36
+    outs:
+    - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
+        (TRASHFIRE).zip
+      md5: f19054199adb35e14747e93692df02dd
+      size: 975262
+      isexec: true
