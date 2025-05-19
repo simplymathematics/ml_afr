@@ -66,8 +66,8 @@ stages:
       md5: 00e79c4d71364bf41707c7acfdb57f5b
       size: 4718
     - path: main.tex
-      md5: cc86740c4446559555c787cc0c947463
-      size: 4460
+      md5: b7b87b0c8bacf8867a022884d4a23db8
+      size: 4303
     - path: pre_commit.flag
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
@@ -76,11 +76,11 @@ stages:
       md5: 1b36965fe210dcc789547e78654dc94c
       size: 340
     - path: main.aux
-      md5: 63612458044ba86354e05bb2537107f6
-      size: 19966
+      md5: 0b8197378d83e75c1d1bc82651c45154
+      size: 26574
     - path: main.log
-      md5: 4dc203ea9a327c86fcb0dbb607f69534
-      size: 53914
+      md5: 951663e020df99bbb167ace10e434e31
+      size: 40927
     - path: main.out
       md5: a62dfd007126831a3e4075882fb5ff7c
       size: 3429
@@ -102,7 +102,7 @@ stages:
       size: 26600
       isexec: true
     - path: main.log
-      md5: a647f09c7fe7d046e1341cb6ab2de846
+      md5: 795f5c7d74e82481f7817a9c180e132e
       size: 36376
       isexec: true
     - path: main.out
@@ -114,15 +114,15 @@ stages:
       size: 2558
       isexec: true
     - path: main.tex
-      md5: cc86740c4446559555c787cc0c947463
-      size: 4460
+      md5: b7b87b0c8bacf8867a022884d4a23db8
+      size: 4303
     outs:
     - path: main.bbl
       md5: fbf37d8ef905e6929652745d4c275dd7
       size: 60615
       isexec: true
     - path: main.pdf
-      md5: 3cbc49401ba05b48676171201e245380
+      md5: 65c5bb2699e99bebb838f10a64a937db
       size: 379386
       isexec: true
   arxiv:
@@ -135,7 +135,7 @@ stages:
       md5: 02df5da254d1a9f8e8d78f6e4ed5d2a6
       size: 7739
     - path: main.pdf
-      md5: 3cbc49401ba05b48676171201e245380
+      md5: 65c5bb2699e99bebb838f10a64a937db
       size: 379386
     - path: plots/
       md5: 06cffcf18452e4b7ebd922e81e7ec0e1.dir
@@ -144,6 +144,6 @@ stages:
     outs:
     - path: A Training Rate and Survival Heuristic for Inference and Robustness Evaluation
         (TRASHFIRE).zip
-      md5: 46bac98aae768a4ad468744d4731ee6b
-      size: 975410
+      md5: e08efbc3d4ea53c15761835f80ddf1f7
+      size: 975327
       isexec: true
